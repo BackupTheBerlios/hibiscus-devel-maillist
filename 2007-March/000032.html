@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Umsatz-Kategorisierung
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-March/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Umsatz-Kategorisierung&In-Reply-To=%3C200703161524.13448.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000031.html">
+   <LINK REL="Next"  HREF="000033.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Umsatz-Kategorisierung</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Umsatz-Kategorisierung&In-Reply-To=%3C200703161524.13448.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Umsatz-Kategorisierung">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Fr Mär 16 15:24:13 CET 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000031.html">[Hibiscus-devel] Umsatz-Kategorisierung
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000033.html">[Hibiscus-devel] Umsatz-Kategorisierung
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#32">[ Datum ]</a>
+              <a href="thread.html#32">[ Thema ]</a>
+              <a href="subject.html#32">[ Betreff (Subject) ]</a>
+              <a href="author.html#32">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi Heiner,
+
+&gt;<i> bei der manuellen Zuordnung der Umsatz-Kategorien gibt es noch ein Problem.
+</I>&gt;<i>
+</I>&gt;<i> Nach der Zuordnung einer Kategorie wird die Liste wieder von Anfang an
+</I>&gt;<i> angezeigt. Ich bin dabei den Buchungen von 2006 die Kategorien
+</I>&gt;<i> zuzuordnen. Das ist ganz schön nervig.
+</I>&gt;<i>
+</I>&gt;<i> Ich habe bereits eine Änderung vorgenommen. Die Tabellenzeilen werden
+</I>&gt;<i> jetzt entsprechend deines Vorschlages zu JVerein nach der Bearbeitung
+</I>&gt;<i> ausgetauscht. An irgendeinder Stelle wird aber noch der neue Aufbau der
+</I>&gt;<i> Tabelle angestoßen. Die finde ich aber nicht. Würdest du dir die Sache
+</I>&gt;<i> mal ansehen?
+</I>
+Ja, das liegt daran, dass nach Ausfuehrung der Action noch ein
+GUI.getCurrentView().reload() ausgefuehrt wird.
+
+Ich bau das mal so um, dass das Aktualisieren der Objekte nicht
+direkt in UmsatzAssign stattfindet (weil die Action hierzu die
+Tabelle kennen muss) sondern stattdessen ueber das Jameica-
+Messaging-System.
+
+Derzeit:
+
+Action &quot;UmsatzAssign&quot; aendert die Objekte direkt in der Tabelle.
+Das heisst aber, dass die Action nicht mehr generisch ist sondern
+nur noch zusammen mit der Tabelle UmsatzList sinnvoll funktioniert.
+
+Neu:
+Action &quot;UmsatzAssign&quot; sendet lediglich eine Message vom
+Typ &quot;ObjectChangedMessage&quot;. Die Tabelle &quot;UmsatzList&quot; abonniert
+diesen Nachrichtentyp und kuemmert sich dann selbst darum,
+das betroffene Objekt zu aktualisieren.
+
+Ich geb Bescheid, wenn ich's eingebaut hab.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000031.html">[Hibiscus-devel] Umsatz-Kategorisierung
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000033.html">[Hibiscus-devel] Umsatz-Kategorisierung
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#32">[ Datum ]</a>
+              <a href="thread.html#32">[ Thema ]</a>
+              <a href="subject.html#32">[ Betreff (Subject)]</a>
+              <a href="author.html#32">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

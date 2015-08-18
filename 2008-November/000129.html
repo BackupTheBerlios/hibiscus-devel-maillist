@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Update auf HBCI4Java 2.5.9
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2008-November/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Update%20auf%20HBCI4Java%202.5.9&In-Reply-To=%3C4910A2E5.4080904%40jost-net.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000128.html">
+   <LINK REL="Next"  HREF="000130.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Update auf HBCI4Java 2.5.9</H1>
+    <B>Heiner Jostkleigrewe</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Update%20auf%20HBCI4Java%202.5.9&In-Reply-To=%3C4910A2E5.4080904%40jost-net.de%3E"
+           TITLE="[Hibiscus-devel] Update auf HBCI4Java 2.5.9">heiner at jost-net.de
+                  </A><BR>
+    <I>Di Nov  4 20:30:45 CET 2008</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000128.html">[Hibiscus-devel] Update auf HBCI4Java 2.5.9
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000130.html">[Hibiscus-devel] Update auf HBCI4Java 2.5.9
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#129">[ Datum ]</a>
+              <a href="thread.html#129">[ Thema ]</a>
+              <a href="subject.html#129">[ Betreff (Subject) ]</a>
+              <a href="author.html#129">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hallo Olaf,
+
+bei mir gab es ein minimales Problem. Durch das CVS-Update wurde die 
+hbci4java-2.5.8.jar nicht gelöscht. Dadurch wurde beim Start von Jameica 
+aus Eclipse heraus eine Exception geworfen:
+
+[Tue Nov 04 20:21:43 CET 
+2008][ERROR][de.willuhn.jameica.plugin.PluginLoader.init] unable to init 
+plugin  hibiscus
+java.lang.NoSuchMethodError: 
+org.kapott.hbci.manager.HBCIUtils.init(Ljava/util/Properties;Lorg/kapott/hbci/callback/HBCICallback;)V
+    at de.willuhn.jameica.hbci.HBCI.initHBCI(HBCI.java:249)
+    at de.willuhn.jameica.hbci.HBCI.init(HBCI.java:115)
+    at 
+de.willuhn.jameica.plugin.PluginLoader.initPlugin(PluginLoader.java:328)
+    at de.willuhn.jameica.plugin.PluginLoader.init(PluginLoader.java:182)
+    at de.willuhn.jameica.services.PluginService.init(PluginService.java:42)
+    at de.willuhn.boot.BootLoader.resolve(BootLoader.java:138)
+    at de.willuhn.boot.BootLoader.resolve(BootLoader.java:118)
+    at de.willuhn.boot.BootLoader.getBootable(BootLoader.java:71)
+    at de.willuhn.jameica.system.Application.init(Application.java:105)
+    at 
+de.willuhn.jameica.system.Application.newInstance(Application.java:86)
+    at de.willuhn.jameica.Main.main(Main.java:78)
+
+Nachdem ich das jar-File gelöscht habe, läuft alles wunderbar. An 
+JVerein sind keine Änderungen vorzunehmen. Soll ich die Löschung 
+committen oder gebrauchts du das alte jar-File noch?
+
+Heiner
+
+
+
+Olaf Willuhn schrieb:
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> ich habe gerade das Update auf HBCI4Java 2.5.9 ins CVS von
+</I>&gt;<i> Hibiscus uebernommen. Die Aenderungen landen damit ab morgen
+</I>&gt;<i> im Nightly-Build. Falls eure Projekte Compile-Abhaengigkeiten
+</I>&gt;<i> auf das hbci4java Jar aus Hibiscus haben, dann muesst ihr
+</I>&gt;<i> den Pfad von hibiscus/lib/hbci4java-2.5.8.jar auf 
+</I>&gt;<i> hibiscus/lib/hbci4java-2.5.9.jar aendern.
+</I>&gt;<i> Weitere Konsequenzen sollten nicht auftreten. Es gab zwar ein
+</I>&gt;<i> paar kleine API-Aenderungen, Hibiscus ist davon aber nicht
+</I>&gt;<i> wirklich betroffen.
+</I>&gt;<i>
+</I>&gt;<i> Hier noch das zugehoerige Announcement von Stefan:
+</I>&gt;<i> <A HREF="http://sourceforge.net/mailarchive/forum.php?thread_name=1225144689.6457.42.camel%40drops.kapott.org&amp;forum_name=hbci4java-help">http://sourceforge.net/mailarchive/forum.php?thread_name=1225144689.6457.42.camel%40drops.kapott.org&amp;forum_name=hbci4java-help</A>
+</I>&gt;<i>
+</I>&gt;<i> PS: Hat zufaellig jemand ein 64Bit Linux-System und koennte
+</I>&gt;<i> da drauf mal hbci4java compilieren? Die in Hibiscus
+</I>&gt;<i> enthaltene libhbci4java-card-linux-amd64.so ist reichlich
+</I>&gt;<i> alt und muesste mal basierend auf hbci4java 2.5.9 neu
+</I>&gt;<i> compiliert werden. Danke ;)
+</I>&gt;<i>
+</I>&gt;<i> Gruss
+</I>&gt;<i> Olaf
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Hibiscus-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Hibiscus-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">https://lists.berlios.de/mailman/listinfo/hibiscus-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000128.html">[Hibiscus-devel] Update auf HBCI4Java 2.5.9
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000130.html">[Hibiscus-devel] Update auf HBCI4Java 2.5.9
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#129">[ Datum ]</a>
+              <a href="thread.html#129">[ Thema ]</a>
+              <a href="subject.html#129">[ Betreff (Subject)]</a>
+              <a href="author.html#129">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

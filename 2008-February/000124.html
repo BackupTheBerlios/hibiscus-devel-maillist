@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Neuer Bootloader in Jameica
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2008-February/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Neuer%20Bootloader%20in%20Jameica&In-Reply-To=%3C200802130217.04437.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Neuer Bootloader in Jameica</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Neuer%20Bootloader%20in%20Jameica&In-Reply-To=%3C200802130217.04437.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Neuer Bootloader in Jameica">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mi Feb 13 02:17:03 CET 2008</I>
+    <P><UL>
+        
+        
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#124">[ Datum ]</a>
+              <a href="thread.html#124">[ Thema ]</a>
+              <a href="subject.html#124">[ Betreff (Subject) ]</a>
+              <a href="author.html#124">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi zusammen,
+
+ich habe mal wieder am Startvorgang von Jameica gebaut.
+Diesmal jedoch lediglich intern. Schnittstellen sind
+keine betroffen.
+
+Beim Start der Anwendung werden ja eine Reihe von internen
+Diensten (Logging, Pluginloader, Services, SSL, usw.)
+initialisiert und beim Beenden wieder geschlossen. Der
+komplette Code fuer den Ablauf dieses Startvorgangs sowie
+die Reihenfolge, in der die Komponenten geladen wurden,
+befand sich in der Klasse &quot;Application&quot;. Das fand ich
+schon lange unschoen, weil es sehr prozedural war.
+
+Vor einiger Zeit hatte ich daher schonmal einen generischen
+Bootloader gebaut. Hierbei implementieren die Dienste
+ein Interface &quot;Bootable&quot;. Jeder Service kann nun ueber
+die Funktion &quot;depends()&quot; mitteilen, welche anderen
+Services er fuer den Start benoetigt. Der Bootloader
+loest diese Abhaengigkeiten dann automatisch auf
+und startet bzw. beendet die Dienste in der richtigen
+Reihenfolge. Ich habe daher einen Grossteil des
+Codes aus der Klasse &quot;Application&quot; in eine Reihe kleinere
+Klassen im Package &quot;services&quot; verschoben und sie dort
+jeweils als Bootable implementiert. Ausserdem habe ich
+einen Meta-Service &quot;Init5&quot; (wie bei Linux ;) definiert,
+der keine eigene Funktionalitaet mitbringt sondern
+lediglich alle noetigen Dienste als Abhaengigkeiten 
+besitzt:
+
+public Class[] depends() {
+  return new Class[]{
+    LockService.class,
+    LogService.class,
+    SysinfoService.class,
+    ProxyService.class,
+    RegistryService.class,
+    ClassService.class,
+    SSLService.class,
+    PluginService.class,
+    PluginServiceService.class,
+  };
+}
+
+
+Der eigentliche Start aller Komponenten kann in
+&quot;Application&quot; nun auf diese zwei Zeilen reduziert
+werden:
+
+BootLoader loader = new BootLoader(getCallback().getStartupMonitor());
+loader.getBootable(Init5.class);
+
+Ich hatte vor langer Zeit schonmal versucht, diesen Bootloader
+einzubauen, war aber an einem Deadlock gescheitert (zwei Dienste
+hatten gegenseitig eine Abhaengigkeit). Diesmal hats aber
+geklappt. Habe gerade alles eingecheckt.
+
+Wie gesagt: Das sind nur interne Aenderungen - in den Plugins
+muss nirgends etwas angepasst werden. Sollten in euren Plugins
+dennoch ploetzlich Fehlermeldungen auftreten, deren Ursache
+ihr euch nicht erklaeren koennt, dann meldet es mir bitte.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#124">[ Datum ]</a>
+              <a href="thread.html#124">[ Thema ]</a>
+              <a href="subject.html#124">[ Betreff (Subject)]</a>
+              <a href="author.html#124">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

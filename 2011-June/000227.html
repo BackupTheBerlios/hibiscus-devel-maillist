@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] xmlrpc
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2011-June/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20xmlrpc&In-Reply-To=%3C4E08A0A6.6080000%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000226.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] xmlrpc</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20xmlrpc&In-Reply-To=%3C4E08A0A6.6080000%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] xmlrpc">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mo Jun 27 17:24:22 CEST 2011</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000226.html">[Hibiscus-devel] xmlrpc
+</A></li>
+        
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#227">[ Datum ]</a>
+              <a href="thread.html#227">[ Thema ]</a>
+              <a href="subject.html#227">[ Betreff (Subject) ]</a>
+              <a href="author.html#227">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hallo,
+
+&gt;&gt;&gt;<i> sind IDs der ueberweisungen, wie sie per find-methode
+</I>&gt;&gt;&gt;<i> zurueckgegeben werden eindeutig ueber die gesamte zeit
+</I>&gt;&gt;&gt;<i> in der das konto im hibiscus konfiguriert ist?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Ja. Die IDs sind aber nicht nur innerhalb des Kontos eindeutig sondern
+</I>&gt;&gt;<i> innerhalb der gesamten Hibiscus-Installation.
+</I>&gt;<i> 
+</I>&gt;<i> die konten-uebergreifende eindeutigkeit hatte ich schon
+</I>&gt;<i> vorausgesetzt :)
+</I>
+Hae? Wenn sie konten-uebergreifend eindeutig sind, wie sollen sie dann
+_innerhalb_ _eines_ Kontos nicht mehr eindeutig sein? Oder verstehe ich
+dich falsch?
+
+&gt;<i> meines erachtens ist eine ausgabe wie &quot;1.234,56&quot; ja 
+</I>&gt;<i> durchaus eine locale-behaftete ausgabe.
+</I>
+Ja, natuerlich ist es durch ein Locale gegangen, um es zu formatieren.
+Allerdings ist es nicht vorgesehen, dass zu aendern. Also man kann es
+schon aendern. Allerdings habe ich das nicht getestet und weiss daher
+nicht, ob das unerwuenschte Nebeneffekte hat. Es kann durchaus sein,
+dass die Betraege dann falsch intepretiert werden, wenn beispielsweise
+eine Ueberweisung via XML-RPC uebergeben wird.
+
+In  ~/.jameica/cfg/de.willuhn.jameica.system.Config.properties
+
+der Parameter: jameica.system.locale=de_DE
+
+Wie gesagt: Rechne mit Fehlern, wenn du das aenderst. In der
+Spezifikation - wie ich sie z.Bsp. hier
+<A HREF="http://hibiscus.berlios.de/doku.php?id=develop:xmlrpc:einzelauftrag">http://hibiscus.berlios.de/doku.php?id=develop:xmlrpc:einzelauftrag</A>
+beschrieben habe - ist das Format von Betraegen so festgelegt. Waere das
+abhaengig vom Locale, wuerde das die Dokumentation erheblich erschweren.
+Ausserdem koennte man sich nicht darauf verlassen, dass beispielsweise
+ein Shop-Connector fuer Magento auf Rechner Y fehlerfrei laeuft, wenn er
+auf X lief.
+
+&gt;&gt;<i> <A HREF="http://hibiscus.berlios.de/doku.php?id=develop:xmlrpc#null-support_aktivieren_deaktivieren">http://hibiscus.berlios.de/doku.php?id=develop:xmlrpc#null-support_aktivieren_deaktivieren</A>
+</I>&gt;<i> 
+</I>&gt;<i> also muss ich hibiscus eine fehlinformation (supports.null=false)
+</I>&gt;<i> unterschieben, damit ich an die gewuenschte information (ID) gelange,
+</I>&gt;<i> obwohl ich sehr wohl mit NULL umgehen koennte?
+</I>&gt;<i> war das so gemeint?
+</I>
+Korrekt. Ist doch aber jetzt egal, wie der Parameter heisst. Er macht
+das, was du suchst.
+
+Gruss
+Olaf
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.16 (GNU/Linux)
+
+iQEcBAEBAgAGBQJOCKCmAAoJEFqO2c/A22xw7I0H/0X5aRQM8zUHIobVyNfli4qz
+xR0yvdwCztiLJd7eXNnxf7x30kNY/0deLD2IhVqtf0z3REB7/7b4AsPc1AgF0qJM
+5EvTTi8Npa1WycJshOEmprvuRGQBo6sglJk7v5Xzr8PtkOpzLLYrdeCPDp/PSyEn
+DewBBVf9fT8b1k5skP3cQ34rYlHRsH4S4kgD5vbdQDdbJ5whkS/c+iJ3m4kdLUJV
+HFi3nfnbRTE1IiXTl9PjnjPwZJPtfMko6pMUNFTHfqUrfIT/awVnHzXi5biP14q3
+2fmWEWx/uuF34IIPLFFsqyuy0F74O7BFlyT+E9LZC/EkOZZ8NG6el84CQCOHKFM=
+=Ipx5
+-----END PGP SIGNATURE-----
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000226.html">[Hibiscus-devel] xmlrpc
+</A></li>
+	
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#227">[ Datum ]</a>
+              <a href="thread.html#227">[ Thema ]</a>
+              <a href="subject.html#227">[ Betreff (Subject)]</a>
+              <a href="author.html#227">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

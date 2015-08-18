@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] [hibiscus-nightly] Umstellung auf H2-Datenbank
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-August/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%5Bhibiscus-nightly%5D%20Umstellung%20auf%20H2-Datenbank&In-Reply-To=%3C200708231712.36757.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   <LINK REL="Next"  HREF="000112.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] [hibiscus-nightly] Umstellung auf H2-Datenbank</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%5Bhibiscus-nightly%5D%20Umstellung%20auf%20H2-Datenbank&In-Reply-To=%3C200708231712.36757.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] [hibiscus-nightly] Umstellung auf H2-Datenbank">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Do Aug 23 17:12:36 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Nächste Nachricht: <A HREF="000112.html">[Hibiscus-devel] Hibiscus-devel Digest, Vol 12, Issue 2
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#111">[ Datum ]</a>
+              <a href="thread.html#111">[ Thema ]</a>
+              <a href="subject.html#111">[ Betreff (Subject) ]</a>
+              <a href="author.html#111">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>[mit dem falschen Absender geschickt, daher hier nochmal...
+auf die Gefahr hin, dass das Posting doppelt erscheint]
+
+Hi,
+
+irgendwann muessen wir ja mal umstellen ;)
+Ich habe daher gerade die Hibiscus-Default-Datenbank im CVS
+(und damit im Nightly-Build ab morgen) von McKoi auf H2 geaendert.
+Das heisst, existierende Installationen verwenden weiterhin McKoi
+(bzw. ggf. MySQL)[1]. Bei neue Installationen wird nun jedoch H2
+mit aktivierter XTEA-Verschluesselung angelegt. Das dafuer noetige
+Passwort wird zufaellig erzeugt und mit dem Masterpasswort verschluesselt
+in de.willuhn.jameica.hbci.rmi.HBCIDBService.properties gespeichert.
+Das Masterpasswort selbst kann ich nicht fuer die Datenbank verwenden,
+da der User dieses aendern kann und ich bisher noch keine praktikable 
+Moeglichkeit gefunden habe, dieses dann auch fuer die Datenbank aendern
+zu koennen.
+
+Nutzer der Nightly-Builds sind somit also jetz automatisch auch
+Beta-Tester fuer die neue H2-Datenbank.
+
+[1] da dort in de.willuhn.jameica.hbci.rmi.HBCIDBService.properties
+mit dem Parameter &quot;database.driver&quot; ja bereits konfiguriert ist, welcher
+Treiber verwendet werden soll.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Nächste Nachricht: <A HREF="000112.html">[Hibiscus-devel] Hibiscus-devel Digest, Vol 12, Issue 2
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#111">[ Datum ]</a>
+              <a href="thread.html#111">[ Thema ]</a>
+              <a href="subject.html#111">[ Betreff (Subject)]</a>
+              <a href="author.html#111">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

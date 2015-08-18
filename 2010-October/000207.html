@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Hilfetexte links unten
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2010-October/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Hilfetexte%20links%20unten&In-Reply-To=%3C4CAC9AFF.7020103%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000206.html">
+   <LINK REL="Next"  HREF="000208.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Hilfetexte links unten</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Hilfetexte%20links%20unten&In-Reply-To=%3C4CAC9AFF.7020103%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Hilfetexte links unten">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mi Okt  6 17:51:27 CEST 2010</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000206.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000208.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#207">[ Datum ]</a>
+              <a href="thread.html#207">[ Thema ]</a>
+              <a href="subject.html#207">[ Betreff (Subject) ]</a>
+              <a href="author.html#207">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> Zunächst wird versucht die bisherige &quot;.TXT&quot;-Datei zu laden. Wenn die
+</I>&gt;<i> nicht existiert (is == null), wird die Methode getHelp() von
+</I>&gt;<i> AbstractView aufgerufen.
+</I>&gt;<i> 
+</I>&gt;<i> Bei dieser Vorgehensweise muss niemand seine Plugins verändern. Ich kann
+</I>&gt;<i> die getHelp()-Methode von AbstractView in den einzelnen Views
+</I>&gt;<i> überschreiben und damit relativ einfach kontrollieren, ob alle Views die
+</I>&gt;<i> Methode überschreiben.
+</I>
+OK, habs eingebaut und eingecheckt. Hab das Patch in GUI.java aber
+noch ein bisschen angepasst, weil StringBufferInputStream deprecated
+ist. Funktioniert.
+
+War mir anfangs nicht ganz sicher, ob es vielleicht zu irgendwelchen
+Classloader-Fehlern mit existierenden Plugins kommen kann, weil deren
+Ableitungen von AbstractView ja noch gegen die Version ohne die
+getHelp()-Funktion compiliert sind. Habs grad getestet: Also Jameica-
+Version mit der neuen Funktion und ein Hibiscus, welches noch gegen
+die Jameica-Version ohne die getHelp()-Funktion compiliert ist.
+Funktioniert.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000206.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000208.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#207">[ Datum ]</a>
+              <a href="thread.html#207">[ Thema ]</a>
+              <a href="subject.html#207">[ Betreff (Subject)]</a>
+              <a href="author.html#207">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

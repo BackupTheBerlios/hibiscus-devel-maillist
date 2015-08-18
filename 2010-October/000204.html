@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Hilfetexte links unten
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2010-October/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Hilfetexte%20links%20unten&In-Reply-To=%3C4CAB848E.4090407%40jost-net.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000203.html">
+   <LINK REL="Next"  HREF="000205.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Hilfetexte links unten</H1>
+    <B>Heiner Jostkleigrewe</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Hilfetexte%20links%20unten&In-Reply-To=%3C4CAB848E.4090407%40jost-net.de%3E"
+           TITLE="[Hibiscus-devel] Hilfetexte links unten">heiner at jost-net.de
+                  </A><BR>
+    <I>Di Okt  5 22:03:26 CEST 2010</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000203.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000205.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#204">[ Datum ]</a>
+              <a href="thread.html#204">[ Thema ]</a>
+              <a href="subject.html#204">[ Betreff (Subject) ]</a>
+              <a href="author.html#204">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hallo Olaf,
+
+ich habe mir die Sache noch mal in Jameica angesehen. Dabei ist mir eine 
+einfache Lösung eingefallen. AbstractView wird um die Methode getHelp() 
+erweitert. Jede View kann die Methode überschreiben und damit einen 
+Hilfetext zurückliefern. In der Klasse GUI wird der Wert aus getView() 
+ausgewertet, sofern keine TXT-Datei gefunden wird. Damit ist auch die 
+Rückwärtskompatibilität gewährleistet.
+
+Würdest du die untenstehenden Patches einbauen?
+
+Heiner
+
+### Eclipse Workspace Patch 1.0
+#P jameica
+Index: src/de/willuhn/jameica/gui/AbstractView.java
+===================================================================
+RCS file: 
+/cvsroot/jameica/jameica/src/de/willuhn/jameica/gui/AbstractView.java,v
+retrieving revision 1.3
+diff -u -r1.3 AbstractView.java
+--- src/de/willuhn/jameica/gui/AbstractView.java    18 Jan 2006 00:35:57 
+-0000    1.3
++++ src/de/willuhn/jameica/gui/AbstractView.java    5 Oct 2010 20:02:52 
+-0000
+@@ -1,7 +1,7 @@
+  /*****************************************************************************
+   * $Source: 
+/cvsroot/jameica/jameica/src/de/willuhn/jameica/gui/AbstractView.java,v $
+   * $Revision: 1.3 $
+- * $Date: 2006-01-18 00:35:57 $
++ * $Date: 2006/01/18 00:35:57 $
+   * $Author: web0 $
+   * $Locker:  $
+   * $State: Exp $
+@@ -9,6 +9,8 @@
+   
+****************************************************************************/
+  package de.willuhn.jameica.gui;
+
++import java.io.StringReader;
++
+  import org.eclipse.swt.widgets.Composite;
+
+  import de.willuhn.util.ApplicationException;
+@@ -92,13 +94,18 @@
+      {
+          this.parent = p;
+      }
++
++  public String getHelp()
++  {
++    return null;
++  }
+  }
+
+
+
+  /***************************************************************************
+   * $Log: AbstractView.java,v $
+- * Revision 1.3  2006-01-18 00:35:57  web0
++ * Revision 1.3  2006/01/18 00:35:57  web0
+   * @N AbstractView#reload
+   *
+   * Revision 1.2  2004/10/29 16:16:24  willuhn
+
+
+
+
+
+
+
+### Eclipse Workspace Patch 1.0
+#P jameica
+Index: src/de/willuhn/jameica/gui/AbstractView.java
+===================================================================
+RCS file: 
+/cvsroot/jameica/jameica/src/de/willuhn/jameica/gui/AbstractView.java,v
+retrieving revision 1.3
+diff -u -r1.3 AbstractView.java
+--- src/de/willuhn/jameica/gui/AbstractView.java    18 Jan 2006 00:35:57 
+-0000    1.3
++++ src/de/willuhn/jameica/gui/AbstractView.java    5 Oct 2010 19:58:33 
+-0000
+@@ -1,7 +1,7 @@
+  /*****************************************************************************
+   * $Source: 
+/cvsroot/jameica/jameica/src/de/willuhn/jameica/gui/AbstractView.java,v $
+   * $Revision: 1.3 $
+- * $Date: 2006-01-18 00:35:57 $
++ * $Date: 2006/01/18 00:35:57 $
+   * $Author: web0 $
+   * $Locker:  $
+   * $State: Exp $
+@@ -9,6 +9,8 @@
+   
+****************************************************************************/
+  package de.willuhn.jameica.gui;
+
++import java.io.StringReader;
++
+  import org.eclipse.swt.widgets.Composite;
+
+  import de.willuhn.util.ApplicationException;
+@@ -92,13 +94,18 @@
+      {
+          this.parent = p;
+      }
++
++  public String getHelp()
++  {
++    return null;
++  }
+  }
+
+
+
+  /***************************************************************************
+   * $Log: AbstractView.java,v $
+- * Revision 1.3  2006-01-18 00:35:57  web0
++ * Revision 1.3  2006/01/18 00:35:57  web0
+   * @N AbstractView#reload
+   *
+   * Revision 1.2  2004/10/29 16:16:24  willuhn
+
+
+
+Am 05.10.2010 11:36, schrieb Olaf Willuhn:
+&gt;<i> Heiner Jostkleigrewe wrote:
+</I>&gt;<i>
+</I>&gt;<i>    
+</I>&gt;&gt;<i> Da war ich wohl etwas zu schnell. Es funktioniert immer noch. Ich hatte
+</I>&gt;&gt;<i> einen Kommentar beim auschecken deiner Änderungen falsch interpretiert.
+</I>&gt;&gt;<i>      
+</I>&gt;<i> Ah ok. Ich hatte noch eine andere Aenderung eingebaut, die ich aber
+</I>&gt;<i> wieder rueckgaengig gemacht hab. Und dachte jetzt, ich haette auch dein
+</I>&gt;<i> Aenderung versehentlich auch wieder geloescht.
+</I>&gt;<i>
+</I>&gt;<i> Gruss
+</I>&gt;<i> Olaf
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Hibiscus-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Hibiscus-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">https://lists.berlios.de/mailman/listinfo/hibiscus-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>    
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000203.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000205.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#204">[ Datum ]</a>
+              <a href="thread.html#204">[ Thema ]</a>
+              <a href="subject.html#204">[ Betreff (Subject)]</a>
+              <a href="author.html#204">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

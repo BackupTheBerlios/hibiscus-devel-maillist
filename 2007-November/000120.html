@@ -1,0 +1,258 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Umbauten an Jameica-Classloader
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-November/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Umbauten%20an%20Jameica-Classloader&In-Reply-To=%3C47336BDD.6030706%40jost-net.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   <LINK REL="Next"  HREF="000121.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Umbauten an Jameica-Classloader</H1>
+    <B>Heiner Jostkleigrewe</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Umbauten%20an%20Jameica-Classloader&In-Reply-To=%3C47336BDD.6030706%40jost-net.de%3E"
+           TITLE="[Hibiscus-devel] Umbauten an Jameica-Classloader">heiner at jost-net.de
+                  </A><BR>
+    <I>Do Nov  8 21:04:45 CET 2007</I>
+    <P><UL>
+        
+        <LI>Nächste Nachricht: <A HREF="000121.html">[Hibiscus-devel] Umbauten an Jameica-Classloader
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#120">[ Datum ]</a>
+              <a href="thread.html#120">[ Thema ]</a>
+              <a href="subject.html#120">[ Betreff (Subject) ]</a>
+              <a href="author.html#120">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hallo Olaf,
+
+bei mir ist ein Problem aufgetreten:
+
+In JVerein wird mittels HBCIUtils.checkAccountCRC(blz, kontonummer); die 
+Bankverbindung überprüft. Dabei erscheint dann jetzt folgende 
+Logging-Ausgabe:
+
+[Thu Nov 08 20:00:18 GMT 
+2007][WARN][de.jost_net.JVerein.Einstellungen.checkAccountCRC] HBCI4Java 
+subsystem seems to be not initialized for this thread group, adding 
+thread group
+[Thu Nov 08 20:00:18 GMT 2007][ERROR][de.willuhn.jameica.gui.GUI.loop] 
+main loop crashed, retry
+java.lang.NullPointerException
+at 
+org.kapott.hbci.manager.HBCIUtilsInternal.getLocMsg(HBCIUtilsInternal.java:85)
+at 
+org.kapott.hbci.manager.HBCIUtilsInternal.getLocMsg(HBCIUtilsInternal.java:95)
+at 
+org.kapott.hbci.manager.HBCIUtilsInternal.getLocMsg(HBCIUtilsInternal.java:90)
+at org.kapott.hbci.manager.HBCIUtils.checkAccountCRC(HBCIUtils.java:1122)
+at de.jost_net.JVerein.Einstellungen.checkAccountCRC(Einstellungen.java:146)
+at de.jost_net.JVerein.server.MitgliedImpl.plausi(MitgliedImpl.java:116)
+at 
+de.jost_net.JVerein.server.MitgliedImpl.updateCheck(MitgliedImpl.java:145)
+at 
+de.willuhn.datasource.db.AbstractDBObject.update(AbstractDBObject.java:703)
+at 
+de.willuhn.datasource.db.AbstractDBObject.store(AbstractDBObject.java:336)
+at 
+de.jost_net.JVerein.gui.control.MitgliedControl.handleStore(MitgliedControl.java:1056)
+at 
+de.jost_net.JVerein.gui.view.MitgliedDetailView$1.handleAction(MitgliedDetailView.java:137)
+at de.willuhn.jameica.gui.parts.Button$1$1.run(Button.java:134)
+at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:67)
+at de.willuhn.jameica.gui.GUI$3.run(GUI.java:642)
+at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:152)
+at org.eclipse.swt.widgets.Display.syncExec(Display.java:3722)
+at de.willuhn.jameica.gui.GUI.startSync(GUI.java:638)
+at de.willuhn.jameica.gui.parts.Button$1.widgetSelected(Button.java:128)
+at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:90)
+at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:66)
+at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1085)
+at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3166)
+at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:2842)
+at de.willuhn.jameica.gui.GUI.loop(GUI.java:657)
+at de.willuhn.jameica.gui.GUI.init(GUI.java:212)
+at de.willuhn.jameica.system.Application.init(Application.java:262)
+at de.willuhn.jameica.system.Application.newInstance(Application.java:93)
+at de.willuhn.jameica.Main.main(Main.java:78)
+
+Daraufhin habe ich die Methode initHBCI aus der Klasse HBCI in meine 
+Klasse JVereinPlugin kopiert. Dann erscheint die Meldung
+
+[Thu Nov 08 20:03:14 GMT 
+2007][ERROR][de.willuhn.jameica.plugin.PluginLoader.init] unable to init 
+plugin jverein
+java.lang.NoClassDefFoundError: de/willuhn/jameica/hbci/HBCICallbackSWT
+at de.jost_net.JVerein.JVereinPlugin.init(JVereinPlugin.java:117)
+at de.willuhn.jameica.plugin.PluginLoader.initPlugin(PluginLoader.java:274)
+at de.willuhn.jameica.plugin.PluginLoader.init(PluginLoader.java:149)
+at 
+de.willuhn.jameica.system.Application.getPluginLoader(Application.java:386)
+at de.willuhn.jameica.system.Application.init(Application.java:229)
+at de.willuhn.jameica.system.Application.newInstance(Application.java:93)
+at de.willuhn.jameica.Main.main(Main.java:78)
+
+Muss ich jetzt auch noch die Klasse HBCICallbackSWT und ....... 
+kopieren? Gibt es nicht doch eine Möglichkeit, die alte Mimik zu 
+reaktivieren?
+
+Heiner
+
+Olaf Willuhn schrieb:
+&gt;<i> Hi zusammen,
+</I>&gt;<i>
+</I>&gt;<i> I)
+</I>&gt;<i>
+</I>&gt;<i> ich hab mich mal wieder an den innersten Eingeweiden
+</I>&gt;<i> von Jameica vergriffen - naemlich am Classloader ;)
+</I>&gt;<i>
+</I>&gt;<i> Grund fuer die ganze Sache:
+</I>&gt;<i>
+</I>&gt;<i> 1) Bisher teilen sich Jameica selbst sowie alle Plugins
+</I>&gt;<i>    einen gemeinsamen Classloader. Das ist auf der einen
+</I>&gt;<i>    Seite prima, weil die Plugins auf die Weise prima
+</I>&gt;<i>    miteinander kommunizieren koennen. Auf der anderen
+</I>&gt;<i>    Seite koennte es aber zu Konflikten kommen, wenn
+</I>&gt;<i>    z.Bsp. Plugin A eine Bibliothek in Version 1.0
+</I>&gt;<i>    enthaelt, Plugin B die gleiche - jedoch in Version 2.0.
+</I>&gt;<i>    Dann befinden sich beide Bibliotheken im Classpath
+</I>&gt;<i>    und koennten zu Konflikten fuehren.
+</I>&gt;<i> 2) Mit dem Classfinder ist es ja moeglich, zu einem
+</I>&gt;<i>    vorgegebenen Interface nach existierenden Implementierungen
+</I>&gt;<i>    zu suchen. Hierbei werden die Klassen in allen Plugins
+</I>&gt;<i>    und in Jameica selbst durchsucht. Es ist also nicht
+</I>&gt;<i>    ohne weiteres moeglich, nur nach Implementierungen
+</I>&gt;<i>    innerhalb des eigenen Plugins zu suchen. Normalerweise
+</I>&gt;<i>    umgeht man das Problem einfach, indem man in seinem
+</I>&gt;<i>    Plugin ein Interface definiert, welches alle anderen
+</I>&gt;<i>    Plugins nicht kennen und ergo auch keine Impls dazu
+</I>&gt;<i>    haben koennen.
+</I>&gt;<i> 3) Vor langer Zeit befand sich die &quot;plugin.xml&quot; mal direkt
+</I>&gt;<i>    in der Jar-Datei von einem Plugin. Damit war es zwar
+</I>&gt;<i>    moeglich, Plugins auszuliefern, die nur aus einer
+</I>&gt;<i>    einzigen Datei bestanden, es hatte jedoch den Nachteil,
+</I>&gt;<i>    das Jameica beim Start alle Jars nach diesen Dateien
+</I>&gt;<i>    durchsuchen musste. Das ist schon lange nicht mehr
+</I>&gt;<i>    so. Allerdings hat das nun den Nebeneffekt, dass Jameica
+</I>&gt;<i>    nicht mehr weiss, in welchem Jar sich das Plugin
+</I>&gt;<i>    tatsaechlich befindet (also das Jar, in dem die
+</I>&gt;<i>    von AbstractPlugin abgeleitete Klasse liegt). Das
+</I>&gt;<i>    ist aber dumm, weil in diesem Jar auch die Ressource-Bundles,
+</I>&gt;<i>    Hilfetexte, Icons, etc liegen. Diese Dateien werden
+</I>&gt;<i>    via &quot;getRessourceAsStream&quot; ueber den Classloader geladen.
+</I>&gt;<i>    Bemerkt? Jupp. Wenn sich Jameica und alle Plugins ein
+</I>&gt;<i>    und den selben Classloader teilen und in zwei Plugins
+</I>&gt;<i>    z.Bsp. ein exakt gleichnamiges Icon (z.Bsp. img/logo.png)
+</I>&gt;<i>    existiert, koennte es passieren, dass Plugin A versehentlich
+</I>&gt;<i>    das Icon von Plugin B laedt.
+</I>&gt;<i>    Das ist uebrigens auch der Grund, warum Jameica -
+</I>&gt;<i>    (wenn es nicht in Eclipse gestartet wurde) bei jedem
+</I>&gt;<i>    Plugin eine Warnung im Log ausgab, dass dieses angeblich
+</I>&gt;<i>    nicht das System-Locale unterstuetzt. Es wusste schlicht
+</I>&gt;<i>    nicht, in welcher Jar-Datei es nach den properties-Dateien
+</I>&gt;<i>    mit den Uebersetzungen suchen sollte. Hat bisher vermutlich
+</I>&gt;<i>    nur deshalb niemanden gestoert, weil noch keiner
+</I>&gt;<i>    mehrsprachige Plugins entwickelt hat ;)
+</I>&gt;<i>    
+</I>&gt;<i>
+</I>&gt;<i> Um bei oben genannten Punkten kuenftig flexibler zu sein,
+</I>&gt;<i> hab ich den Classloader nun aufgeteilt. Es gibt einen System-Classloader,
+</I>&gt;<i> der alles kennt (sowohl Jameica als auch die Plugins). Ausserdem
+</I>&gt;<i> wird fuer jedes Plugin ein eigener Classloader erzeugt, der
+</I>&gt;<i> nur dieses Plugin kennt.
+</I>&gt;<i> (zu erreichen ueber plugin.getRessources().getClassloader())
+</I>&gt;<i> Hierbei werden die Klassen jedoch nicht redundant geladen.
+</I>&gt;<i> Stattdessen existiert Tree von Classloadern. Der System-Classloader
+</I>&gt;<i> kennt selbst nur die Jameica-Klassen. Allerdings enthaelt er
+</I>&gt;<i> als &quot;Child-Classloader&quot; auch die von den Plugins. Findet er
+</I>&gt;<i> eine Klasse nicht selbst, delegiert er die Anfrage an die
+</I>&gt;<i> Kinder.
+</I>&gt;<i> Heisst: Im Code der Plugins muss nichts geaendert werden,
+</I>&gt;<i> da ueberall standardmaessig noch der System-Classloader
+</I>&gt;<i> verwendet wird. In Zukunft besteht jedoch die Moeglichkeit,
+</I>&gt;<i> auch die Plugin-Classloader zu nutzen, wenn man sicherstellen
+</I>&gt;<i> will, dass man nur Daten aus dem eigenen Plugin laden moechte.
+</I>&gt;<i>
+</I>&gt;<i> Der Startvorgang von Jameica sollte hierbei auch etwas schneller
+</I>&gt;<i> geworden sein, da vorher an einer Stelle (gezwungenermassen)
+</I>&gt;<i> Klassen doppelt geladen werden mussten.
+</I>&gt;<i>
+</I>&gt;<i> II) In diesem Zusammenhang konnte auch der Konstruktor
+</I>&gt;<i> von AbstractPlugin vereinfacht werden. Er enthielt bisher
+</I>&gt;<i> einen Parameter vom Typ &quot;File&quot;. Er existiert zwar noch,
+</I>&gt;<i> ich hab ihn aber als &quot;deprecated&quot; markiert. Stattdessen
+</I>&gt;<i> kann man nun den neuen parameterlosen Konstruktor nutzen.
+</I>&gt;<i> Wenn irgendwann alle Plugins umgestellt sind, fliegen
+</I>&gt;<i> die expliziten Konstruktoren aus AbstractPlugin komplett
+</I>&gt;<i> raus. Dann kann man ihn in der eigenen Plugin-Klasse
+</I>&gt;<i> auch weglassen, da er dann nicht mehr ueberschrieben werden
+</I>&gt;<i> muss. Jameica versucht standardmaessig, das Plugin ueber
+</I>&gt;<i> den neuen parameterlosen Konstruktor zu instanziieren.
+</I>&gt;<i> Schlaegt das fehl (weil er im Plugin noch nicht implementiert
+</I>&gt;<i> ist), macht der Pluginloader ein Fallback und instanziiert
+</I>&gt;<i> das Plugin mit dem alten Konstruktor. In dem Fall wird
+</I>&gt;<i> im Log ein Warnhinweis ausgegeben, dass das Plugin einen
+</I>&gt;<i> veralteten Konstruktor nutzt.
+</I>&gt;<i> Ausserdem sind nun die Methoden install(), update(),
+</I>&gt;<i> shutDown() und init() nicht mehr abstract. Stattdessen
+</I>&gt;<i> sind sie in AbstractPlugin leer implementiert. Man
+</I>&gt;<i> _muss_ sie also nicht mehr ueberschreiben sondern _kann_
+</I>&gt;<i> dies tun, wenn man sie braucht.
+</I>&gt;<i> Heisst: Akut muesst ihr an euren Plugins nichts aendern.
+</I>&gt;<i> Sie kompilieren unveraendert auch gegen die geaenderte
+</I>&gt;<i> AbstractPlugin. Ihr muesst auch keine neuen Releases
+</I>&gt;<i> machen. Es kommt auch zu keinen NoSuchMethodErrors, wenn
+</I>&gt;<i> das Plugin noch gegen die alte AbstractPlugin gelinkt ist
+</I>&gt;<i> (zumindest bei meinen Tests ging das).
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Alle Aenderungen sind natuerlich nicht in der Release
+</I>&gt;<i> sondern nur im Nightly-Build. Und wie gesagt - ihr muesst
+</I>&gt;<i> an eurem Code erstmal nichts aendern. Alles sollte wie
+</I>&gt;<i> gehabt funktionieren. Falls doch irgendwelche Fehler
+</I>&gt;<i> kommen, die auf Classloader-Probleme zurueckzufuehren
+</I>&gt;<i> sind, dann meldet mir sie bitte.
+</I>&gt;<i>
+</I>&gt;<i> Gruss
+</I>&gt;<i> Olaf
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Hibiscus-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Hibiscus-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">https://lists.berlios.de/mailman/listinfo/hibiscus-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Nächste Nachricht: <A HREF="000121.html">[Hibiscus-devel] Umbauten an Jameica-Classloader
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#120">[ Datum ]</a>
+              <a href="thread.html#120">[ Thema ]</a>
+              <a href="subject.html#120">[ Betreff (Subject)]</a>
+              <a href="author.html#120">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

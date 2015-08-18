@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] [Hibiscus] Umstellung auf H2-Datenbank incl.	Migration fertig
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-October/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%5BHibiscus%5D%20Umstellung%20auf%20H2-Datenbank%20incl.%0A%09Migration%20fertig&In-Reply-To=%3C200710051922.14029.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   <LINK REL="Next"  HREF="000119.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] [Hibiscus] Umstellung auf H2-Datenbank incl.	Migration fertig</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%5BHibiscus%5D%20Umstellung%20auf%20H2-Datenbank%20incl.%0A%09Migration%20fertig&In-Reply-To=%3C200710051922.14029.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] [Hibiscus] Umstellung auf H2-Datenbank incl.	Migration fertig">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Fr Okt  5 19:22:13 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Nächste Nachricht: <A HREF="000119.html">[Hibiscus-devel] Umbauten an Jameica-Classloader
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#118">[ Datum ]</a>
+              <a href="thread.html#118">[ Thema ]</a>
+              <a href="subject.html#118">[ Betreff (Subject) ]</a>
+              <a href="author.html#118">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+nachdem ja nun schon seit einiger Zeit im Nightly-Build
+die H2-Datenbank (fuer Neuinstallationen) standardmaessig
+verwendet wird, kann sie nun auch fuer existierende
+Hibiscus-Installationen genutzt werden. Sprich: Inzwischen
+existiert eine Migration, um die Daten aus McKoi zu uebernehmen.
+
+Falls ihr MySQL verwendet, braucht ihr gar nicht weiterlesen.
+Euch betrifft das nicht ;)
+
+Die Migration von McKoi nach H2 ist ab morgen im Nightly-Build
+von Hibiscus (1.8). Bitte dabei (wie gehabt) unbedingt auch ein
+Update der Jameica-Version (1.6 - ebenfalls Nightly-Build)
+durchfuehren.
+
+Die Migration ist noch nicht standardmaessig scharf geschaltet,
+weil ich erst noch ein paar Testergebnisse von euch erfahren
+wollte. Ich habe es bei mir jedenfalls erfolgreich getestet.
+
+Zum Aktivieren der Migration, oeffnet ihr die Config-Datei
+
+.jameica/cfg/de.willuhn.jameica.hbci.HBCI.properties
+
+im Benutzerverzeichnis mit einem Editor und fuegt am Ende
+folgende Zeile hinzu:
+
+migration.h2=true
+
+Beim naechsten Start wird dann ein Fenster erscheinen, in
+dem die Migration gestartet wird. Sie laeuft dann vollautomatisch
+durch. Hibiscus beendet sich anschliessend. Fertig ;)
+
+Keine Angst, sollte es bei der Migration zu einem Fehler
+kommen, kann man sie wieder rueckgaengig machen, da
+die alte McKoi-Datenbank nicht geloescht wird und
+wieder zu ihr zurueckgewechselt werden kann, wenn ein
+Fehler auftrat. Falls das passiert, meldet euch einfach
+kurz, dann teile ich mit, in welchen Config-Dateien man
+das wieder zurueckstellt.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Nächste Nachricht: <A HREF="000119.html">[Hibiscus-devel] Umbauten an Jameica-Classloader
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#118">[ Datum ]</a>
+              <a href="thread.html#118">[ Thema ]</a>
+              <a href="subject.html#118">[ Betreff (Subject)]</a>
+              <a href="author.html#118">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

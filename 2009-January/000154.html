@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Update auf SWT 3.4.1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2009-January/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Update%20auf%20SWT%203.4.1&In-Reply-To=%3C200901021904.25576.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   <LINK REL="Next"  HREF="000155.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Update auf SWT 3.4.1</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Update%20auf%20SWT%203.4.1&In-Reply-To=%3C200901021904.25576.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Update auf SWT 3.4.1">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Fr Jan  2 19:04:25 CET 2009</I>
+    <P><UL>
+        
+        <LI>Nächste Nachricht: <A HREF="000155.html">[Hibiscus-devel] Hibiscus 1.9 aktualisiert (wegen Bug 684)
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#154">[ Datum ]</a>
+              <a href="thread.html#154">[ Thema ]</a>
+              <a href="subject.html#154">[ Betreff (Subject) ]</a>
+              <a href="author.html#154">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi zusammen,
+
+habe gerade die SWT-Version im Jameica-CVS auf 3.4.1 aktualisiert.
+Unter anderem, um einen MacOS-Fehler (Bug 679) zu beheben.
+Insbesondere aber, weil die SWT-Version inzwischen bereits
+reichlich alt war und SWT 3.4.1 einen ganz grossen Vorteil 
+mit sich bringt: Die DLL/so-Libs muessen nun nicht mehr
+explizit mit dem JVM-Parameter &quot;-Djava.library.path&quot; angegeben
+werden. Stattdessen sind sie nun direkt in swt.jar enthalten und
+werden von SWT on-the-fly in das Temp-Verzeichnis des Betriebs-
+Systems entpackt. Damit wird auch Jameica selbst um 0,5 MB
+kleiner und der Start von Jameica ist flexibler und einfacher.
+Die Aenderungen sind damit ab morgen im Nightly-Build.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Nächste Nachricht: <A HREF="000155.html">[Hibiscus-devel] Hibiscus 1.9 aktualisiert (wegen Bug 684)
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#154">[ Datum ]</a>
+              <a href="thread.html#154">[ Thema ]</a>
+              <a href="subject.html#154">[ Betreff (Subject)]</a>
+              <a href="author.html#154">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Umbenennungen in der API
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-April/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Umbenennungen%20in%20der%20API&In-Reply-To=%3C200704232014.00759.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000062.html">
+   <LINK REL="Next"  HREF="000064.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Umbenennungen in der API</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Umbenennungen%20in%20der%20API&In-Reply-To=%3C200704232014.00759.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Umbenennungen in der API">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mo Apr 23 20:14:00 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000062.html">[Hibiscus-devel] Support fuer externe Adressbuecher
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000064.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#63">[ Datum ]</a>
+              <a href="thread.html#63">[ Thema ]</a>
+              <a href="subject.html#63">[ Betreff (Subject) ]</a>
+              <a href="author.html#63">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+Im Zuge der Unterstuetzung von externen Adressbuechern waren leider
+noch einige grundlegendere API-Aenderungen an Hibiscus noetig:
+
+1) Ueberweisungen und Lastschriften implementierten das
+   Interface &quot;Transfer&quot;. Das wurde in &quot;HibiscusTransfer&quot;
+   umbenannt
+
+2) Stattdessen gibt es nun ein neues Interface &quot;Transfer&quot;,
+   welches generisch genug ist, dass es sowohl von HibiscusTransfer
+   (und damit von Ueberweisungen und Lastschriften) als auch von
+   Umsaetzen implementiert wird.
+
+Hintergrund: Die generische Adressbuch-API liefert Objekte
+des Typs &quot;Address&quot;. Diese wiederrum haben eine Funktion
+&quot;public java.util.List getTransfers()&quot;. In dieser Funktion
+koennen nun gebuendelt alle Geldbewegungen von und an diese
+Adresse zurueckgeliefert werden. Sowohl Ueberweisungen und
+Lastschriften als auch Umsaetze.
+
+In dem Zusammenhang wurden 3 Funktionen in &quot;Umsatz&quot; umbenannt.
+
+Bisher:
+public String getEmpfaengerName();
+public String getEmpfaengerKonto();
+public String getEmpfaengerBLZ();
+
+Nun (einheitlich zu Ueberweisungen und Lastschriften):
+public String getGegenkontoName();
+public String getGegenkontoNummer();
+public String getGegenkontoBLZ();
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000062.html">[Hibiscus-devel] Support fuer externe Adressbuecher
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000064.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#63">[ Datum ]</a>
+              <a href="thread.html#63">[ Thema ]</a>
+              <a href="subject.html#63">[ Betreff (Subject)]</a>
+              <a href="author.html#63">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

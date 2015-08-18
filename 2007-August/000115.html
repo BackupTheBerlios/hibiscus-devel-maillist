@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Hibiscus-devel Digest, Vol 12, Issue 2
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-August/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Hibiscus-devel%20Digest%2C%20Vol%2012%2C%20Issue%202&In-Reply-To=%3C200708241601.20103.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000114.html">
+   <LINK REL="Next"  HREF="000116.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Hibiscus-devel Digest, Vol 12, Issue 2</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Hibiscus-devel%20Digest%2C%20Vol%2012%2C%20Issue%202&In-Reply-To=%3C200708241601.20103.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Hibiscus-devel Digest, Vol 12, Issue 2">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Fr Aug 24 16:01:19 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000114.html">[Hibiscus-devel] Hibiscus-devel Digest, Vol 12, Issue 2
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000116.html">[Hibiscus-devel] Hibiscus + HBCI Howto ist fertig
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#115">[ Datum ]</a>
+              <a href="thread.html#115">[ Thema ]</a>
+              <a href="subject.html#115">[ Betreff (Subject) ]</a>
+              <a href="author.html#115">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> &gt;  Existierende
+</I>&gt;<i> &gt; Hibiscus-Installationen bleiben auch bei Einspielung aktueller
+</I>&gt;<i> &gt; Nightly-Builds solange bei Mckoi, bis die Migration fertig ist.
+</I>&gt;<i>
+</I>&gt;<i> Die Änderung betrifft nur Hibiscus.
+</I>
+Korrekt.
+
+&gt;<i> Hast du ein Dokument, in dem beschrieben ist, welche Arbeiten
+</I>&gt;<i> notwändig sind und welche Inkompatibilitäten zwischen McKoi
+</I>&gt;<i> und H2 bestehen? 
+</I>
+Nein, ein Dokument hab ich dazu nicht. Bisher sind mir nur
+zwei Unterschiede beim Laufzeitverhalten (die Create-Scripts
+sehen natuerlich auch anders aus).
+
+1) H2-Datebase wandelt SQL92-Identifier in Grossbuchstaben
+um. Hierzu musste ich das datasource-Package anpassen. Die
+Konfiguration, ob de.willuhn.ds Identifier automatisch in
+Grossbuchstaben wandeln soll, geschieht ueber ein System-
+Property, welches pro Datasource gesetzt werden kann.
+Schau hierzu einfach mal in DBSupportH2Impl. Da wird ein
+System-Property gesetzt, dessen Name auf &quot;uppercase&quot; endet.
+
+2) H2 kann Date-/Timestamp-Werte direkt miteinander chronologisch
+vergleichen. Die Implementierung der Funktion &quot;getSQLTimestamp&quot;
+war daher nicht noetig.
+
+Das war's schon (zumindest das, was mir bis jetzt bekannt ist).
+
+PS: H2 bringt eine Reihe von weiteren Vorteilen mit.
+
+ - ein eigenes Webinterface zum Administrieren der Datenbank
+ - Funktionen, um einen Datenbank-Dump als SQL-Script exportieren
+   zu koennen. Damit liesse sich hervorragend ein Live-Backup
+   der Daten anlegen
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000114.html">[Hibiscus-devel] Hibiscus-devel Digest, Vol 12, Issue 2
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000116.html">[Hibiscus-devel] Hibiscus + HBCI Howto ist fertig
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#115">[ Datum ]</a>
+              <a href="thread.html#115">[ Thema ]</a>
+              <a href="subject.html#115">[ Betreff (Subject)]</a>
+              <a href="author.html#115">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

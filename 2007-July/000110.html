@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Neues Custom-Widget &quot;SearchInput&quot;
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-July/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Neues%20Custom-Widget%20%22SearchInput%22&In-Reply-To=%3C200707311645.48958.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000109.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Neues Custom-Widget &quot;SearchInput&quot;</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Neues%20Custom-Widget%20%22SearchInput%22&In-Reply-To=%3C200707311645.48958.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Neues Custom-Widget &quot;SearchInput&quot;">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Di Jul 31 16:45:48 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000109.html">[Hibiscus-devel] Automatische Erkennung von Kartenlesern
+</A></li>
+        
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#110">[ Datum ]</a>
+              <a href="thread.html#110">[ Thema ]</a>
+              <a href="subject.html#110">[ Betreff (Subject) ]</a>
+              <a href="author.html#110">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+Ich habe gerade die erste Version eines neuen Custom-Widgets
+eingecheckt, welches man schon frueher oefters haette
+gebrauchen koennen: Ein Texteingabefeld, welches nach Eingabe
+von einigen Zeichen im Hintergrund eine Suche startet und
+die Ergebnisse als Dropdown-Liste anbietet. Also eine
+Mischung aus TextInput und SelectInput. Diese
+Funktionalitaet kann man auch von einigen Suchmaschinen.
+
+Hier ein Code-Schnipsel fuer die Verwendung:
+Die Methode &quot;startSearch(String)&quot; muss ueberschrieben
+werden, um die Suche durchfuehren zu koennen:
+
+input = new SearchInput() {
+  public List startSearch(String text) {
+    try {
+      DBService service = ...;
+      DBIterator result = service.createList(Project.class);
+      if (text != null)
+        result.addFilter(&quot;name like ?&quot;, new Object[]{&quot;%&quot;+text+&quot;%&quot;});
+
+      return PseudoIterator.asList(result);
+    }
+    catch (Exception e) {
+      Logger.error(&quot;unable to load data&quot;, e);
+      return null;
+    }
+  }
+};
+input.setValue(getProject());
+input.setMandatory(true);
+
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000109.html">[Hibiscus-devel] Automatische Erkennung von Kartenlesern
+</A></li>
+	
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#110">[ Datum ]</a>
+              <a href="thread.html#110">[ Thema ]</a>
+              <a href="subject.html#110">[ Betreff (Subject)]</a>
+              <a href="author.html#110">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

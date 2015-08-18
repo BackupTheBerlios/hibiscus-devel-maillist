@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Daueraufträge abrufen
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-July/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%3D%3Fiso-8859-15%3Fq%3FDauerauftr%3DE4ge_abrufen%3F%3D&In-Reply-To=%3C46922068.8020706%40jammerhund.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000086.html">
+   <LINK REL="Next"  HREF="000092.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Daueraufträge abrufen</H1>
+    <B>Matthias Scholz</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%3D%3Fiso-8859-15%3Fq%3FDauerauftr%3DE4ge_abrufen%3F%3D&In-Reply-To=%3C46922068.8020706%40jammerhund.de%3E"
+           TITLE="[Hibiscus-devel] Daueraufträge abrufen">ms at jammerhund.de
+                  </A><BR>
+    <I>Mo Jul  9 13:47:52 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000086.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000092.html">[Hibiscus-devel] Daueraufträge abrufen
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#88">[ Datum ]</a>
+              <a href="thread.html#88">[ Thema ]</a>
+              <a href="subject.html#88">[ Betreff (Subject) ]</a>
+              <a href="author.html#88">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hallo,
+
+ich wollte eben ein paar Daueraufträge einrichten um mir ein wenig 
+Arbeit zu ersparen ;-)
+
+Zuerst wollte ich bestehende abrufen. Dabei kam folgendes:
+
+[Mon Jul 09 13:28:45 CEST 
+2007][INFO][de.willuhn.jameica.gui.internal.parts.BackgroundTaskMonitor.check] 
+creating progress monitor for GUI
+[Mon Jul 09 13:28:45 CEST 
+2007][INFO][de.willuhn.jameica.gui.internal.parts.BackgroundTaskMonitor$1.run] 
+activating progress monitor
+[Mon Jul 09 13:28:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.open] 
+open pin/tan passport
+[Mon Jul 09 13:28:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.PinTanConfigFactory.load] 
+trying to apply jameica trustmanager
+[Mon Jul 09 13:28:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.PinTanConfigFactory.findByKonto] 
+searching config for konto XXXXXXXXX, blz: 86070024
+[Mon Jul 09 13:28:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.PinTanConfigFactory.findByKonto] 
+found config. url: fints.deutsche-bank.de
+[Mon Jul 09 13:28:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.PinTanConfigFactory.findByKonto] 
+using config. url: fints.deutsche-bank.de
+[Mon Jul 09 13:28:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.open] 
+[PIN/TAN] url         : fints.deutsche-bank.de
+[Mon Jul 09 13:28:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.open] 
+[PIN/TAN] blz         : 86070024
+[Mon Jul 09 13:28:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.open] 
+[PIN/TAN] filter      : Base64
+[Mon Jul 09 13:28:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.open] 
+[PIN/TAN] HBCI version: plus
+[Mon Jul 09 13:28:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.log] *** there is 
+only one pintan method (999) supported - choosing this automatically
+[Mon Jul 09 13:28:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.HBCIFactory$Worker.run] 
+processing exclusive jobs
+[Mon Jul 09 13:28:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.HBCIFactory$Worker.run] 
+processing batch jobs
+[Mon Jul 09 13:28:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.HBCIFactory$Worker.run] 
+adding job DauerList to queue
+[Mon Jul 09 13:28:46 CEST 
+2007][ERROR][de.willuhn.jameica.hbci.server.hbci.HBCIFactory$Worker.run] 
+error while executing hbci jobs
+[Mon Jul 09 13:28:46 CEST 
+2007][ERROR][de.willuhn.jameica.hbci.server.hbci.HBCIFactory$Worker.run] 
+org.kapott.hbci.exceptions.HBCI_Exception: Fehler beim Erzeugen des Jobs 
+DauerList
+        at org.kapott.hbci.manager.HBCIHandler.newJob(HBCIHandler.java:263)
+        at 
+de.willuhn.jameica.hbci.server.hbci.HBCIFactory$Worker.run(HBCIFactory.java:503)
+        at de.willuhn.jameica.gui.GUI$5.run(GUI.java:775)
+Caused by: java.lang.reflect.InvocationTargetException
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native 
+Method)
+        at 
+sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
+        at 
+sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
+        at java.lang.reflect.Constructor.newInstance(Constructor.java:494)
+        at org.kapott.hbci.manager.HBCIHandler.newJob(HBCIHandler.java:259)
+        ... 2 more
+Caused by: org.kapott.hbci.exceptions.JobNotSupportedException: 
+Geschäftsvorfall DauerList wird nicht unterstützt, evtl. andere 
+HBCI-Version benutzen
+        at 
+org.kapott.hbci.GV.HBCIJobImpl.findSpecNameForGV(HBCIJobImpl.java:183)
+        at org.kapott.hbci.GV.HBCIJobImpl.&lt;init&gt;(HBCIJobImpl.java:78)
+        at org.kapott.hbci.GV.GVDauerList.&lt;init&gt;(GVDauerList.java:44)
+        ... 7 more
+
+[Mon Jul 09 13:28:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.close] 
+closing pin/tan passport
+[Mon Jul 09 13:28:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.close] 
+pin/tan passport closed
+[Mon Jul 09 13:28:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.HBCIFactory.stop] 
+stopping hbci factory
+[Mon Jul 09 13:28:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.HBCIFactory$2.run] 
+executing listener
+[Mon Jul 09 13:28:47 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.HBCIFactory.stop] finished
+[Mon Jul 09 13:28:49 CEST 
+2007][INFO][de.willuhn.jameica.gui.internal.parts.BackgroundTaskMonitor$2.handleEvent] 
+closing background task monitor snapin
+
+
+Wenn ich das &quot;Geschäftsvorfall DauerList wird nicht unterstützt, evtl. 
+andere HBCI-Version benutzen&quot; richtig sehe, liegt das wieder mal an 
+meiner Bank? Kann ich die HBCI Version einstellen? Und wenn ja wo.
+
+
+Ich verwende Jameica 1.4 Build 179 + Hibiscus 1.6 Build 168 auf Debian Etch.
+
+
+Grüße
+
+Matthias
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000086.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000092.html">[Hibiscus-devel] Daueraufträge abrufen
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#88">[ Datum ]</a>
+              <a href="thread.html#88">[ Thema ]</a>
+              <a href="subject.html#88">[ Betreff (Subject)]</a>
+              <a href="author.html#88">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

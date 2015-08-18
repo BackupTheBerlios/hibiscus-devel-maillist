@@ -1,0 +1,329 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Sammelaufträge ausführen
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-July/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%3D%3Fiso-8859-15%3Fq%3FSammelauftr%3DE4ge_ausf%3DFChren%3F%3D&In-Reply-To=%3C4692245B.8010006%40jammerhund.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000091.html">
+   <LINK REL="Next"  HREF="000089.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Sammelaufträge ausführen</H1>
+    <B>Matthias Scholz</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%3D%3Fiso-8859-15%3Fq%3FSammelauftr%3DE4ge_ausf%3DFChren%3F%3D&In-Reply-To=%3C4692245B.8010006%40jammerhund.de%3E"
+           TITLE="[Hibiscus-devel] Sammelaufträge ausführen">ms at jammerhund.de
+                  </A><BR>
+    <I>Mo Jul  9 14:04:43 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000091.html">[Hibiscus-devel] Daueraufträge anlegen
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000089.html">[Hibiscus-devel] Kleinigkeiten
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#87">[ Datum ]</a>
+              <a href="thread.html#87">[ Thema ]</a>
+              <a href="subject.html#87">[ Betreff (Subject) ]</a>
+              <a href="author.html#87">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hallo,
+
+beim Ausführen von Sammelaufträgen bekomme ich folgende Fehlermeldungen:
+
+[Mon Jul 09 13:58:45 CEST 
+2007][INFO][de.willuhn.jameica.gui.internal.parts.BackgroundTaskMonitor.check] 
+creating progress monitor for GUI
+[Mon Jul 09 13:58:45 CEST 
+2007][INFO][de.willuhn.jameica.gui.internal.parts.BackgroundTaskMonitor$1.run] 
+activating progress monitor
+[Mon Jul 09 13:58:45 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.open] 
+open pin/tan passport
+[Mon Jul 09 13:58:45 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.PinTanConfigFactory.load] 
+trying to apply jameica trustmanager
+[Mon Jul 09 13:58:45 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.PinTanConfigFactory.findByKonto] 
+searching config for konto XXXXXXXXX, blz: 86070024
+[Mon Jul 09 13:58:45 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.PinTanConfigFactory.findByKonto] 
+found config. url: fints.deutsche-bank.de
+[Mon Jul 09 13:58:45 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.PinTanConfigFactory.findByKonto] 
+using config. url: fints.deutsche-bank.de
+[Mon Jul 09 13:58:45 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.open] 
+[PIN/TAN] url         : fints.deutsche-bank.de
+[Mon Jul 09 13:58:45 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.open] 
+[PIN/TAN] blz         : 86070024
+[Mon Jul 09 13:58:45 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.open] 
+[PIN/TAN] filter      : Base64
+[Mon Jul 09 13:58:45 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.open] 
+[PIN/TAN] HBCI version: plus
+[Mon Jul 09 13:58:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.log] *** there is 
+only one pintan method (999) supported - choosing this automatically
+[Mon Jul 09 13:58:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.HBCIFactory$Worker.run] 
+processing exclusive jobs
+[Mon Jul 09 13:58:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.HBCIFactory$Worker.run] 
+processing batch jobs
+[Mon Jul 09 13:58:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.HBCIFactory$Worker.run] 
+adding job MultiUeb to queue
+[Mon Jul 09 13:58:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.log] *** adding job 
+SammelUeb6 to dialog
+[Mon Jul 09 13:58:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.HBCIFactory$Worker.run] 
+executing jobs
+[Mon Jul 09 13:58:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.log] Führe Dialog 
+für Kunden-ID XXXXXXXXXXX aus
+[Mon Jul 09 13:58:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.log] führe 
+Dialog-Initialisierung aus
+[Mon Jul 09 13:58:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] führe 
+Dialog-Initialisierung aus
+[Mon Jul 09 13:58:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] erzeuge 
+HBCI-Nachricht DialogInit
+[Mon Jul 09 13:58:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] signiere 
+HBCI-Nachricht
+[Mon Jul 09 13:58:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] 
+verschlüssele HBCI-Nachricht
+[Mon Jul 09 13:58:46 CEST 
+2007][WARN][de.willuhn.jameica.hbci.HBCICallbackSWT.log] konnte 
+folgenden nutzerdefinierten Wert nicht in Nachricht einsetzen: 
+Crypted.CryptHead.SecProfile.version=1
+[Mon Jul 09 13:58:46 CEST 
+2007][WARN][de.willuhn.jameica.hbci.HBCICallbackSWT.log] konnte 
+folgenden nutzerdefinierten Wert nicht in Nachricht einsetzen: 
+Crypted.CryptHead.SecProfile.method=PIN
+[Mon Jul 09 13:58:46 CEST 
+2007][INFO][org.kapott.hbci.comm.FilterHibiscus.Base64.&lt;init&gt;] creating 
+custom base64 filter org.kapott.hbci.comm.FilterHibiscus.Base64
+[Mon Jul 09 13:58:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.log] baue Verbindung 
+zu <A HREF="https://fints.deutsche-bank.de:443">https://fints.deutsche-bank.de:443</A> auf und verifiziere Zertifikat
+[Mon Jul 09 13:58:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] versende 
+HBCI-Nachricht
+[Mon Jul 09 13:58:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] warte auf 
+Antwortdaten
+[Mon Jul 09 13:58:46 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.log] warte auf 
+Antwortdaten
+[Mon Jul 09 13:58:47 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] 
+entschlüssele Antwortnachricht
+[Mon Jul 09 13:58:47 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] überprüfe 
+Signatur der Antwortnachricht
+[Mon Jul 09 13:58:47 CEST 
+2007][WARN][de.willuhn.jameica.hbci.HBCICallbackSWT.log] Nachricht 
+enthält keine digitale Signatur
+[Mon Jul 09 13:58:47 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] Dialog 
+initialisiert - Dialog-ID ist 20070709135847183914NrZiiQHGo0
+[Mon Jul 09 13:58:47 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.log] führe Aufträge aus
+[Mon Jul 09 13:58:47 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] erstelle 
+Auftragsdaten für Geschäftsvorfall SammelUeb6
+[Mon Jul 09 13:58:47 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] erzeuge 
+HBCI-Nachricht CustomMsg
+[Mon Jul 09 13:58:47 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] signiere 
+HBCI-Nachricht
+[Mon Jul 09 13:59:00 CEST 
+2007][INFO][de.willuhn.jameica.security.Wallet.write] writing wallet 
+file /home/mscholz/.jameica/cfg/de.willuhn.jameica.hbci.HBCI.wallet2
+[Mon Jul 09 13:59:00 CEST 
+2007][INFO][de.willuhn.jameica.security.Wallet.write] serializing xml-wallet
+[Mon Jul 09 13:59:00 CEST 
+2007][INFO][de.willuhn.jameica.security.Wallet.write] test if readable
+[Mon Jul 09 13:59:00 CEST 
+2007][INFO][de.willuhn.jameica.security.Wallet.read] reading xml-wallet 
+file /home/mscholz/.jameica/cfg/de.willuhn.jameica.hbci.HBCI.wallet2_42746
+[Mon Jul 09 13:59:04 CEST 
+2007][INFO][de.willuhn.jameica.security.Wallet.read] deserializing 
+xml-wallet
+[Mon Jul 09 13:59:04 CEST 
+2007][INFO][de.willuhn.jameica.security.Wallet.read] reading xml-wallet done
+[Mon Jul 09 13:59:04 CEST 
+2007][INFO][de.willuhn.jameica.security.Wallet.write] renaming temp file
+[Mon Jul 09 13:59:04 CEST 
+2007][INFO][de.willuhn.jameica.security.Wallet.write] writing xml-wallet 
+done
+[Mon Jul 09 13:59:04 CEST 
+2007][INFO][de.willuhn.jameica.security.Wallet.write] writing wallet 
+file /home/mscholz/.jameica/cfg/de.willuhn.jameica.hbci.HBCI.wallet2
+[Mon Jul 09 13:59:04 CEST 
+2007][INFO][de.willuhn.jameica.security.Wallet.write] serializing xml-wallet
+[Mon Jul 09 13:59:04 CEST 
+2007][INFO][de.willuhn.jameica.security.Wallet.write] test if readable
+[Mon Jul 09 13:59:04 CEST 
+2007][INFO][de.willuhn.jameica.security.Wallet.read] reading xml-wallet 
+file /home/mscholz/.jameica/cfg/de.willuhn.jameica.hbci.HBCI.wallet2_42747
+[Mon Jul 09 13:59:08 CEST 
+2007][INFO][de.willuhn.jameica.security.Wallet.read] deserializing 
+xml-wallet
+[Mon Jul 09 13:59:08 CEST 
+2007][INFO][de.willuhn.jameica.security.Wallet.read] reading xml-wallet done
+[Mon Jul 09 13:59:08 CEST 
+2007][INFO][de.willuhn.jameica.security.Wallet.write] renaming temp file
+[Mon Jul 09 13:59:08 CEST 
+2007][INFO][de.willuhn.jameica.security.Wallet.write] writing xml-wallet 
+done
+[Mon Jul 09 13:59:08 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.callback] callback 
+[reason 17] handled by class 
+de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl
+[Mon Jul 09 13:59:08 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] 
+verschlüssele HBCI-Nachricht
+[Mon Jul 09 13:59:08 CEST 
+2007][WARN][de.willuhn.jameica.hbci.HBCICallbackSWT.log] konnte 
+folgenden nutzerdefinierten Wert nicht in Nachricht einsetzen: 
+Crypted.CryptHead.SecProfile.version=1
+[Mon Jul 09 13:59:08 CEST 
+2007][WARN][de.willuhn.jameica.hbci.HBCICallbackSWT.log] konnte 
+folgenden nutzerdefinierten Wert nicht in Nachricht einsetzen: 
+Crypted.CryptHead.SecProfile.method=PIN
+[Mon Jul 09 13:59:08 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] versende 
+HBCI-Nachricht
+[Mon Jul 09 13:59:08 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] warte auf 
+Antwortdaten
+[Mon Jul 09 13:59:08 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.log] warte auf 
+Antwortdaten
+[Mon Jul 09 13:59:09 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] 
+entschlüssele Antwortnachricht
+[Mon Jul 09 13:59:09 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] überprüfe 
+Signatur der Antwortnachricht
+[Mon Jul 09 13:59:09 CEST 
+2007][WARN][de.willuhn.jameica.hbci.HBCICallbackSWT.log] Nachricht 
+enthält keine digitale Signatur
+[Mon Jul 09 13:59:09 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] 
+Ergebnisdaten für Geschäftsvorfall SammelUeb6 empfangen
+[Mon Jul 09 13:59:09 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.log] führe 
+Dialog-Ende aus
+[Mon Jul 09 13:59:09 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] beende Dialog
+[Mon Jul 09 13:59:09 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] erzeuge 
+HBCI-Nachricht DialogEnd
+[Mon Jul 09 13:59:09 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] signiere 
+HBCI-Nachricht
+[Mon Jul 09 13:59:09 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] 
+verschlüssele HBCI-Nachricht
+[Mon Jul 09 13:59:09 CEST 
+2007][WARN][de.willuhn.jameica.hbci.HBCICallbackSWT.log] konnte 
+folgenden nutzerdefinierten Wert nicht in Nachricht einsetzen: 
+Crypted.CryptHead.SecProfile.version=1
+[Mon Jul 09 13:59:09 CEST 
+2007][WARN][de.willuhn.jameica.hbci.HBCICallbackSWT.log] konnte 
+folgenden nutzerdefinierten Wert nicht in Nachricht einsetzen: 
+Crypted.CryptHead.SecProfile.method=PIN
+[Mon Jul 09 13:59:09 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] versende 
+HBCI-Nachricht
+[Mon Jul 09 13:59:09 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] warte auf 
+Antwortdaten
+[Mon Jul 09 13:59:09 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.log] warte auf 
+Antwortdaten
+[Mon Jul 09 13:59:09 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] 
+entschlüssele Antwortnachricht
+[Mon Jul 09 13:59:09 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] überprüfe 
+Signatur der Antwortnachricht
+[Mon Jul 09 13:59:09 CEST 
+2007][WARN][de.willuhn.jameica.hbci.HBCICallbackSWT.log] Nachricht 
+enthält keine digitale Signatur
+[Mon Jul 09 13:59:10 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.status] Dialog beendet
+[Mon Jul 09 13:59:10 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.HBCIFactory$Worker.run] 
+executing check for job MultiUeb
+[Mon Jul 09 13:59:10 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.AbstractHBCIJob.getStatusText] 
+global status: null:null: 9050 - Teilweise fehlerhaft.
+[Mon Jul 09 13:59:10 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.AbstractHBCIJob.getStatusText] 
+job status: 3:null: 9380 - Benutzer hat keine Auftragsberechtigung. 
+(element CustomMsg.GV.SammelUeb6)
+[Mon Jul 09 13:59:10 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.AbstractHBCIJob.getStatusText] 
+retval[ 0]: Benutzer hat keine Auftragsberechtigung.
+[Mon Jul 09 13:59:10 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.close] 
+closing pin/tan passport
+[Mon Jul 09 13:59:10 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.close] 
+pin/tan passport closed
+[Mon Jul 09 13:59:10 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.HBCIFactory.stop] 
+stopping hbci factory
+[Mon Jul 09 13:59:10 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.HBCIFactory.stop] finished
+[Mon Jul 09 13:59:10 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.HBCIFactory$2.run] 
+executing listener
+
+
+
+Ich verwende Jameica 1.4 Build 179 + Hibiscus 1.6 Build 168 auf Debian 
+Etch.
+
+
+Grüße
+
+Matthias
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000091.html">[Hibiscus-devel] Daueraufträge anlegen
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000089.html">[Hibiscus-devel] Kleinigkeiten
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#87">[ Datum ]</a>
+              <a href="thread.html#87">[ Thema ]</a>
+              <a href="subject.html#87">[ Betreff (Subject)]</a>
+              <a href="author.html#87">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

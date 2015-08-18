@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Release-Koordination
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-April/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Release-Koordination&In-Reply-To=%3CE7F24401-9001-4A8C-938A-54B50BA56920%40koras.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000067.html">
+   <LINK REL="Next"  HREF="000069.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Release-Koordination</H1>
+    <B>Jürgen Koras</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Release-Koordination&In-Reply-To=%3CE7F24401-9001-4A8C-938A-54B50BA56920%40koras.de%3E"
+           TITLE="[Hibiscus-devel] Release-Koordination">Juergen at koras.de
+                  </A><BR>
+    <I>Sa Apr 28 21:14:41 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000067.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000069.html">[Hibiscus-devel] PDF-Ausgabe der Umsatz-Kategorien
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#68">[ Datum ]</a>
+              <a href="thread.html#68">[ Thema ]</a>
+              <a href="subject.html#68">[ Betreff (Subject) ]</a>
+              <a href="author.html#68">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;&gt;<i> &quot;Exception Catcher Thread&quot; prio=10 tid=0x00501860 nid=0x1805200  
+</I>&gt;&gt;<i> runnable
+</I>&gt;<i>
+</I>&gt;<i> Koennte ein Debugger-Thread sein. Hattest du Jameica in Eclipse  
+</I>&gt;<i> laufen lassen?
+</I>Ja, korrekt.
+
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Sehr merkwuerdig. Laut den Stacktraces wuerde ich behaupten, dass
+</I>&gt;<i> Hibiscus hier gerade gar nichts macht. Also weder beim Export haengt
+</I>&gt;<i> noch sonst irgendwo. Wenn du die Anwendung in Eclipse im Debugger
+</I>&gt;<i> eingerichtet hast, kannst du dann mal in ExportDialog in Zeile
+</I>&gt;<i> 207 ein System.out.println(&quot;foo&quot;) eintragen oder einen Breakpoint
+</I>&gt;<i> setzen? Dann koennte man erkennen, ob wenigstens noch der Task  
+</I>&gt;<i> gestartet
+</I>&gt;<i> wird.
+</I>
+Nein, der Task startet nicht mehr. Das meinte ich in meiner  
+ursprünglichen Mail ja bereits, habe es aber extra nochmals verifiziert.
+Die CPU-Last kommt aus der Main Event Loop.  
+GUI.display.readAndDispatch() (Zeile 657) liefert TRUE zurück, somit  
+erzeugt die while-Schleife die CPU-Last.
+Die wirklich spannende Frage ist nun, warum der BackgoundTask nicht  
+startet? SWT scheint ja durchaus zu glauben, dass es noch was zu tun  
+gibt...
+Das scheint also wirklich ein SWT-Problem zu sein.
+
+viele Grüße
+Jürgen
+
+
+&gt;<i>
+</I>&gt;<i> Gruss
+</I>&gt;<i> Olaf
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Hibiscus-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Hibiscus-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">https://lists.berlios.de/mailman/listinfo/hibiscus-devel</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000067.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000069.html">[Hibiscus-devel] PDF-Ausgabe der Umsatz-Kategorien
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#68">[ Datum ]</a>
+              <a href="thread.html#68">[ Thema ]</a>
+              <a href="subject.html#68">[ Betreff (Subject)]</a>
+              <a href="author.html#68">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

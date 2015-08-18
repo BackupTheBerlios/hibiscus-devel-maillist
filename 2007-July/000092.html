@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Daueraufträge abrufen
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-July/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%3D%3Fiso-8859-15%3Fq%3FDauerauftr%3DE4ge_abrufen%3F%3D&In-Reply-To=%3C200707091514.12382.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000088.html">
+   <LINK REL="Next"  HREF="000091.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Daueraufträge abrufen</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%3D%3Fiso-8859-15%3Fq%3FDauerauftr%3DE4ge_abrufen%3F%3D&In-Reply-To=%3C200707091514.12382.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Daueraufträge abrufen">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mo Jul  9 15:14:12 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000088.html">[Hibiscus-devel] Daueraufträge abrufen
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000091.html">[Hibiscus-devel] Daueraufträge anlegen
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#92">[ Datum ]</a>
+              <a href="thread.html#92">[ Thema ]</a>
+              <a href="subject.html#92">[ Betreff (Subject) ]</a>
+              <a href="author.html#92">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hallo,
+
+&gt;<i> ich wollte eben ein paar Daueraufträge einrichten um mir ein wenig
+</I>&gt;<i> Arbeit zu ersparen ;-)
+</I>&gt;<i>
+</I>&gt;<i> Zuerst wollte ich bestehende abrufen. Dabei kam folgendes:
+</I>[...]
+&gt;<i> Caused by: org.kapott.hbci.exceptions.JobNotSupportedException:
+</I>&gt;<i> Geschäftsvorfall DauerList wird nicht unterstützt, evtl. andere
+</I>&gt;<i> HBCI-Version benutzen
+</I>&gt;<i>         at
+</I>&gt;<i> org.kapott.hbci.GV.HBCIJobImpl.findSpecNameForGV(HBCIJobImpl.java:183)
+</I>&gt;<i>         at org.kapott.hbci.GV.HBCIJobImpl.&lt;init&gt;(HBCIJobImpl.java:78)
+</I>&gt;<i>         at org.kapott.hbci.GV.GVDauerList.&lt;init&gt;(GVDauerList.java:44)
+</I>&gt;<i>         ... 7 more
+</I>[...]
+&gt;<i> Wenn ich das &quot;Geschäftsvorfall DauerList wird nicht unterstützt, evtl.
+</I>&gt;<i> andere HBCI-Version benutzen&quot; richtig sehe, liegt das wieder mal an
+</I>&gt;<i> meiner Bank? Kann ich die HBCI Version einstellen? Und wenn ja wo.
+</I>
+Korrekt. Entweder die Bank selbst unterstuetzt den Geschaeftsvorfall
+nicht, oder aber die eingestellte HBCI-Version. Ich tippe allerdings
+auf ersteres. Zum Aendern der HBCI-Version gehst du oben im Menu
+auf Plugins-&gt;Hibiscus-&gt;Einstellungen, klickst in der Liste der 
+Sicherheitsmedien doppelt auf &quot;PIN/TAN&quot; und siehst dort eine Liste
+der eingerichteten PIN/TAN-Konfigurationen. Klick doppelt auf
+die entsprechende Konfiguration. In dem folgenden Dialog kannst
+du die HBCI-Version aendern.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000088.html">[Hibiscus-devel] Daueraufträge abrufen
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000091.html">[Hibiscus-devel] Daueraufträge anlegen
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#92">[ Datum ]</a>
+              <a href="thread.html#92">[ Thema ]</a>
+              <a href="subject.html#92">[ Betreff (Subject)]</a>
+              <a href="author.html#92">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

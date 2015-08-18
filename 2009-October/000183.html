@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Integrität des Programms?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2009-October/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%3D%3Fiso-8859-1%3Fq%3FIntegrit%3DE4t_des_Programms%3D3F%3F%3D&In-Reply-To=%3C1256926835.7378.27.camel%40drops.kapott.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000182.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Integrität des Programms?</H1>
+    <B>HBCI4Java (Stefan Palme)</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%3D%3Fiso-8859-1%3Fq%3FIntegrit%3DE4t_des_Programms%3D3F%3F%3D&In-Reply-To=%3C1256926835.7378.27.camel%40drops.kapott.org%3E"
+           TITLE="[Hibiscus-devel] Integrität des Programms?">hbci4java at kapott.org
+                  </A><BR>
+    <I>Fr Okt 30 19:20:35 CET 2009</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000182.html">[Hibiscus-devel] Integrität des Programms?
+</A></li>
+        
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#183">[ Datum ]</a>
+              <a href="thread.html#183">[ Thema ]</a>
+              <a href="subject.html#183">[ Betreff (Subject) ]</a>
+              <a href="author.html#183">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hallo,
+
+ich verstehe zwar Dein prinzipielles Problem - aber Deine
+Argumentation nicht ganz.
+
+On Fri, 2009-10-30 at 17:04 +0100, Holger Jeromin wrote:
+&gt;<i> Die angegebene MD5 Summe ist sinnvoll, jedoch ist sie eher was gegen
+</I>&gt;<i> Installationsprobleme. Der Downloadserver und die Webseite nutzt kein
+</I>&gt;<i> HTTPS, so dass die MD5 Summe beliebig manipuliert sein könnte.
+</I>
+Was würde HTTPS denn nutzen? Wenn ein Angreifer auf dem Server
+einbricht, dort ein manipuliertes Archiv hinterlegt und die MD5-
+Summe, die auf der Webseite angezeigt wird, ebenfalls entsprechend
+anpasst, nützt auch HTTPS beim Verbindungsaufbau mit dem Server
+nichts...
+
+&gt;<i> Die GPG Signatur ist da schon spannender. Dass jedoch auf der Webseite
+</I>&gt;<i> empfohlen wird dem Key &quot;<A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">info at willuhn.de</A>&quot; einfach so ohne Prüfung zu
+</I>&gt;<i> vertrauen ist jedoch ein extrem schlechter Rat.
+</I>&gt;<i> 
+</I>&gt;<i> Der Schlüssel hat auch keinerlei Signatur bekannter Stellen. Eine
+</I>&gt;<i> Signatur der c't-Kryptokampagne oder nur eines Debian-Mitarbeiters zum
+</I>&gt;<i> Beispiel hätte Gewicht. Die vier Unterschriften des Keys sind alle in
+</I>&gt;<i> der Richtung auch nicht sehr ergiebig... 8-/
+</I>
+Im Prinzip: ACK.
+
+Aber: Was würde das nützen? Auch in dem Fall gilt - bei einem Einbruch
+auf dem Server ist die ganze Sicherheit dahin. Wenn ich der Einbrecher
+wäre, würde ich ein modifiziertes Hibiscus-Archiv hochladen, das mit
+MEINEM Schlüssel signieren (z.B. &quot;<A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">hibiscus at kapott.org</A>&quot;), und auch die
+Webseite manipulieren (&quot;überprüfen Sie das Archiv mit dem Schlüssel
+<A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">hibiscus at kapott.org</A>&quot;). 
+Woher sollte ein Nutzer wissen, dass <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">hibiscus at kapott.org</A> nicht der
+&quot;richtige&quot; Schlüssel ist? Ich könnte unter <A HREF="http://hibiscus.kapott.org">http://hibiscus.kapott.org</A>
+ebenfalls Hibiscus zum Download anbieten, so dass es nicht ohne
+weiteres ersichtlich wäre, dass hier etwas faul ist.
+
+Der Schlüssel <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">hibiscus at kapott.org</A> könnte sogar tatsächlich bei diversen
+PGP-Sign-Parties von mehreren Personen als vertrauenswürdig eingestuft
+worden sein...
+
+Zugegeben, nicht sehr realistisch und weit hergeholt... Die Frage ist
+für mich: worauf genau willst Du eigentlich hinaus?
+
+Selbst ein Versand der Software per CD ist nicht sicher: in den USA sind
+Spammer inzwischen dazu übergegangen, CDs mit &quot;Updates&quot; irgendwelcher
+populären Softwarepakte zu verschicken - nur dass diese CDs manipulierte
+Versionen dieser Software enthalten. Die Opfer richtigen sich damit un-
+wissentlich Hintertüren im System ein, die die Angreifer dann für ihre
+Zwecke verwenden...
+
+Wenn Du wirklich so paranoid bist, solltest Du Dir den Quelltext von
+Hibiscus von der Webseite herunterladen, diesen auf Backdoors u.ä. 
+überprüfen und dann selbst kompilieren. Diese prinzipiell sicherste
+Variante steht Dir übrigens nur bei OpenSource-Produkten zur
+Verfügung. :-)
+
+Wie machen denn die Banken das beim Vertrieb der von ihnen bereit-
+gestellten Onlinebanking-Software? Alle oben genannten Angriffs-
+Möglichkeiten würden da auch greifen... 
+
+Oder anders: was genau stellst Du Dir denn als bessere 
+Sicherungs-Variante vor? 
+
+Grüße
+-stefan-
+
+-- 
+<A HREF="http://hbci4java.kapott.org">http://hbci4java.kapott.org</A>
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000182.html">[Hibiscus-devel] Integrität des Programms?
+</A></li>
+	
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#183">[ Datum ]</a>
+              <a href="thread.html#183">[ Thema ]</a>
+              <a href="subject.html#183">[ Betreff (Subject)]</a>
+              <a href="author.html#183">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

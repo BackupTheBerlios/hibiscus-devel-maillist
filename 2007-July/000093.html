@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Release-Koordination
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-July/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Release-Koordination&In-Reply-To=%3C200707091624.49573.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000085.html">
+   <LINK REL="Next"  HREF="000096.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Release-Koordination</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Release-Koordination&In-Reply-To=%3C200707091624.49573.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Release-Koordination">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mo Jul  9 16:24:49 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000085.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000096.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#93">[ Datum ]</a>
+              <a href="thread.html#93">[ Thema ]</a>
+              <a href="subject.html#93">[ Betreff (Subject) ]</a>
+              <a href="author.html#93">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> ja, der erste Klick auf den Button &quot;...&quot; macht nichts, der zweite
+</I>&gt;<i> Klick öffnet einen Dialog, in welchem die Datumsauswahl dann doppelt
+</I>&gt;<i> erscheint! Ein dritter Klick geht dann ganz normal.
+</I>
+OK, das Problem sollte ja dann mit dem shell.forceActive geloest
+sein. Habe es gerade committed.
+
+&gt;<i> Ich habe einmal in der Klasse GUI die Methode start() so geändert,
+</I>&gt;<i> dass BackgroundTask.run(...) direkt aufgerufen wird, also synchron.
+</I>&gt;<i> OK, dass ist der Holzhammer, aber dann geht der Export der
+</I>&gt;<i> Kontoauszüge mit PDF! Das Button-Problem jedoch bleibt.
+</I>
+Dann liegt es tatsaechlich an dem zweiten Thread, mit dem
+SWT unter MacOS nicht klarkommt.
+
+&gt;<i> Damit das gleiche Verhalten: Export geht, Button nicht. Die Frage ist
+</I>&gt;<i> nun, warum das &quot;Konstrukt sieht merkwuerdig aus - ich weiss. Muss
+</I>&gt;<i> aber so ;)&quot; so ist? Wie bereits einmal erwähnt kenne ich SWT leider
+</I>&gt;<i> nicht, bin mit SWING aufgewachsen... :-)
+</I>
+Wie folgt. SWT ist single-threaded (Swing IMHO auch). Will man
+also Code aus einem anderen Thread heraus ausfuehren, der auf
+die GUI zugreifen soll, muss man ihn mittels Display#syncExec bzw.
+Display#asyncExec in die Event-Queue des SWT-Threads einreihen.
+Das asyncExec startet hierzu jedoch keinen zweiten Thread sondern
+fuehrt die Aktion lediglich asynchron aus. Die Ausfuehrung von
+laengerdauerndem Code wuerde hier also auch die GUI blockieren.
+Daher wird in asyncExec nochmal ein separater Thread erzeugt.
+Dieser laeuft dann unabhaengig von der GUI.
+
+Was mich aber wirklich wundert: Ich hab mal in der CVS-History
+nachgeschaut - in Jameica 1.4 (also in der Vorversion) sah
+der Code bereits haargenau so aus. Daher kann ich mir nich
+so richtig erklaeren, warum es jetzt nicht mehr geht.
+
+Zum Test koenntest du die Methode in der GUI-Klasse ja mal
+etwas verkuerzen:
+
+  public void start(final BackgroundTask task)
+  {
+    if (getDisplay() == null || getDisplay().isDisposed()) return;
+
+    // Das Konstrukt sieht merkwuerdig aus - ich weiss. Muss aber so ;)
+    Thread t = new Thread()
+    {
+      public void run()
+      {
+        getStatusBar().startProgress();
+        ProgressMonitor monitor = new BackgroundTaskMonitor();
+        try
+        {
+          task.run(monitor);
+        }
+        catch (OperationCanceledException oce)
+        {
+          if (monitor != null)
+            monitor.setStatus(ProgressMonitor.STATUS_CANCEL);
+        }
+        catch (Throwable t)
+        {
+          Logger.error(&quot;error while executing background task&quot;,t);
+          if (monitor != null)
+            monitor.setStatus(ProgressMonitor.STATUS_ERROR);
+        }
+        finally
+        {
+          getStatusBar().stopProgress();
+        }
+      }
+    };
+
+    getDisplay().asyncExec(t);
+  }
+
+
+Hierbei wir asyncExec direkt der Thread uebergeben. Das fuehrt
+zumindest unter Linux zwar dazu, dass die restliche GUI nicht
+sofort refreshed wird, aber vielleicht geht es ja dann.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000085.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000096.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#93">[ Datum ]</a>
+              <a href="thread.html#93">[ Thema ]</a>
+              <a href="subject.html#93">[ Betreff (Subject)]</a>
+              <a href="author.html#93">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

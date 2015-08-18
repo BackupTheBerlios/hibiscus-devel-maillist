@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Hibiscus 1.10 und Jameica 1.7
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2008-December/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Hibiscus%201.10%20und%20Jameica%201.7&In-Reply-To=%3C200812301709.10415.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000152.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Hibiscus 1.10 und Jameica 1.7</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Hibiscus%201.10%20und%20Jameica%201.7&In-Reply-To=%3C200812301709.10415.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Hibiscus 1.10 und Jameica 1.7">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Di Dez 30 17:09:10 CET 2008</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000152.html">[Hibiscus-devel] Hibiscus 1.9 freigegeben
+</A></li>
+        
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#153">[ Datum ]</a>
+              <a href="thread.html#153">[ Thema ]</a>
+              <a href="subject.html#153">[ Betreff (Subject) ]</a>
+              <a href="author.html#153">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi zusammen,
+
+#### 1) Versionsnummern
+nachdem nun die neuen Releases raus sind, haben die
+Nightly-Build wieder die Versionsnummer gewechselt. Dummerweise
+bin ich hier auf eine Problematik gestossen, die ich schon
+wieder voellig verdraengt hatte - naemlich die Versionsnummern:
+
+Die werden in Jameica intern als Double gespeichert. Die naechste
+Hibiscus-Version waere ja nach 1.9 nun 1.10. 1.10 ist ja aber als
+Dezimal-Zahl identisch mit 1.1. Da hierbei die ganze Versionierung
+und das Update-System durcheinanderkommen wuerde, musste ich die
+Verwaltung der Versionsnummern in Jameica nun grundlegend umstellen.
+Sie werden nun nicht mehr als Double sondern als Objekt vom
+Typ de.willuhn.jameica.plugin.Version behandelt. In dem Zusammenhang
+koennen nun auch komplexere Versionsnummern gebildet werden. Format:
+
+$major.$minor.$path-$prefix
+
+Also z.Bsp.: &quot;1.10.0-nightly&quot;
+
+Patch-Version und Prefix sind optional. Werden sie weggelassen,
+haben die Versionsnummern das bisherige Format (also etwa 1.10).
+
+API-Aenderungen:
+  - Manifest.getVersion() liefert nun nicht mehr double sondern
+    Version
+  - AbstractPlugin.update(double) ist deprecated. Stattdessen
+    kuenftig bitte AbstractPlugin.update(Version) nutzen.
+    Ist derzeit aber noch abwaertskompatibel - muss also noch
+    nicht genutzt werden.
+
+Wenn ihr mit diesen Aenderungen noch nichts zu tun haben wollt,
+dann schwengt bei eurer aus dem CVS ausgecheckten Jameica-Version
+einfach von der HEAD-Branch auf das Tag JAMEICA_1_7
+
+
+#### 2) Java-Version
+Mit Jameica 1.8 und Hibiscus 1.10 ist nun endlich schluss mit
+Java 1.4. Ich habe die Projekteigenschaften in Eclipse
+entsprechend umgestellt und die RMI-Compiler aus den Build-
+Scripts entfernt.
+
+
+#### 3) Nightly-Builds
+Mit dem Support fuer die neuen Versionsnummern sind die Nightly-
+Builds von Jameica und Hibiscus kuenftig auch direkt in der
+Versionsnummer als solche markiert (mittels Prefix). 
+
+Gruss
+Olaf
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000152.html">[Hibiscus-devel] Hibiscus 1.9 freigegeben
+</A></li>
+	
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#153">[ Datum ]</a>
+              <a href="thread.html#153">[ Thema ]</a>
+              <a href="subject.html#153">[ Betreff (Subject)]</a>
+              <a href="author.html#153">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

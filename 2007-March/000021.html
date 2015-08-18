@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Auswertung der Kategorien
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-March/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Auswertung%20der%20Kategorien&In-Reply-To=%3C200703091619.54054.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000020.html">
+   <LINK REL="Next"  HREF="000022.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Auswertung der Kategorien</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Auswertung%20der%20Kategorien&In-Reply-To=%3C200703091619.54054.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Auswertung der Kategorien">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Fr Mär  9 16:19:53 CET 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000020.html">[Hibiscus-devel] Auswertung der Kategorien
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000022.html">[Hibiscus-devel] Auswertung der Kategorien
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#21">[ Datum ]</a>
+              <a href="thread.html#21">[ Thema ]</a>
+              <a href="subject.html#21">[ Betreff (Subject) ]</a>
+              <a href="author.html#21">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> das nächste Problem: Ich habe die Umsatz-Typ-Tabelle um eine Spalte
+</I>&gt;<i> erweitert (create.sql und update_1.6-1.7) und die entsprechenden
+</I>&gt;<i> Erweiterungen in Hibiscus vorgenommen. Jetzt meldet mir Jameica beim Start:
+</I>&gt;<i>
+</I>&gt;<i> [Fri Mar 09 15:45:56 CET
+</I>&gt;<i> 2007][ERROR][de.willuhn.jameica.plugin.PluginLoader.init]
+</I>&gt;<i> de.willuhn.util.ApplicationException: Fehler beim Prüfung der
+</I>&gt;<i> Datenbank-Integrität, Plugin wird aus Sicherheitsgründen deaktiviert
+</I>&gt;<i>     at de.willuhn.jameica.hbci.HBCI.init(HBCI.java:177)
+</I>&gt;<i>     at
+</I>&gt;<i> de.willuhn.jameica.plugin.PluginLoader.initPlugin(PluginLoader.java:220)
+</I>&gt;<i>     at de.willuhn.jameica.plugin.PluginLoader.init(PluginLoader.java:136)
+</I>&gt;<i>     at
+</I>&gt;<i> de.willuhn.jameica.system.Application.getPluginLoader(Application.java:391)
+</I>&gt;<i>     at de.willuhn.jameica.system.Application.init(Application.java:234)
+</I>&gt;<i>     at
+</I>&gt;<i> de.willuhn.jameica.system.Application.newInstance(Application.java:91)
+</I>&gt;<i>     at de.willuhn.jameica.Main.main(Main.java:78)
+</I>&gt;<i> Caused by: java.lang.Exception: database checksum does not match any
+</I>&gt;<i> known version: EdG6qLQ0SXRgJ8QBtz5Vrg==
+</I>&gt;<i>
+</I>&gt;<i> Was kann ich tun?
+</I>
+Hibiscus fuehrt beim Start einen Konsistenz-Check der Datenbank durch.
+Hierbei wird insbesondere sichergestellt, dass die Datenbank-Version zur
+Programm-Version passt und somit nicht aus Versehen Inkonsistenzen durch
+falsche SQL-Kommandos geschehen koennen oder SQLExceptions wegen nicht
+existierenden Spalten auftreten. Ausserdem schuetzt es vor Datenbank-
+Aenderungen durch eine dritte Partei.
+
+Dabei werden alle SQL-Tabellen und alle darin befindlichen Spalten
+ermitteln und darueber eine MD5-Checksumme gebildet. Diese Checksumme
+wird dann mit einem Soll-Wert verglichen, der in Hibiscus fuer jede Version
+hart gecoded hinterlegt. Der ganze Code dazu findet sich in
+
+de.willuhn.jameica.hbci.HBCI#checkConsistency()
+
+Fuer Version 1.7 ist derzeit als DB-Checksumme
+folgendes hinterlegt (Zeile 139):
+
+DBMAPPING.put(&quot;W20zxD8/jDgK30A/I1NE7w==&quot;,new Double(1.7));
+
+Durch deine Aenderung ergibt sich eine neue Checksumme. Die muss nun
+hier geaendert werden. Aus dem Grund meldet Hibiscus auch die erwartete
+Checksumme - dann kann man diese gleich eintragen (siehe Stacktrace)
+
+&gt;<i> Caused by: java.lang.Exception: database checksum does not match any
+</I>&gt;<i> known version: EdG6qLQ0SXRgJ8QBtz5Vrg==
+</I>
+Aender Zeile 139 also einfach so ab:
+
+DBMAPPING.put(&quot;EdG6qLQ0SXRgJ8QBtz5Vrg==&quot;,new Double(1.7));
+
+Dann startet die Anwendung auch wieder.
+
+&gt;<i> Wie ist das eigentlich generell mit den DB-Update geregelt? Meines
+</I>&gt;<i> Wissens wird die Datei update-alterversion.neueversion.sql nur
+</I>&gt;<i> ausgeführt, wenn Jameica feststellt, das ein Versionswechsel
+</I>&gt;<i> stattfindet.
+</I>
+Korrekt.
+Der Code dazu ist in 
+de.willuhn.jameica.hbci.HBCI#update()
+
+&gt;<i> Was sollen Nutzer der Nightly-Builds dann machen? 
+</I>
+Genau vor der Problematik stand ich auch schon: Die Datenbank
+hat sich zwar geaendert, nicht aber die Versionsnummer. Wie
+also loese ich dennoch die Ausfuehrung des SQL-Updates aus?
+In de.willuhn.jameica.hbci.HBCI#init() (Zeile 144-171)
+existiert dafuer Code, der die Dateilaenge des aktuellen
+Update-Scripts (derzeit update_1.6-1.7.sql) prueft und mit
+einem Parameter aus einer properties-Datei vergleicht.
+Stimmen beide Werte nicht mehr ueberein, geht Hibiscus davon
+aus, dass das Update-Script im Laufe der Entwicklung geaendert
+wurde, ohne dass sich die Versionsnummer geaendert hat. Es
+fuehrt das SQL-Script daher nochmal aus und speichert die
+aktuelle Dateilaenge in der properties-Datei.
+Hierbei ist aber folgendes unbedingt zu beachten:
+
+1) Das SQL-Script muss sich also wiederholt ausfuehren
+   lassen, ohne dass dabei Inkonsistenzen oder Fehler
+   auftreten. Aus dem Grund verwende ich statt &quot;alter table&quot;
+   lieber &quot;alter create table&quot; (da sich das mehrfach
+   aufrufen laesst)
+
+2) Der Code (Zeilt 144-171) muss unmittelbar vor der offiziellen
+   Release unbedingt auskommentiert werden. Er ist ja nur
+   zu Entwicklungszwecken
+
+Gruss
+Olaf
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000020.html">[Hibiscus-devel] Auswertung der Kategorien
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000022.html">[Hibiscus-devel] Auswertung der Kategorien
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#21">[ Datum ]</a>
+              <a href="thread.html#21">[ Thema ]</a>
+              <a href="subject.html#21">[ Betreff (Subject)]</a>
+              <a href="author.html#21">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

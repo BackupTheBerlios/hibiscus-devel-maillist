@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Umsaetze mit und ohne Umsatztyp
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2009-February/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Umsaetze%20mit%20und%20ohne%20Umsatztyp&In-Reply-To=%3C200902161344.07581.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000169.html">
+   <LINK REL="Next"  HREF="000171.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Umsaetze mit und ohne Umsatztyp</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Umsaetze%20mit%20und%20ohne%20Umsatztyp&In-Reply-To=%3C200902161344.07581.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Umsaetze mit und ohne Umsatztyp">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mo Feb 16 13:44:07 CET 2009</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000169.html">[Hibiscus-devel] Umsaetze mit und ohne Umsatztyp
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000171.html">[Hibiscus-devel] Umsaetze mit und ohne Umsatztyp
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#170">[ Datum ]</a>
+              <a href="thread.html#170">[ Thema ]</a>
+              <a href="subject.html#170">[ Betreff (Subject) ]</a>
+              <a href="author.html#170">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> ich wollt am Wochende mal einen Regelerner fuer Hibiscus
+</I>&gt;<i> schreiben (schaut sich bisherige Transaktionen und ihre
+</I>&gt;<i> Umsatztypen an, und schlaegt fuer unkategorisierte dann
+</I>&gt;<i> passende vor),
+</I>
+Klingt interessant. Hast du dir schon Gedanken gemacht, wie
+diese Vorschlaege dem User praesentiert werden sollen?
+
+&gt;<i> bin aber in einen Bug (oder ein Missverstaendniss) beim
+</I>&gt;<i> abfragen der Umsaetze gelaufen.
+</I>&gt;<i>
+</I>&gt;<i> Ich mache
+</I>&gt;<i> DBIterator test = UmsatzUtil.getUmsaetzeBackwards();
+</I>&gt;<i> test.addFilter(&quot;umsatztyp_id is NULL&quot;);
+</I>&gt;<i>
+</I>&gt;<i> bkomme aber trotzdem Umsaetze zurueck,
+</I>&gt;<i> wo test.getUmsatzTyp() != null ist.
+</I>
+Hibiscus kennt ja zwei Arten von Kategorie-Zuordnungen.
+Festzugeordnet (in der Datenbank) und on-the-fly zugeordnet
+(mittels Suchbegriff). Bei letzteren ist umsatztyp_id zwar
+NULL, dennoch liefert getUmsatzTyp() u.U. eine Kategorie
+zurueck. Naemlich dann, wenn ein Suchbegriff zutrifft.
+Heisst: All jene Umaetze, bei denen umsatztyp_id zwar NULL
+ist, jedoch trotzdem eine Kategorie zurueckgeliefert wird,
+sind on-the-fly zugeordnete.
+
+&gt;<i> -Wie kann ich den Iterator ein 'Limit 100' oder aehnlich mitgeben,
+</I>&gt;<i> um Beispielsweise nur von den letzten 1000 Transaktionen zu lernen?
+</I>
+Das ist leider nicht moeglich. Derzeit bleibt dir hier
+nur, in der &quot;while (it.hasNext())&quot;-Schleife einen
+Counter mitlaufen zu lassen und nach der gewuenschten
+Anzahl abzubrechen.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000169.html">[Hibiscus-devel] Umsaetze mit und ohne Umsatztyp
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000171.html">[Hibiscus-devel] Umsaetze mit und ohne Umsatztyp
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#170">[ Datum ]</a>
+              <a href="thread.html#170">[ Thema ]</a>
+              <a href="subject.html#170">[ Betreff (Subject)]</a>
+              <a href="author.html#170">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Weekly Digest [KW 12]
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-March/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Weekly%20Digest%20%5BKW%2012%5D&In-Reply-To=%3C200703221301.07984.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000036.html">
+   <LINK REL="Next"  HREF="000038.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Weekly Digest [KW 12]</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Weekly%20Digest%20%5BKW%2012%5D&In-Reply-To=%3C200703221301.07984.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Weekly Digest [KW 12]">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Do Mär 22 13:01:07 CET 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000036.html">[Hibiscus-devel] Weekly Digest [KW 12]
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000038.html">[Hibiscus-devel] Weekly Digest [KW 12]
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#37">[ Datum ]</a>
+              <a href="thread.html#37">[ Thema ]</a>
+              <a href="subject.html#37">[ Betreff (Subject) ]</a>
+              <a href="author.html#37">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> Bei den Umsätzen nach Kategorien gibt es noch einen Bug. Die Summe pro
+</I>&gt;<i> Kategorie wird ohne Berücksichtigung des angegebenen Zeitraums
+</I>&gt;<i> berechnet. Ich habe mir die Sourcen schon angesehen. Auf die Schnelle
+</I>&gt;<i> konnte ich den Fehler aber nicht finden.
+</I>
+Das will ich ohnehin nochmal unter der Haube umbauen. Zum einen, weil
+derzeit haufenweise SQL-Statements ausgefuehrt werden, um den Tree
+zu erzeugen. Das geht auch mit weniger. Zum anderen, um auch die
+nicht zugeordneten Umsaetze in einer Pseudo-Kategorie &quot;Nicht zugeordnet&quot;
+zu erfassen.
+
+&gt;<i> Eigentlich hatte ich noch vor, 2 Auswertungen nach Kategorien im
+</I>&gt;<i> PDF-Format zu bauen:
+</I>&gt;<i> 1. Auflistung aller Buchungen im vorgegebenen Zeitraum sortiert und
+</I>&gt;<i> summiert nach Kategorien (entspricht dem Baum mit allen geöffneten Zweigen)
+</I>&gt;<i> 2. Auflistung der Summen pro Kategorie. Entspricht dem Baum mit allen
+</I>&gt;<i> geschlossenen Zweigen.
+</I>
+Klingt sehr sinnvoll. GUI-technisch braeuchte man dazu ja nur einen
+Button &quot;Exportieren&quot;/&quot;Drucken&quot; auf dem Dialog. Der erzeugt dann
+das PDF so wie es gerade in der Tabelle angezeigt wird.
+
+&gt;<i> Wann willst du das Release erstellen? Hast du evtl. noch Zeit die
+</I>&gt;<i> PDF-Ausgabe zu bauen?
+</I>
+Klar, dafuer ist noch Zeit. Ich hatte bisher immer einen Release-Zyklus
+von ca. 6 Monaten. Die letzte Release stammt von Ende Oktober 2006.
+Also ist noch bis Ende April Zeit ;)
+
+Nach dieser Release will ich dann mal wieder einige groessere
+Sachen in Angriff nehmen. In Hibiscus insb. die Unterstuetzung fuer
+Apache Derby (bzw. generell fuer verschiedene Datenbanken).
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000036.html">[Hibiscus-devel] Weekly Digest [KW 12]
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000038.html">[Hibiscus-devel] Weekly Digest [KW 12]
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#37">[ Datum ]</a>
+              <a href="thread.html#37">[ Thema ]</a>
+              <a href="subject.html#37">[ Betreff (Subject)]</a>
+              <a href="author.html#37">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

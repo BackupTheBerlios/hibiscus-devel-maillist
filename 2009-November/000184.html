@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Integrität des Programms?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2009-November/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%3D%3Fiso-8859-1%3Fq%3FIntegrit%3DE4t_des_Programms%3D3F%3F%3D&In-Reply-To=%3C200911020041.03491.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   <LINK REL="Next"  HREF="000186.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Integrität des Programms?</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%3D%3Fiso-8859-1%3Fq%3FIntegrit%3DE4t_des_Programms%3D3F%3F%3D&In-Reply-To=%3C200911020041.03491.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Integrität des Programms?">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mo Nov  2 00:41:03 CET 2009</I>
+    <P><UL>
+        
+        <LI>Nächste Nachricht: <A HREF="000186.html">[Hibiscus-devel] Integrität des Programms?
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#184">[ Datum ]</a>
+              <a href="thread.html#184">[ Thema ]</a>
+              <a href="subject.html#184">[ Betreff (Subject) ]</a>
+              <a href="author.html#184">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+auch wenn Stefan eigentlich schon das geschrieben hat, was ich auch
+gesagt haette, muss ich mich natuerlich noch selbst verteidigen ;)
+
+&gt;<i> ich würde gerne Hibiscus einsetzen, mache mir jedoch Gedanken über die
+</I>&gt;<i> Manipulierbarkeit des Programmarchivs. Etwas Paranoia ist bei
+</I>&gt;<i> Homebankingsoftware ja angebracht.
+</I>
+Auf jeden Fall!
+
+&gt;<i> Die angegebene MD5 Summe ist sinnvoll, jedoch ist sie eher was gegen
+</I>&gt;<i> Installationsprobleme. 
+</I>
+Korrekt. Sie dient nur der Vollstaendigkeit halber. Wenn ich sie
+nicht poste, wuerde sich sonst sicher ein Paket-Maintainer melden ;)
+
+&gt;<i> Der Downloadserver und die Webseite nutzt kein 
+</I>&gt;<i> HTTPS, so dass die MD5 Summe beliebig manipuliert sein könnte.
+</I>
+Explizit nicht, das stimmt. Du kannst HTTPS aber problemlos
+verwenden. Alle URLs auf meinem Server sind 1:1 auch ueber HTTPS
+erreichbar. Ich schalte nur deshalb nicht automatisch auf
+HTTPS um, weil ich kein kommerzielles Löhn-Zertifikat habe und
+die meisten User mit dem Sicherheitshinweis (gerade Firefox
+leistet sich bei unbekannten Zertifikaten ja neuerdings abenteuerliche
+Dialog-Ausfluege) schlicht ueberfordert waeren.
+
+&gt;<i> Die GPG Signatur ist da schon spannender. Dass jedoch auf der Webseite
+</I>&gt;<i> empfohlen wird dem Key &quot;<A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">info at willuhn.de</A>&quot; einfach so ohne Prüfung zu
+</I>&gt;<i> vertrauen ist jedoch ein extrem schlechter Rat.
+</I>&gt;<i>
+</I>&gt;<i> Der Schlüssel hat auch keinerlei Signatur bekannter Stellen. Eine
+</I>&gt;<i> Signatur der c't-Kryptokampagne oder nur eines Debian-Mitarbeiters zum
+</I>&gt;<i> Beispiel hätte Gewicht.
+</I>
+OK, das mit der c't-Signatur sehe ich ja noch ein (obwohl man auch
+hierzu haette auf eine Messe fahren muessen, wo die c't gerade mal
+sowas veranstaltet hat). Aber warum sollte ich einem Debian-Mitarbeiter 
+per se vertrauen?
+
+Wie dem auch sei: Extra fuer dich (kein Mist, hab ich jetzt nur deshalb
+gemacht - und dabei frage ich mich, warum mir das nicht schon viel
+eher eingefallen ist) habe ich die Downloads jetzt mit einer
+*FESTHALTEN* qualifizierten elektronischen Signatur[tm] (von meinem
+S-Trust-Personenzertifikat auf Chipkarte) versehen.
+Das ist nicht von irgendeiner c't signiert. Das echte digitale
+Unterschrift, die vorm Gesetz der handschriftlichen gleichgestellt ist!!1 ;)
+Unter <A HREF="https://www.zvs-user.s-trust.de/zvs/ds/DsZertifikateSuchen">https://www.zvs-user.s-trust.de/zvs/ds/DsZertifikateSuchen</A>
+(Gib dort Vorname &quot;Olaf&quot;, Nachname &quot;Willuhn&quot;, Mail &quot;info[ät]willuhn.de&quot;
+ein) kannst du den Public-Key abrufen und die Signatur verifizieren.
+
+So, und jetzt sag mir nochmal, dass dir das nicht sicher genug ist ;)
+
+&gt;<i> Die Setuproutine vom der VR Krautheim ist da sogar noch viel schlimmer,
+</I>&gt;<i> da sie sogar auf einen überhaupt nicht vertrauenswürdigen Server linkt:
+</I>&gt;<i> <A HREF="http://www.downloadcounter.de/counter.pl?file=http://jameica-banking.vb-kra">http://www.downloadcounter.de/counter.pl?file=http://jameica-banking.vb-kra</A>
+</I>&gt;<i>utheim.de/jameicabanking-setup120.exe&amp;user=hylli
+</I>
+Ja, ich muss zugeben, dass ich das auch etwas unschoen finde. Aber
+Hylli (er arbeitet bei der Bank und kuemmert sich darum) will wohl
+die Downloads zaehlen. Du kannst den am Parameter &quot;file&quot; angehaengten
+Link natuerlich auch direkt aufrufen, um den Zaehler zu umgehen und
+direkt von der Bank-Webseite zu laden.
+
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Nächste Nachricht: <A HREF="000186.html">[Hibiscus-devel] Integrität des Programms?
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#184">[ Datum ]</a>
+              <a href="thread.html#184">[ Thema ]</a>
+              <a href="subject.html#184">[ Betreff (Subject)]</a>
+              <a href="author.html#184">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

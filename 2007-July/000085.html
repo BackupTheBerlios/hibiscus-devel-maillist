@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Release-Koordination
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-July/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Release-Koordination&In-Reply-To=%3CC0692378-EB87-4566-9D88-E11C24C2DAB9%40koras.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000084.html">
+   <LINK REL="Next"  HREF="000093.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Release-Koordination</H1>
+    <B>Jürgen Koras</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Release-Koordination&In-Reply-To=%3CC0692378-EB87-4566-9D88-E11C24C2DAB9%40koras.de%3E"
+           TITLE="[Hibiscus-devel] Release-Koordination">Juergen at koras.de
+                  </A><BR>
+    <I>Sa Jul  7 18:00:04 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000084.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000093.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#85">[ Datum ]</a>
+              <a href="thread.html#85">[ Thema ]</a>
+              <a href="subject.html#85">[ Betreff (Subject) ]</a>
+              <a href="author.html#85">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hallo,
+
+ja, der erste Klick auf den Button &quot;...&quot; macht nichts, der zweite  
+Klick öffnet einen Dialog, in welchem die Datumsauswahl dann doppelt  
+erscheint! Ein dritter Klick geht dann ganz normal.
+
+Ich habe einmal in der Klasse GUI die Methode start() so geändert,  
+dass BackgroundTask.run(...) direkt aufgerufen wird, also synchron.  
+OK, dass ist der Holzhammer, aber dann geht der Export der  
+Kontoauszüge mit PDF! Das Button-Problem jedoch bleibt.
+
+Dann habe ich einen der beiden geschachtelten Threads wieder  
+aktiviert. Die Methode sieht dann so aus:
+
+  /**
+    * @see de.willuhn.jameica.system.ApplicationController#start 
+(de.willuhn.jameica.system.BackgroundTask)
+    */
+   public void start(final BackgroundTask task)
+   {
+     if (getDisplay() == null || getDisplay().isDisposed()) return;
+
+     // Das Konstrukt sieht merkwuerdig aus - ich weiss. Muss aber so ;)
+     getDisplay().asyncExec(new Runnable() {
+       public void run()
+       {
+//        getStatusBar().startProgress();
+//        Thread t = new Thread()
+//        {
+//          public void run()
+//          {
+             ProgressMonitor monitor = new BackgroundTaskMonitor();
+             try
+             {
+               task.run(monitor);
+             }
+             catch (OperationCanceledException oce)
+             {
+               if (monitor != null) monitor.setStatus 
+(ProgressMonitor.STATUS_CANCEL);
+             }
+             catch (Throwable t)
+             {
+               Logger.error(&quot;error while executing background task&quot;,t);
+               if (monitor != null) monitor.setStatus 
+(ProgressMonitor.STATUS_ERROR);
+             }
+             finally
+             {
+//              getStatusBar().stopProgress();
+             }
+           }
+//        };
+//        t.start();
+//      }
+     });
+   }
+}
+Damit das gleiche Verhalten: Export geht, Button nicht. Die Frage ist  
+nun, warum das &quot;Konstrukt sieht merkwuerdig aus - ich weiss. Muss  
+aber so ;)&quot; so ist? Wie bereits einmal erwähnt kenne ich SWT leider  
+nicht, bin mit SWING aufgewachsen... :-)
+
+viele Grüße
+Jürgen
+
+
+
+Am 02.07.2007 um 11:04 schrieb Olaf Willuhn:
+
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;&gt;<i> Ich habe die swt.jar entsprechend ausgetauscht. jnilib-Dateien sind
+</I>&gt;&gt;<i> da zunächst keine dabei, sind aber im jar drin.
+</I>&gt;<i>
+</I>&gt;<i> Ah, das ist ja genial. Von dieser Moeglichkeit hatte ich auch
+</I>&gt;<i> schonmal gelesen. Ich nehme an, dass die jnilibs dann zur Laufzeit
+</I>&gt;<i> in ein temporaeres Verzeichnis entpackt und nach Programmende
+</I>&gt;<i> wieder geloescht werden.
+</I>&gt;<i>
+</I>&gt;&gt;<i> In Zeile 117 wird reporter.addHeaderColumn(...) aufgerufen. Hier
+</I>&gt;&gt;<i> springt der Debugger nicht einmal mehr in die Methode rein! (Step
+</I>&gt;&gt;<i> into bleibt hängen!!!) Sowas habe ich bisher noch nie gesehen???
+</I>&gt;<i> [...]
+</I>&gt;&gt;<i> der ClassLoader lädt die Klasse java.awt.Color nicht! Vielleicht
+</I>&gt;&gt;<i> liegt es dann eher an meinem Rechner. Man könnte einmal die
+</I>&gt;&gt;<i> Bibliothek tauschen und den neuen NightlyBuild dann testen. Am BUG
+</I>&gt;&gt;<i> ist ja Sebastian auch am testen...
+</I>&gt;<i>
+</I>&gt;<i> Mhh, interessant. Die komplette Funktion &quot;doExport&quot; laeuft
+</I>&gt;<i> in einem separaten Thread (BackgroundTask). Klingt so, als
+</I>&gt;<i> ob es Probleme gibt, wenn aus diesem separaten Thread auf
+</I>&gt;<i> irgendwelche GUI-spezifischen Sachen zugegriffen wird. Bei
+</I>&gt;<i> SWT muss man das zwar generell beruecksichtigen und GUI-Aufrufe
+</I>&gt;<i> in einem GUI.getDisplay().syncExec() bzw. GUI.getDisplay().asyncExec()
+</I>&gt;<i> verpacken. MacOS scheint da aber irgendwie noch empflindlicher
+</I>&gt;<i> zu sein.
+</I>&gt;<i>
+</I>&gt;<i> Kannst du das Verhalten - welches Sebastian beobachtet hat
+</I>&gt;<i> (Bug 359) auch beobachten? Wenn er bei einem Datums-Eingabefeld
+</I>&gt;<i> auf den Button &quot;...&quot; klickt, um den Kalender-Dialog zu oeffnen,
+</I>&gt;<i> passiert beim ersten Klick nichts.
+</I>&gt;<i>
+</I>&gt;<i> Ich koennte mir gut vorstellen, dass das die gleiche Ursache hat.
+</I>&gt;<i>
+</I>&gt;<i> Gruss
+</I>&gt;<i> Olaf
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Hibiscus-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Hibiscus-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">https://lists.berlios.de/mailman/listinfo/hibiscus-devel</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000084.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000093.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#85">[ Datum ]</a>
+              <a href="thread.html#85">[ Thema ]</a>
+              <a href="subject.html#85">[ Betreff (Subject)]</a>
+              <a href="author.html#85">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

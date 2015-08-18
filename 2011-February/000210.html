@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Plugin-Mechanismus in Job-Erzeugung
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2011-February/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Plugin-Mechanismus%20in%20Job-Erzeugung&In-Reply-To=%3C4D625D5C.1030406%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000209.html">
+   <LINK REL="Next"  HREF="000211.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Plugin-Mechanismus in Job-Erzeugung</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Plugin-Mechanismus%20in%20Job-Erzeugung&In-Reply-To=%3C4D625D5C.1030406%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Plugin-Mechanismus in Job-Erzeugung">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mo Feb 21 13:41:00 CET 2011</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000209.html">[Hibiscus-devel] Test. Please ignore
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000211.html">[Hibiscus-devel] Plugin-Mechanismus in Job-Erzeugung
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#210">[ Datum ]</a>
+              <a href="thread.html#210">[ Thema ]</a>
+              <a href="subject.html#210">[ Betreff (Subject) ]</a>
+              <a href="author.html#210">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+Setzt die Diskussion von
+<A HREF="https://www.willuhn.de/bugzilla/show_bug.cgi?id=338#c27">https://www.willuhn.de/bugzilla/show_bug.cgi?id=338#c27</A>
+fort:
+
+@Raphael: Erstmal Danke fuer den Code.
+
+Hab mir deine aktualisierte Loesung grad angeschaut. Gute Idee, so
+aehnlich haette ich das wohl auch gemacht. Ein paar Anmerkungen noch:
+
+1) Ich wuerde versuchen, das neue Interface &quot;IHBCIJob&quot; zu vermeiden.
+   Damit waere es moeglich, HBCI-Jobs zu implementieren, die nicht
+   von &quot;AbstractHBCIJob&quot; erben. Sie koennten dann bei der Ergebnis-
+   Behandlung in &quot;handleResult()&quot; &quot;aus der Reihe tanzen&quot;. Ich denke,
+   es sollte auch ohne das Interface - direkt mit AbstractHBCIJob
+   als Basis gehen.
+
+2) Das manuelle Registrieren der Jobs in der HBCIJobFactory
+   ist eigentlich nicht noetig. Man koennte alternativ auch
+   den Classfinder nehmen:
+
+   PluginLoader loader = Application.getPluginLoader();
+   ClassFinder finder = loader.getPlugin(HBCI.class).getResources().
+                          getClassLoader().getClassFinder();
+
+   Class[] classes = finder.findImplementors(AbstractHBCIJob.class);
+   for (Class c:classes)
+   {
+     AbstractPlugin p = loader.findByClass(c);
+     if (p != null &amp;&amp; p.getClass().equals(HBCI.class))
+       System.out.println(&quot;  Hibiscus selbst: &quot; + c);
+     else
+       System.out.println(&quot;  Fremdplugin: &quot; + c);
+   }
+
+   Das liefert alle verfuegbaren Implementierungen von AbstractHBCIJob.
+   Auch die von anderen Plugins.
+   Via &quot;loader.findByClass(c)&quot; kann man dabei auch gleich noch
+   unterscheiden, ob der Job von Hibiscus selbst stammt oder von
+   einem Fremdplugin. Man muesste in HBCIJobFactory nicht die
+   zwei Listen fuehren.
+
+   Achso, Moment. Gesucht ist ja nicht die Liste aller Jobs sondern
+   eine konkrete Implementierung - wie &quot;Umsatz-Abruf&quot;. Mhh, dann
+   sind die Interfaces IHBCIJob, IHBCISaldoJob,... irgendwie doch
+   noetig. Aber dann kann man nicht mehr erzwingen, dass die
+   Implementierungen von AbstractHBCIJob abgeleitet sind.
+   Verzwickt ;)
+
+3) Ein Problem hab ich noch mit der Instanziierung der Jobs via
+   Reflection. Der Konstruktor mit einem Parameter ist nicht
+   vorgeschrieben. &quot;HBCIDauerauftragDeleteJob&quot; erwartet im Konstruktor
+   beispielsweise zwei Parameter: &lt;Dauerauftrag&gt; und &lt;Date&gt;.
+
+   Die pragmatische Loesung waere vermutlich, die Typisierung bei
+   der Job-Erstellung in HBCIJobFactory aufzugeben und varargs
+   zu verwenden. Etwa so:
+
+   public static synchronized AbstractHBCIJob createJob(
+     Class&lt;? extends AbstractHBCIJob&gt; clazz, Object... params);
+
+   Hab ich aber noch nicht getestet.
+
+4) Das &quot;boolean isApplicable(T type)&quot; im Job ist eine gute Idee.
+   Eventuell koennte man das in AbstractHBCIJob bereits implementieren
+   und da immer &quot;false&quot; zurueckliefern. Bei Hibiscus-internen Jobs
+   koennte die Pruefung mit &quot;isApplicable&quot; dann einfach wegfallen
+   (sie muessten die Methode nicht implementieren/ueberschreiben),
+   da sie generell verwendet werden, wenn keine alternative
+   Implementierung gefunden wurde. Wenn eine Alternative gefunden
+   wird, dann wird sie nur verwendet, wenn &quot;isApplicable&quot; true liefert.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000209.html">[Hibiscus-devel] Test. Please ignore
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000211.html">[Hibiscus-devel] Plugin-Mechanismus in Job-Erzeugung
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#210">[ Datum ]</a>
+              <a href="thread.html#210">[ Thema ]</a>
+              <a href="subject.html#210">[ Betreff (Subject)]</a>
+              <a href="author.html#210">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

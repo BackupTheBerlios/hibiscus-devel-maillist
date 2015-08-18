@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Umsatzkategorisierung
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-February/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Umsatzkategorisierung&In-Reply-To=%3C200702191349.37646.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000007.html">
+   <LINK REL="Next"  HREF="000009.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Umsatzkategorisierung</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Umsatzkategorisierung&In-Reply-To=%3C200702191349.37646.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Umsatzkategorisierung">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mo Feb 19 13:49:37 CET 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000007.html">[Hibiscus-devel] Umsatzkategorisierung
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000009.html">[Hibiscus-devel] re Umsatzkategorisierung
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#8">[ Datum ]</a>
+              <a href="thread.html#8">[ Thema ]</a>
+              <a href="subject.html#8">[ Betreff (Subject) ]</a>
+              <a href="author.html#8">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> habe ich mir die Umsatzkategorisierung mal angesehen. Die Realisierung
+</I>&gt;<i> folgender Vorschläge würde die Sache für mich rund machen:
+</I>&gt;<i>
+</I>&gt;<i> 1. In der Übersicht der Buchungen pro Konto werden nicht nur die
+</I>&gt;<i> manuellen Umsatzkategorien angezeigt, sondern auch die automatisch
+</I>&gt;<i> ermittelten. So kann man sehen, ob jede Buchung einer Kategorie
+</I>&gt;<i> zugeordnet ist.
+</I>
+Das haette ich auch gern - allerdings wuerde es vermutlich mit
+recht grossen Performance-Einbussen verbunden sein, da die statischen
+Zuordnungen direkt in der Datenbank stehen und via Join mitgeladen
+werden koennen. Die dynamischen Kategorien werden aber erst zu
+Laufzeit mittels regulaerer Ausdruecke ermitteln. Ich muesste also
+fuer jeden geladenen Umsatz erst alle Umsatz-Typen auf Treffer testen.
+Ich werde das wohl mal benchmarken um zu schauen, wieviel Zeit das
+genau kostet.
+
+&gt;<i> 2. Jeder Umsatzkategorie wird ein Sortierkriterium zugeordnet für die
+</I>&gt;<i> folgenden Auswertungen
+</I>&gt;<i> 3. Liste aller Umsatzkategorien mit Summen. Die Umsatzkategorien sind
+</I>&gt;<i> nach dem Sortierkriterium sortiert.
+</I>
+Das sollte eigentlich kein Problem sein.
+
+&gt;<i> 4. wie 3. Zusätzlich Auflistung der zugehörigen Buchungen.
+</I>
+Hier waere es vielleicht sinnvoll, das nicht in einer Tabelle
+sondern in einer TreeTable anzuzeigen, damit man eine Umsatz-.Kategorie
+auf- und zuklappen kann, um die einzelnen Buchungen ein- oder
+ausblenden zu koennen. Unter
+<A HREF="http://www.eclipse.org/swt/R3_2/new_and_noteworthy.html">http://www.eclipse.org/swt/R3_2/new_and_noteworthy.html</A>
+finden sich hierzu ein paar schoene Beispiele.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000007.html">[Hibiscus-devel] Umsatzkategorisierung
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000009.html">[Hibiscus-devel] re Umsatzkategorisierung
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#8">[ Datum ]</a>
+              <a href="thread.html#8">[ Thema ]</a>
+              <a href="subject.html#8">[ Betreff (Subject)]</a>
+              <a href="author.html#8">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

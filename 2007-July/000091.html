@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Daueraufträge anlegen
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-July/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%3D%3Fiso-8859-15%3Fq%3FDauerauftr%3DE4ge_anlegen%3F%3D&In-Reply-To=%3C46922197.40201%40jammerhund.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000092.html">
+   <LINK REL="Next"  HREF="000087.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Daueraufträge anlegen</H1>
+    <B>Matthias Scholz</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%3D%3Fiso-8859-15%3Fq%3FDauerauftr%3DE4ge_anlegen%3F%3D&In-Reply-To=%3C46922197.40201%40jammerhund.de%3E"
+           TITLE="[Hibiscus-devel] Daueraufträge anlegen">ms at jammerhund.de
+                  </A><BR>
+    <I>Mo Jul  9 13:52:55 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000092.html">[Hibiscus-devel] Daueraufträge abrufen
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000087.html">[Hibiscus-devel] Sammelaufträge ausführen
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#91">[ Datum ]</a>
+              <a href="thread.html#91">[ Thema ]</a>
+              <a href="subject.html#91">[ Betreff (Subject) ]</a>
+              <a href="author.html#91">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hallo,
+
+beim erstellen eines Dauerauftragen kommt bei mir folgendes:
+
+[Mon Jul 09 13:50:00 CEST 
+2007][WARN][de.willuhn.jameica.hbci.HBCICallbackSWT.log] CRC Algorithmus 
+27 nicht nicht implementiert
+[Mon Jul 09 13:50:00 CEST 
+2007][INFO][de.willuhn.jameica.messaging.LogMessageConsumer.handleMessage] 
+Auftrag gespeichert
+[Mon Jul 09 13:50:00 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.open] 
+open pin/tan passport
+[Mon Jul 09 13:50:00 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.PinTanConfigFactory.load] 
+trying to apply jameica trustmanager
+[Mon Jul 09 13:50:00 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.PinTanConfigFactory.findByKonto] 
+searching config for konto XXXXXXXXX, blz: 86070024
+[Mon Jul 09 13:50:00 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.PinTanConfigFactory.findByKonto] 
+found config. url: fints.deutsche-bank.de
+[Mon Jul 09 13:50:00 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.PinTanConfigFactory.findByKonto] 
+using config. url: fints.deutsche-bank.de
+[Mon Jul 09 13:50:00 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.open] 
+[PIN/TAN] url         : fints.deutsche-bank.de
+[Mon Jul 09 13:50:00 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.open] 
+[PIN/TAN] blz         : 86070024
+[Mon Jul 09 13:50:00 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.open] 
+[PIN/TAN] filter      : Base64
+[Mon Jul 09 13:50:00 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.open] 
+[PIN/TAN] HBCI version: plus
+[Mon Jul 09 13:50:00 CEST 
+2007][INFO][de.willuhn.jameica.hbci.HBCICallbackSWT.log] *** there is 
+only one pintan method (999) supported - choosing this automatically
+[Mon Jul 09 13:50:00 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.HBCIFactory.stop] 
+stopping hbci factory
+[Mon Jul 09 13:50:00 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.HBCIFactory.stop] finished
+[Mon Jul 09 13:50:00 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.close] 
+closing pin/tan passport
+[Mon Jul 09 13:50:00 CEST 
+2007][INFO][de.willuhn.jameica.hbci.passports.pintan.server.PassportHandleImpl.close] 
+pin/tan passport closed
+[Mon Jul 09 13:50:00 CEST 
+2007][ERROR][de.willuhn.jameica.hbci.server.hbci.HBCIDauerauftragStoreJob.&lt;init&gt;] 
+error while executing job DauerNew
+[Mon Jul 09 13:50:00 CEST 
+2007][ERROR][de.willuhn.jameica.hbci.server.hbci.HBCIDauerauftragStoreJob.&lt;init&gt;] 
+org.kapott.hbci.exceptions.HBCI_Exception: Fehler beim Erzeugen des Jobs 
+DauerNew
+        at org.kapott.hbci.manager.HBCIHandler.newJob(HBCIHandler.java:263)
+        at 
+de.willuhn.jameica.hbci.server.hbci.HBCIFactory.getJobRestrictions(HBCIFactory.java:200)
+        at 
+de.willuhn.jameica.hbci.server.hbci.HBCIDauerauftragStoreJob.&lt;init&gt;(HBCIDauerauftragStoreJob.java:128)
+        at 
+de.willuhn.jameica.hbci.gui.action.DauerauftragExecute.handleAction(DauerauftragExecute.java:52)
+        at 
+de.willuhn.jameica.hbci.gui.views.DauerauftragNew$1.handleAction(DauerauftragNew.java:80)
+        at de.willuhn.jameica.gui.parts.Button$2.run(Button.java:134)
+        at 
+org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:67)
+        at de.willuhn.jameica.gui.GUI$3.run(GUI.java:625)
+        at 
+org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:152)
+        at org.eclipse.swt.widgets.Display.syncExec(Display.java:3720)
+        at de.willuhn.jameica.gui.GUI.startSync(GUI.java:621)
+        at 
+de.willuhn.jameica.gui.parts.Button$1.widgetSelected(Button.java:128)
+        at 
+org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:90)
+        at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:66)
+        at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1085)
+        at 
+org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3164)
+        at 
+org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:2840)
+        at de.willuhn.jameica.gui.GUI.loop(GUI.java:640)
+        at de.willuhn.jameica.gui.GUI.init(GUI.java:211)
+        at de.willuhn.jameica.system.Application.init(Application.java:266)
+        at 
+de.willuhn.jameica.system.Application.newInstance(Application.java:90)
+        at de.willuhn.jameica.Main.main(Main.java:78)
+Caused by: java.lang.reflect.InvocationTargetException
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native 
+Method)
+        at 
+sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
+        at 
+sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
+        at java.lang.reflect.Constructor.newInstance(Constructor.java:494)
+        at org.kapott.hbci.manager.HBCIHandler.newJob(HBCIHandler.java:259)
+        ... 21 more
+Caused by: org.kapott.hbci.exceptions.JobNotSupportedException: 
+Geschäftsvorfall DauerNew wird nicht unterstützt, evtl. andere 
+HBCI-Version benutzen
+        at 
+org.kapott.hbci.GV.HBCIJobImpl.findSpecNameForGV(HBCIJobImpl.java:183)
+        at org.kapott.hbci.GV.HBCIJobImpl.&lt;init&gt;(HBCIJobImpl.java:78)
+        at org.kapott.hbci.GV.GVDauerNew.&lt;init&gt;(GVDauerNew.java:43)
+        ... 26 more
+
+[Mon Jul 09 13:50:00 CEST 
+2007][INFO][de.willuhn.jameica.hbci.server.hbci.HBCIFactory$2.run] 
+executing listener
+[Mon Jul 09 13:50:00 CEST 
+2007][ERROR][de.willuhn.jameica.messaging.LogMessageConsumer.handleMessage] 
+Fehler beim Erstellen des Auftrags. Fehlermeldung: Fehler beim Erzeugen 
+des Jobs DauerNew
+
+
+Ist es hier auch weider so, dass ich mit der Deutschen Bank sowas nicht 
+machen kann???
+
+
+
+Ich verwende Jameica 1.4 Build 179 + Hibiscus 1.6 Build 168 auf Debian 
+Etch.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000092.html">[Hibiscus-devel] Daueraufträge abrufen
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000087.html">[Hibiscus-devel] Sammelaufträge ausführen
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#91">[ Datum ]</a>
+              <a href="thread.html#91">[ Thema ]</a>
+              <a href="subject.html#91">[ Betreff (Subject)]</a>
+              <a href="author.html#91">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

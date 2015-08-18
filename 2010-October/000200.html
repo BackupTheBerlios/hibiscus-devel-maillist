@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Hilfetexte links unten
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2010-October/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Hilfetexte%20links%20unten&In-Reply-To=%3C4CA99070.5010102%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000199.html">
+   <LINK REL="Next"  HREF="000201.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Hilfetexte links unten</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Hilfetexte%20links%20unten&In-Reply-To=%3C4CA99070.5010102%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Hilfetexte links unten">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mo Okt  4 10:29:36 CEST 2010</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000199.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000201.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#200">[ Datum ]</a>
+              <a href="thread.html#200">[ Thema ]</a>
+              <a href="subject.html#200">[ Betreff (Subject) ]</a>
+              <a href="author.html#200">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;&gt;<i> Mhh, mir faellt da nicht wirklich eine brauchbare technische
+</I>&gt;&gt;<i> Loesung ein. Unter Umstaenden koenne ich eine Message schicken,
+</I>&gt;&gt;<i> wenn keine Hilfe gefunden wurde. Die koenntest du dann abonnieren
+</I>&gt;&gt;<i> und bei dir eine Warnmeldung um Log ausgeben.
+</I>
+&gt;<i> Die Lösung finde ich gut. Dann werde ich entsprechende Loggings nur
+</I>&gt;<i> auf meinem Entwicklungssystem ausgeben.
+</I>
+Ist eingebaut. Ich schicke eine QueryMessage an den Channel
+&quot;jameica.help.missing&quot;. Die QueryMessage enthaelt als &quot;data&quot;
+die View, bei der die Hilfe fehlte. Du kannst das also
+in etwa so bei dir verwenden:
+
+private class HelpConsumer implements MessageConsumer
+{
+  public void handleMessage(Message m)
+  {
+    QueryMessage msg = (QueryMessage) m;
+    AbstractView view = (AbstractView) msg.getData();
+    Logger.error(&quot;help missing for view &quot; + view.getClass());
+  }
+  [...]
+}
+
+MessageConsumer mc = new HelpConsumer();
+Application.getMessagingFactory().getMessagingQueue(&quot;jameica.help.missing&quot;).
+  registerMessageConsumer(mc);
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000199.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000201.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#200">[ Datum ]</a>
+              <a href="thread.html#200">[ Thema ]</a>
+              <a href="subject.html#200">[ Betreff (Subject)]</a>
+              <a href="author.html#200">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

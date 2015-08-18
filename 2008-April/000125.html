@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Reihenfolge beim Laden/Initialisieren der Plugins	geaendert
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2008-April/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Reihenfolge%20beim%20Laden/Initialisieren%20der%20Plugins%0A%09geaendert&In-Reply-To=%3C200804101541.20727.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Reihenfolge beim Laden/Initialisieren der Plugins	geaendert</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Reihenfolge%20beim%20Laden/Initialisieren%20der%20Plugins%0A%09geaendert&In-Reply-To=%3C200804101541.20727.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Reihenfolge beim Laden/Initialisieren der Plugins	geaendert">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Do Apr 10 15:41:20 CEST 2008</I>
+    <P><UL>
+        
+        
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#125">[ Datum ]</a>
+              <a href="thread.html#125">[ Thema ]</a>
+              <a href="subject.html#125">[ Betreff (Subject) ]</a>
+              <a href="author.html#125">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+Komisch, am Pluginloader von Jameica find ich immer wieder
+Sachen, die geaendert werden koennten. Ich hoffe, ich
+nerve mit den Umbauten nicht zu sehr ;)
+Aber da die letzte offizielle Release ja erst vor kurzem stattfand,
+ist das die beste Gelegenheit, groessere Aenderungen vorzunehmen.
+
+Diesmal: Reihenfolge beim Laden/Initialisieren der Plugins geaendert.
+
+Vorher:
+
+1) Plugin A: Klassen laden
+2) Plugn A: init()
+3) Plugin B: Klassen laden
+4) Plugn B: init()
+5) Plugin A: Services starten
+6) Plugin B: Services starten
+
+Nun:
+
+1) Plugin A: Klassen laden
+2) Plugin B: Klassen laden
+3) Plugn A: init()
+4) Plugin A: Services starten
+5) Plugn B: init()
+6) Plugin B: Services starten
+
+
+Vorteile:
+
+1) Wenn das erste Plugin initialisiert wird, sind bereits alle
+   Klassen geladen und der Classfinder findet alles relevante -
+   auch aus anderen Plugins.
+2) Wenn Plugin B auf Services von Plugin A angewiesen ist, sind
+   diese nun bereits in PluginB.init() verfuegbar
+
+Nachteile:
+Eigentlich wuesste ich kein Szenario, wo die geaenderte Reihenfolge
+Nachteile bringen koennte. im Gegenteil: Wenn Plugins voneinander
+abhaengig sind, sind nun Ressourcen der anderen Plugins eher
+verfuegbar.
+
+Habs gerade eingecheckt. Falls euch dennoch Fehler auffallen
+oder bei euren Plugins jetzt spontan etwas nicht mehr funktioniert,
+dann gebt mir einfach Bescheid.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#125">[ Datum ]</a>
+              <a href="thread.html#125">[ Thema ]</a>
+              <a href="subject.html#125">[ Betreff (Subject)]</a>
+              <a href="author.html#125">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] klassiker  java.lang.NullPointerException
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2012-January/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20klassiker%20%20java.lang.NullPointerException&In-Reply-To=%3C4F0DA5C8.1060109%40federa.firma.cc%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000239.html">
+   <LINK REL="Next"  HREF="000241.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] klassiker  java.lang.NullPointerException</H1>
+    <B>hbci at federa.firma.cc</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20klassiker%20%20java.lang.NullPointerException&In-Reply-To=%3C4F0DA5C8.1060109%40federa.firma.cc%3E"
+           TITLE="[Hibiscus-devel] klassiker  java.lang.NullPointerException">hbci at federa.firma.cc
+                  </A><BR>
+    <I>Mi Jan 11 16:07:52 CET 2012</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000239.html">[Hibiscus-devel] klassiker  java.lang.NullPointerException
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000241.html">[Hibiscus-devel] klassiker  java.lang.NullPointerException
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#240">[ Datum ]</a>
+              <a href="thread.html#240">[ Thema ]</a>
+              <a href="subject.html#240">[ Betreff (Subject) ]</a>
+              <a href="author.html#240">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Am 10.01.2012 23:36, schrieb Olaf Willuhn:
+&gt;<i> -----BEGIN PGP SIGNED MESSAGE-----
+</I>&gt;<i> Hash: SHA1
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">hbci at federa.firma.cc</A> wrote:
+</I>&gt;<i>
+</I>&gt;&gt;&gt;<i> In Zeile 46 in CustomerDetail.java steht aber gar nichts:
+</I>&gt;&gt;&gt;<i> <A HREF="https://github....CustomerDetail.java">https://github....CustomerDetail.java</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i> ja der Abgleich mit dem Git hakt, sorry. Datei CustomerDetail.java
+</I>&gt;&gt;<i> habe ich angehangen. In Zeile 46  steht
+</I>&gt;<i>
+</I>&gt;&gt;<i> left.addInput(control.getCompany());
+</I>&gt;<i>
+</I>&gt;<i> Dann passt die Klasse CustomerControl.java auch nicht dazu. Der
+</I>&gt;<i> Nullpointer entsteht offensichtlich, weil control.getCompany() NULL
+</I>&gt;<i> zurueckliefert. Laut
+</I>&gt;<i> <A HREF="https://github.com/reibach/reibach/blob/master/src/reibach/gui/control/CustomerControl.java">https://github.com/reibach/reibach/blob/master/src/reibach/gui/control/CustomerControl.java</A>
+</I>&gt;<i> kann die Funktion aber nicht NULL liefern. Bitte stelle sicher, dass
+</I>&gt;<i> deine CustomerControl.java in getCompany() tatsaechlich etwas
+</I>&gt;<i> zurueckliefert und auf dem Input-Feld auch &quot;setName()&quot; aufgerufen wurde.
+</I>Danke das war es! Die Funktion lieferte tatsaechlich Null, ist nun behoben
+
+&gt;<i> Das ist jedenfalls kein Fehler von Jameica. Lasse deinen Code doch
+</I>&gt;<i> einfach im Eclipse-Debugger laufen, setze einen Breakpoint und
+</I>&gt;<i> analysiere deinen Code.
+</I>Ja, das mach ich schon. Hier hatte mich verwirrt, dass  der Aufruf aus
+dem oberen Menue heraus mittels
+action=&quot;reibach.gui.action.CustomerDetail&quot; NICHT funktionierte, aber aus 
+dem Kontext ueber die Uebersichtsseite CustomerList mittels
+buttons.addButton(Settings.i18n().tr(&quot;Create new customer&quot;), new 
+CustomerDetail(),null,true); TADELLOS funktionierte.
+
+Ich fange ja erst an, den Nebel zu durchdringen... .
+
+/guenter
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000239.html">[Hibiscus-devel] klassiker  java.lang.NullPointerException
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000241.html">[Hibiscus-devel] klassiker  java.lang.NullPointerException
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#240">[ Datum ]</a>
+              <a href="thread.html#240">[ Thema ]</a>
+              <a href="subject.html#240">[ Betreff (Subject)]</a>
+              <a href="author.html#240">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

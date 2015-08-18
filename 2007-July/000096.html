@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Release-Koordination
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-July/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Release-Koordination&In-Reply-To=%3CF711CA3F-191E-4EC9-B353-00A8E0490F77%40koras.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000093.html">
+   <LINK REL="Next"  HREF="000097.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Release-Koordination</H1>
+    <B>Jürgen Koras</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Release-Koordination&In-Reply-To=%3CF711CA3F-191E-4EC9-B353-00A8E0490F77%40koras.de%3E"
+           TITLE="[Hibiscus-devel] Release-Koordination">Juergen at koras.de
+                  </A><BR>
+    <I>So Jul 15 14:29:46 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000093.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000097.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#96">[ Datum ]</a>
+              <a href="thread.html#96">[ Thema ]</a>
+              <a href="subject.html#96">[ Betreff (Subject) ]</a>
+              <a href="author.html#96">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hallo Olaf,
+
+ja, mit der geänderten Methode funktioniert der Export auch!
+
+Jetzt ist eigentlich nur noch eine Kleinigkeit nicht rund: wenn man  
+eine bestehende PDF-Datei ersetzen will, dann fragt erst der Save- 
+Dialog, dann nochmals ein eigener Dialog von Hibiscus, ob man die  
+Datei wirklich ersetzen will. Man muss das also zweimal bestätigen.  
+Ist das auch eine Eigenart von MacOS oder triff das bei Dir auch auf?
+
+viele Grüße
+Jürgen Koras
+
+
+Am 09.07.2007 um 16:24 schrieb Olaf Willuhn:
+
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;&gt;<i> ja, der erste Klick auf den Button &quot;...&quot; macht nichts, der zweite
+</I>&gt;&gt;<i> Klick öffnet einen Dialog, in welchem die Datumsauswahl dann doppelt
+</I>&gt;&gt;<i> erscheint! Ein dritter Klick geht dann ganz normal.
+</I>&gt;<i>
+</I>&gt;<i> OK, das Problem sollte ja dann mit dem shell.forceActive geloest
+</I>&gt;<i> sein. Habe es gerade committed.
+</I>&gt;<i>
+</I>&gt;&gt;<i> Ich habe einmal in der Klasse GUI die Methode start() so geändert,
+</I>&gt;&gt;<i> dass BackgroundTask.run(...) direkt aufgerufen wird, also synchron.
+</I>&gt;&gt;<i> OK, dass ist der Holzhammer, aber dann geht der Export der
+</I>&gt;&gt;<i> Kontoauszüge mit PDF! Das Button-Problem jedoch bleibt.
+</I>&gt;<i>
+</I>&gt;<i> Dann liegt es tatsaechlich an dem zweiten Thread, mit dem
+</I>&gt;<i> SWT unter MacOS nicht klarkommt.
+</I>&gt;<i>
+</I>&gt;&gt;<i> Damit das gleiche Verhalten: Export geht, Button nicht. Die Frage ist
+</I>&gt;&gt;<i> nun, warum das &quot;Konstrukt sieht merkwuerdig aus - ich weiss. Muss
+</I>&gt;&gt;<i> aber so ;)&quot; so ist? Wie bereits einmal erwähnt kenne ich SWT leider
+</I>&gt;&gt;<i> nicht, bin mit SWING aufgewachsen... :-)
+</I>&gt;<i>
+</I>&gt;<i> Wie folgt. SWT ist single-threaded (Swing IMHO auch). Will man
+</I>&gt;<i> also Code aus einem anderen Thread heraus ausfuehren, der auf
+</I>&gt;<i> die GUI zugreifen soll, muss man ihn mittels Display#syncExec bzw.
+</I>&gt;<i> Display#asyncExec in die Event-Queue des SWT-Threads einreihen.
+</I>&gt;<i> Das asyncExec startet hierzu jedoch keinen zweiten Thread sondern
+</I>&gt;<i> fuehrt die Aktion lediglich asynchron aus. Die Ausfuehrung von
+</I>&gt;<i> laengerdauerndem Code wuerde hier also auch die GUI blockieren.
+</I>&gt;<i> Daher wird in asyncExec nochmal ein separater Thread erzeugt.
+</I>&gt;<i> Dieser laeuft dann unabhaengig von der GUI.
+</I>&gt;<i>
+</I>&gt;<i> Was mich aber wirklich wundert: Ich hab mal in der CVS-History
+</I>&gt;<i> nachgeschaut - in Jameica 1.4 (also in der Vorversion) sah
+</I>&gt;<i> der Code bereits haargenau so aus. Daher kann ich mir nich
+</I>&gt;<i> so richtig erklaeren, warum es jetzt nicht mehr geht.
+</I>&gt;<i>
+</I>&gt;<i> Zum Test koenntest du die Methode in der GUI-Klasse ja mal
+</I>&gt;<i> etwas verkuerzen:
+</I>&gt;<i>
+</I>&gt;<i>   public void start(final BackgroundTask task)
+</I>&gt;<i>   {
+</I>&gt;<i>     if (getDisplay() == null || getDisplay().isDisposed()) return;
+</I>&gt;<i>
+</I>&gt;<i>     // Das Konstrukt sieht merkwuerdig aus - ich weiss. Muss aber  
+</I>&gt;<i> so ;)
+</I>&gt;<i>     Thread t = new Thread()
+</I>&gt;<i>     {
+</I>&gt;<i>       public void run()
+</I>&gt;<i>       {
+</I>&gt;<i>         getStatusBar().startProgress();
+</I>&gt;<i>         ProgressMonitor monitor = new BackgroundTaskMonitor();
+</I>&gt;<i>         try
+</I>&gt;<i>         {
+</I>&gt;<i>           task.run(monitor);
+</I>&gt;<i>         }
+</I>&gt;<i>         catch (OperationCanceledException oce)
+</I>&gt;<i>         {
+</I>&gt;<i>           if (monitor != null)
+</I>&gt;<i>             monitor.setStatus(ProgressMonitor.STATUS_CANCEL);
+</I>&gt;<i>         }
+</I>&gt;<i>         catch (Throwable t)
+</I>&gt;<i>         {
+</I>&gt;<i>           Logger.error(&quot;error while executing background task&quot;,t);
+</I>&gt;<i>           if (monitor != null)
+</I>&gt;<i>             monitor.setStatus(ProgressMonitor.STATUS_ERROR);
+</I>&gt;<i>         }
+</I>&gt;<i>         finally
+</I>&gt;<i>         {
+</I>&gt;<i>           getStatusBar().stopProgress();
+</I>&gt;<i>         }
+</I>&gt;<i>       }
+</I>&gt;<i>     };
+</I>&gt;<i>
+</I>&gt;<i>     getDisplay().asyncExec(t);
+</I>&gt;<i>   }
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Hierbei wir asyncExec direkt der Thread uebergeben. Das fuehrt
+</I>&gt;<i> zumindest unter Linux zwar dazu, dass die restliche GUI nicht
+</I>&gt;<i> sofort refreshed wird, aber vielleicht geht es ja dann.
+</I>&gt;<i>
+</I>&gt;<i> Gruss
+</I>&gt;<i> Olaf
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Hibiscus-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Hibiscus-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">https://lists.berlios.de/mailman/listinfo/hibiscus-devel</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000093.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000097.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#96">[ Datum ]</a>
+              <a href="thread.html#96">[ Thema ]</a>
+              <a href="subject.html#96">[ Betreff (Subject)]</a>
+              <a href="author.html#96">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

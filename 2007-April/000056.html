@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Liste der Umsätze nach Kategorien
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-April/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%0A%20%3D%3Fiso-8859-1%3Fq%3FListe_der_Ums%3DE4tze_nach_Kategori%3F%3D%0A%20%3D%3Fiso-8859-1%3Fq%3Fen%3F%3D&In-Reply-To=%3C46264730.7020105%40jost-net.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000055.html">
+   <LINK REL="Next"  HREF="000058.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Liste der Umsätze nach Kategorien</H1>
+    <B>Heiner Jostkleigrewe</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%0A%20%3D%3Fiso-8859-1%3Fq%3FListe_der_Ums%3DE4tze_nach_Kategori%3F%3D%0A%20%3D%3Fiso-8859-1%3Fq%3Fen%3F%3D&In-Reply-To=%3C46264730.7020105%40jost-net.de%3E"
+           TITLE="[Hibiscus-devel] Liste der Umsätze nach Kategorien">heiner at jost-net.de
+                  </A><BR>
+    <I>Mi Apr 18 18:28:32 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000055.html">[Hibiscus-devel] Liste der Umsätze nach Kategorien
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000058.html">[Hibiscus-devel] Liste der Umsätze nach Kategorien
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#56">[ Datum ]</a>
+              <a href="thread.html#56">[ Thema ]</a>
+              <a href="subject.html#56">[ Betreff (Subject) ]</a>
+              <a href="author.html#56">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hallo Olaf,
+
+vielen Dank für deine Bemühungen. Ich werde das morgen Abend mal 
+ausprobieren. Den untenstehenden Code hatte ich bereits in meinem Report 
+eingebaut.
+
+Heiner
+
+Olaf Willuhn schrieb:
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>&gt;&gt;<i> Achso, dann hab ich dich voellig falsch verstanden. Ich dachte, du
+</I>&gt;&gt;<i> hast nach der Umsatzkategorie &quot;Nicht zugeordnet&quot; in der Datenbank
+</I>&gt;&gt;<i> oder Fach-API gesucht. Dort existiert sie ja nicht. Aber der Tree
+</I>&gt;&gt;<i> hingegen sollte sie natuerlich mit zurueckliefern. Wenn das nicht
+</I>&gt;&gt;<i> der Fall ist, waere das wirklich ein Bug. Ich schau mir das mal an.
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> OK, habs eingebaut und eingecheckt. Der Fehler war nur, dass
+</I>&gt;<i> der Tree eine innere Klasse verwendet, die GenericObjectNode
+</I>&gt;<i> implementiert, um die nicht zugeordneten Umsaetze abbilden
+</I>&gt;<i> zu koennen. Da diese private war, konnte man sie nicht auslesen.
+</I>&gt;<i> Ich hab sie daher extrahiert und public gemacht. Heisst
+</I>&gt;<i> &quot;UmsatzGroup&quot; und befindet sich im &quot;.server&quot;-Package.
+</I>&gt;<i>
+</I>&gt;<i> Bsp.:
+</I>&gt;<i>
+</I>&gt;<i> UmsatzTypTree tree = .....;
+</I>&gt;<i> List list = tree.getItems();
+</I>&gt;<i>
+</I>&gt;<i> for (int i=0;i&lt;list.size();++i)
+</I>&gt;<i> {
+</I>&gt;<i>   // Alternativ kannst du auch direkt auf
+</I>&gt;<i>   // &quot;UmsatzGroup&quot; casten.
+</I>&gt;<i>   GenericObjectNode kat = (GenericObjectNode) list.get(i);
+</I>&gt;<i>
+</I>&gt;<i>   System.out.println(&quot;Kategorie: &quot; +
+</I>&gt;<i>     kat.getAttribute(kat.getPrimaryAttribute()));
+</I>&gt;<i>
+</I>&gt;<i>   GenericIterator umsaetze = kat.getChildren();
+</I>&gt;<i>
+</I>&gt;<i>   while (umsaetze.hasNext())
+</I>&gt;<i>   {
+</I>&gt;<i>     // Alternativ kannst du direkt auf &quot;Umsatz&quot; casten
+</I>&gt;<i>     GenericObject umsatz = umsaetze.next();
+</I>&gt;<i>     System.out.println(&quot;  &quot; +
+</I>&gt;<i>       umsatz.getAttribute(umsatz.getPrimaryAttribute()));
+</I>&gt;<i>   }
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> Gruss
+</I>&gt;<i> Olaf
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Hibiscus-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Hibiscus-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">https://lists.berlios.de/mailman/listinfo/hibiscus-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000055.html">[Hibiscus-devel] Liste der Umsätze nach Kategorien
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000058.html">[Hibiscus-devel] Liste der Umsätze nach Kategorien
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#56">[ Datum ]</a>
+              <a href="thread.html#56">[ Thema ]</a>
+              <a href="subject.html#56">[ Betreff (Subject)]</a>
+              <a href="author.html#56">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

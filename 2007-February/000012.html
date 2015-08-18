@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Saldo Abruf Probleme
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-February/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Saldo%20Abruf%20Probleme&In-Reply-To=%3C45DF16F6.1080703%40jammerhund.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000011.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Saldo Abruf Probleme</H1>
+    <B>Matthias Scholz</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Saldo%20Abruf%20Probleme&In-Reply-To=%3C45DF16F6.1080703%40jammerhund.de%3E"
+           TITLE="[Hibiscus-devel] Saldo Abruf Probleme">ms at jammerhund.de
+                  </A><BR>
+    <I>Fr Feb 23 17:31:50 CET 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000011.html">[Hibiscus-devel] Saldo Abruf Probleme
+</A></li>
+        
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#12">[ Datum ]</a>
+              <a href="thread.html#12">[ Thema ]</a>
+              <a href="subject.html#12">[ Betreff (Subject) ]</a>
+              <a href="author.html#12">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi Olaf,
+
+das is spietzenmäßig, was die machen! Erst war es Deutsche Bank mit der 
+86070000, dann die Deutsche Bank 24 mit der 86070024 und jetzt wieder 
+mit der alten 86070000. Die auf der Bank sagen, dass die 86070024 zwar 
+auch noch geht, man aber in Zukunft die 86070000 soll. Nur beim HBCI 
+geben die die 86070024 und damit geht es dann. Is schon crazy!
+Aber jetzt gehen die Abrufe und ich kann die Daueraufträge einrichten.
+
+Danke nochmal
+
+Matthias
+
+&gt;<i>Hi,
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>&gt;&gt;<i>So langsam treibt mich meine Deutsche Bank in den Wahnsinn. Erst geben
+</I>&gt;&gt;<i>die mir ne RSA Karte, die mir nix nützt, dann habe ich mein Konto für
+</I>&gt;&gt;<i>PIN/TAN freischalten lassen und konnte genau einmal die Umsätze/Salden
+</I>&gt;&gt;<i>abrufen :-(
+</I>&gt;&gt;<i>Leider weiß ich noch nicht so viel mit den Meldungen anzufangen und
+</I>&gt;&gt;<i>hoffe auf eure Hilfe. Logfile is hier:
+</I>&gt;&gt;<i><A HREF="https://devinno.kpln.de/jammerhund/jameica.log">https://devinno.kpln.de/jammerhund/jameica.log</A>
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Die Bank antwortet hier mit einem lapidaren
+</I>&gt;<i>&quot;Keine gültige Kontoverbindung&quot;. Sehr hilfreich :-(
+</I>&gt;<i>Ansonsten sieht das Log aber korrekt aus. Ich kann
+</I>&gt;<i>jetzt nur spekulieren, was die Ursache sein koennte:
+</I>&gt;<i>Falsche URL oder falsche HBCI-Version schliesse ich
+</I>&gt;<i>aus - dann waerst du nicht so weit gekommen. Daher bleiben
+</I>&gt;<i>eigentlich nur BLZ, Kontonummer, Kunden-/Benutzerkennung.
+</I>&gt;<i>Es koennte sein, dass die Bank nur fuer HBCI vielleicht
+</I>&gt;<i>eine abweichende BLZ verwendet. Die Dresdner Bank macht
+</I>&gt;<i>das z.Bsp. auch so. Bei Kontonummer, Kunden-/Benutzerkennung
+</I>&gt;<i>koennte es sein, dass die ggf. links mit Nullen aufgefuellt
+</I>&gt;<i>werden muessen oder vielleicht bei der Kunden-/Benutzerkennung
+</I>&gt;<i>was falsches drin steht. 
+</I>&gt;<i>
+</I>&gt;<i>Ansonsten haette ich noch folgende 2 URLs, wo
+</I>&gt;<i>Hibiscus mit der Deutschen Bank funktioniert:
+</I>&gt;<i>
+</I>&gt;<i><A HREF="http://www.onlinebanking-forum.de/phpBB2/viewtopic.php?p=32178">http://www.onlinebanking-forum.de/phpBB2/viewtopic.php?p=32178</A>
+</I>&gt;<i><A HREF="http://www.willuhn.de/bugzilla/show_bug.cgi?id=288">http://www.willuhn.de/bugzilla/show_bug.cgi?id=288</A>
+</I>&gt;<i>
+</I>&gt;<i>Gruss
+</I>&gt;<i>Olaf
+</I>&gt;<i>_______________________________________________
+</I>&gt;<i>Hibiscus-devel mailing list
+</I>&gt;<i><A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Hibiscus-devel at lists.berlios.de</A>
+</I>&gt;<i><A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">https://lists.berlios.de/mailman/listinfo/hibiscus-devel</A>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000011.html">[Hibiscus-devel] Saldo Abruf Probleme
+</A></li>
+	
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#12">[ Datum ]</a>
+              <a href="thread.html#12">[ Thema ]</a>
+              <a href="subject.html#12">[ Betreff (Subject)]</a>
+              <a href="author.html#12">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

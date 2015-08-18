@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Hilfetexte links unten
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2010-October/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Hilfetexte%20links%20unten&In-Reply-To=%3C4CAB9832.9050402%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000204.html">
+   <LINK REL="Next"  HREF="000206.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Hilfetexte links unten</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Hilfetexte%20links%20unten&In-Reply-To=%3C4CAB9832.9050402%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Hilfetexte links unten">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Di Okt  5 23:27:14 CEST 2010</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000204.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000206.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#205">[ Datum ]</a>
+              <a href="thread.html#205">[ Thema ]</a>
+              <a href="subject.html#205">[ Betreff (Subject) ]</a>
+              <a href="author.html#205">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> ich habe mir die Sache noch mal in Jameica angesehen. Dabei ist mir eine
+</I>&gt;<i> einfache Lösung eingefallen. AbstractView wird um die Methode getHelp()
+</I>&gt;<i> erweitert. Jede View kann die Methode überschreiben und damit einen
+</I>&gt;<i> Hilfetext zurückliefern.
+</I>
+Aber dann muesste man doch die Views aller Plugins ueberarbeiten
+und dort getHelp() implementieren, weil sonst die bisherigen
+Hilfe-Seiten nicht mehr gefunden werden. Oder verstehe ich dich
+da jetzt falsch?
+
+&gt;<i> Würdest du die untenstehenden Patches einbauen?
+</I>
+Kann es sein, dass das Patch unvollstaendig ist?
+Das erweitert lediglich AbstractView um:
+
+public String getHelp()
+{
+  return null;
+}
+
+
+Gruss
+Olaf
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000204.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000206.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#205">[ Datum ]</a>
+              <a href="thread.html#205">[ Thema ]</a>
+              <a href="subject.html#205">[ Betreff (Subject)]</a>
+              <a href="author.html#205">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

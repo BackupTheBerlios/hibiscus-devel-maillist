@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] H2-Support integriert
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-June/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20H2-Support%20integriert&In-Reply-To=%3C200706251354.20947.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000082.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] H2-Support integriert</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20H2-Support%20integriert&In-Reply-To=%3C200706251354.20947.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] H2-Support integriert">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mo Jun 25 13:54:20 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000082.html">[Hibiscus-devel] RDH Cipkarten
+</A></li>
+        
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#83">[ Datum ]</a>
+              <a href="thread.html#83">[ Thema ]</a>
+              <a href="subject.html#83">[ Betreff (Subject) ]</a>
+              <a href="author.html#83">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+den Kampf mit Apache Derby hatte ich ja aufgegeben. Die &quot;H2&quot;-Datenbank
+(www.h2database.com) zeigte sich jedoch gnaediger. Sie wandelt zwar auch
+alle SQL-Identifier in Uppercase um, allerdings hab ich den OR-Mapper
+de.willuhn.datasource hierzu so erweitert, dass er ein System-Property
+&quot;de.willuhn.datasource.db.uppercase&quot; auswertet. Setzt man es mit:
+
+System.setProperty(&quot;de.willuhn.datasource.db.uppercase&quot;,&quot;true&quot;);
+
+...dann werden alle SQL-Identifier (Tabellen- und Spaltennamen)
+unter der Haube in Grossbuchstaben umgewandelt.
+
+Heisst konkret: Seit gerade eben unterstuetzt Hibiscus auch die
+H2-Datenbank, welche im Gegensatz zu McKoi aktiv gepflegt wird
+und sehr interessante Features unterstuetzt. Neben Verschluesselung
+via AES bzw. XTEA kann sie auch SQL-Dumps von Datenbanken erzeugen
+und diese auch wieder einspielen. Bsp.:
+
+  String url = &quot;jdbc:h2:&lt;verzeichnis&gt;&quot;;
+  String script = &quot;dump.sql&quot;;
+  Backup.execute(url, user, password, script);
+  DeleteDbFiles.execute(dir, dbName);
+  RunScript.execute(url, user, password, script);
+
+Damit kann man also auch ganz einfach ein Plaintext-Datenbank-Backup
+erzeugen und wieder einspielen.
+
+Eine Migration von McKoi auf H2 habe ich nicht geplant.
+Ich wuerde H2 zwar sehr gern bereits in Hibiscus 1.7 als Default-Datenbank
+fuer Neuinstallationen verwenden, allerdings waere das vermutlich etwas
+derb kurzfristig - zumal ich die Version ja diese Woche releasen moechte.
+
+PS: Das MacOS-Problem (Anwendung bleibt haengen) besteht uebrigens immer noch.
+Und ich hab leider noch keine Loesung dafuer gefunden. Ich bin mir
+zwar ziemlich sicher, dass es ein Deadlock irgendwo in SWT ist, der
+duch Multithreading in Hibiscus/Jameica ausgeloest wird. Da allerdings
+keine Fehler geworfen werden, finde ich die genaue Stelle nicht.
+Ich weiss nun nicht, ob ich mit Hibiscus 1.7/Jameica 1.5 noch warten
+sollte, bis das Problem geloest ist. Ich hab nur keine Ahnung, wie lange
+das noch dauern wird - ich braeuchte hier dringend jemand mit 
+Programmier-Erfahrung und Mac, der das mal analysieren koennte.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000082.html">[Hibiscus-devel] RDH Cipkarten
+</A></li>
+	
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#83">[ Datum ]</a>
+              <a href="thread.html#83">[ Thema ]</a>
+              <a href="subject.html#83">[ Betreff (Subject)]</a>
+              <a href="author.html#83">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Überweisungsstatus / Vorgemerkte Umsätze
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2009-February/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DDCberweisungsstatus_/_Vorgemerkt%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fe_Ums%3DE4tze%3F%3D&In-Reply-To=%3C1234450868.3943.20.camel%40devel.office.ancoso-development.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000165.html">
+   <LINK REL="Next"  HREF="000167.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Überweisungsstatus / Vorgemerkte Umsätze</H1>
+    <B>HBCI4Java (Stefan Palme)</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DDCberweisungsstatus_/_Vorgemerkt%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fe_Ums%3DE4tze%3F%3D&In-Reply-To=%3C1234450868.3943.20.camel%40devel.office.ancoso-development.de%3E"
+           TITLE="[Hibiscus-devel] Überweisungsstatus / Vorgemerkte Umsätze">hbci4java at kapott.org
+                  </A><BR>
+    <I>Do Feb 12 16:01:08 CET 2009</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000165.html">[Hibiscus-devel] Überweisungsstatus / Vorgemerkte Umsätze
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000167.html">[Hibiscus-devel] CRM/emediaservices
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#166">[ Datum ]</a>
+              <a href="thread.html#166">[ Thema ]</a>
+              <a href="subject.html#166">[ Betreff (Subject) ]</a>
+              <a href="author.html#166">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hallo,
+
+Johannes Schlatow wrote:
+&gt;<i> &gt; &gt; Nun zum eigentlich Topic. Als ehemaliger Starmoney-User kenne ich noch
+</I>&gt;<i> &gt; &gt; die Rubrik 'Vorgemerkte Umsätze', dort wurden bereits gesendete,
+</I>&gt;<i> &gt; &gt; aber noch nicht vollständig gebuchte Überweisungen angezeigt (man
+</I>&gt;<i> &gt; &gt; hat quasi einen Tag vorher gesehen, dass man von jemandem eine
+</I>&gt;<i> &gt; &gt; Überweisung bekommt).
+</I>&gt;<i> &gt; &gt; Da ich mich mit den HBCI Spezifikationen noch nie
+</I>&gt;<i> &gt; &gt; auseinandergesetzt habe, weiß ich auch nicht wie das im Endeffekt
+</I>&gt;<i> &gt; &gt; realisiert wurde bzw. ob es eine Art Statusabfrage für
+</I>&gt;<i> &gt; &gt; Überweisungen gibt. Auf jeden Fall wäre das ein sehr schönes
+</I>&gt;<i> &gt; &gt; Feature.
+</I>
+Stefan Palme wrote:
+&gt;<i> &gt; Die &quot;vorgemerkten Umsätze&quot; werden beim Abruf von Kontoauszügen mit
+</I>&gt;<i> &gt; übertragen. Allerdings wertet HBCI4Java diese Informationen noch
+</I>&gt;<i> &gt; nicht aus, so dass Hibiscus auch keine Chance hat, diese Daten anzu-
+</I>&gt;<i> &gt; zeigen.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Steht aber schon auf der TODO-Liste ;-)
+</I>
+Olaf Willuhn wrote:
+&gt;<i> Ich habe gerade einen User, fuer den ich Hibiscus so erweitert habe,
+</I>&gt;<i> dass das &quot;notbooked&quot;-Property der Umsaetze mit im Log ausgegeben wird,
+</I>&gt;<i> damit ich mir die MT942-Daten mal anschauen kann. Habe das Log vorgestern
+</I>&gt;<i> gekriegt - sieht gut aus. Ich haette versucht, das mit deinem MT940-
+</I>&gt;<i> Parser einzulesen. Wenn du willst, kann ich dir das Log aber auch
+</I>&gt;<i> gerne mal schicken. Ich wuerde den User vorher noch fragen, ob ich
+</I>&gt;<i> die Daten an dich weiterleiten kann.
+</I>
+Habe gerade ein HBCI4Java-Update ins SVN eingecheckt (Release r120).
+Dort wird nun auch die Auswertung der MT942-Daten (also der vorgemerkten
+Umsätze) unterstützt.
+
+Dafür gibt es nun neben getFlatData() auch getFlatDataUnbooked(), wobei
+alle vorgemerkten Umsätze als Liste von GVRKUms.UmsLines zurückgegeben
+werden (Hinweis: der Saldo in diesen UmsLine-Objekte entspricht nicht
+dem Saldo, den man erhalten würde, wenn man den tatsächlichen Konto-
+auszug entsprechend &quot;weiterrechnet&quot;. Statt dessen ist der Saldo vor dem
+ersten vorgemerkten Umsatz mit &quot;0&quot; initialisiert. Das ist im Moment aus
+Design-Gründen so, kann aber im Prinzip auch von der Anwendung nach-
+korrigiert werden).
+
+Ganz nebenbei hat sich dabei das API der GVRKUms-Klasse geändert. Einige
+Array-Variablen werden nun statt dessen als Listen gespeichert... Am 
+besten einfach aus den Quellen die Java-Doku bauen und schnell nachlesen
+- sollte alles nicht weiter kompliziert sein :-)
+
+Grüße
+-stefan-
+
+-- 
+-------------------------------------------------------------------
+Dipl. Inf. (FH) Stefan Palme
+ 
+email: <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">kleiner at hora-obscura.de</A>
+www:   <A HREF="http://hbci4java.kapott.org">http://hbci4java.kapott.org</A>
+       <A HREF="http://converter-db.de">http://converter-db.de</A>
+       <A HREF="http://myamavis.kapott.org">http://myamavis.kapott.org</A>
+icq:   36376278
+ 
+key fingerprint: 1BA7 D217 36A1 534C A5AD  F18A E2D1 488A E904 F9EC
+-------------------------------------------------------------------
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000165.html">[Hibiscus-devel] Überweisungsstatus / Vorgemerkte Umsätze
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000167.html">[Hibiscus-devel] CRM/emediaservices
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#166">[ Datum ]</a>
+              <a href="thread.html#166">[ Thema ]</a>
+              <a href="subject.html#166">[ Betreff (Subject)]</a>
+              <a href="author.html#166">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

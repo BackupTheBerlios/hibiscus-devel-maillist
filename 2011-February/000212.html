@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Plugin-Mechanismus in Job-Erzeugung
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2011-February/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Plugin-Mechanismus%20in%20Job-Erzeugung&In-Reply-To=%3C4D6286A1.8060201%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000211.html">
+   <LINK REL="Next"  HREF="000213.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Plugin-Mechanismus in Job-Erzeugung</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Plugin-Mechanismus%20in%20Job-Erzeugung&In-Reply-To=%3C4D6286A1.8060201%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Plugin-Mechanismus in Job-Erzeugung">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mo Feb 21 16:37:05 CET 2011</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000211.html">[Hibiscus-devel] Plugin-Mechanismus in Job-Erzeugung
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000213.html">[Hibiscus-devel] Plugin-Mechanismus in Job-Erzeugung
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#212">[ Datum ]</a>
+              <a href="thread.html#212">[ Thema ]</a>
+              <a href="subject.html#212">[ Betreff (Subject) ]</a>
+              <a href="author.html#212">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> Das Interface ist in der jetzigen Form tatsächlich redundant mit
+</I>&gt;<i> AbstractHBCIJob. Die Frage ist, ob es Sinn macht Plugins zu zwingend
+</I>&gt;<i> von AbstractHBCIJob abzuleiten.
+</I>&gt;<i> Da würde ich deinen Urteil vertrauen da für mich Hibuscus noch sehr neu
+</I>&gt;<i> ist.
+</I>
+Naja, das dort drin implementierte Verhalten ist schon wichtig und
+sollte bei allen Jobs identisch sein. Allerdings koennte man ueberlegen,
+den Code in einen separaten &quot;JobResultProcessor&quot; (oder so aehnlich)
+auszulagern. Er waere dann nicht mehr Bestandteil der
+Ableitungs-Hierarchie an der Stelle und koennte durch ein Interface
+IHBCIJob nicht mehr umgangen werden, wenn es nicht AbstractHBCIJob
+implementiert. Allerdings koennte das mit etwas mehr Arbeit verbunden sein.
+
+&gt;<i> Irgendwie muss man die Jobs ja unterscheiden. Am Anfang hatte ich über
+</I>&gt;<i> einen Enum nachgedacht (SALDO, UMSATZ etc). Der Job könnte dann
+</I>&gt;<i> zurückgeben was er kann (public JobType getJobType()) und mann konnte
+</I>&gt;<i> anhand dessen unterscheiden. Interfaces fand ich aber doch schöner.
+</I>
+Ja, im Vergleich zu Enums ist Interface wirklich besser - zumal die
+Liste der Enum-Werte nicht geaendert werden muesste, wenn neue
+Geschaeftvorfaelle hinzukommen.
+
+&gt;<i> Ich schau heute abend nochmal in den Code.
+</I>
+Gern. Gib einfach Bescheid, wenn du irgendwelche Fragen hast.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000211.html">[Hibiscus-devel] Plugin-Mechanismus in Job-Erzeugung
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000213.html">[Hibiscus-devel] Plugin-Mechanismus in Job-Erzeugung
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#212">[ Datum ]</a>
+              <a href="thread.html#212">[ Thema ]</a>
+              <a href="subject.html#212">[ Betreff (Subject)]</a>
+              <a href="author.html#212">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

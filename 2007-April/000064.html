@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Release-Koordination
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-April/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Release-Koordination&In-Reply-To=%3C200704240102.46207.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000063.html">
+   <LINK REL="Next"  HREF="000065.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Release-Koordination</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Release-Koordination&In-Reply-To=%3C200704240102.46207.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Release-Koordination">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Di Apr 24 01:02:46 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000063.html">[Hibiscus-devel] Umbenennungen in der API
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000065.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#64">[ Datum ]</a>
+              <a href="thread.html#64">[ Thema ]</a>
+              <a href="subject.html#64">[ Betreff (Subject) ]</a>
+              <a href="author.html#64">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+wenn die PDF-Auswertung der Umsaetze samt Kategorien
+drin ist, sind wir doch mit den geplanten Features
+im wesentlichen durch, oder?
+
+Dann wuerde ich naemlich langsam in die Beta-Phase
+uebergehen. In der Zeit wuerde ich insbesondere
+den Zugriff auf die Sicherheitsmedien nach Updates
+von 1.6 auf 1.7 sowie 1.5 auf 1.7 nochmal testen.
+Gerade dort hatte ich ja an der Verwaltung und dem
+Cachen der PINs und Passwoerter einiges geaendert.
+Naja, und dann wird vielleicht aufgrund meiner API-
+Aenderungen der letzten Tage noch der ein oder
+andere Fehler auftreten (vermutlich typischerweise
+ClassCastExceptions, Nullpointer und NoSuchMethodErrors).
+
+Die finale Release koennte dann spaetestens Anfang Juni
+erscheinen.
+
+Was mich noch wirklich wurmt, sind:
+
+<A HREF="https://www.willuhn.de/bugzilla/show_bug.cgi?id=359">https://www.willuhn.de/bugzilla/show_bug.cgi?id=359</A>
+  Der Haenger in MacOS beim Erstellen eines PDF-Exports.
+  Mangels Mac kann man leider schlecht reproduzieren.
+
+<A HREF="https://www.willuhn.de/bugzilla/show_bug.cgi?id=377">https://www.willuhn.de/bugzilla/show_bug.cgi?id=377</A>
+  Das ist ein Bug in HBCI4Java, bei dem der Bank-Storno
+  einer Lastschrift in den Umsaetze faelschlicherweise
+  als negativer Betrag angezeigt wird.
+
+Die restlichen kritischen Fehler sind Bank- oder
+Kartenleser-spezifisch. Mangels Testsystemen und -hardware
+kann ich das meist schlecht bis gar nicht reproduzieren.
+
+@Heiner: Da wir die Releases synchron machen wollen:
+Wie sieht deine Planung aus?
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000063.html">[Hibiscus-devel] Umbenennungen in der API
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000065.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#64">[ Datum ]</a>
+              <a href="thread.html#64">[ Thema ]</a>
+              <a href="subject.html#64">[ Betreff (Subject)]</a>
+              <a href="author.html#64">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

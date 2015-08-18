@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Hilfetexte links unten
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2010-October/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Hilfetexte%20links%20unten&In-Reply-To=%3C4CAC0ED1.8080007%40jost-net.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000205.html">
+   <LINK REL="Next"  HREF="000207.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Hilfetexte links unten</H1>
+    <B>Heiner Jostkleigrewe</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Hilfetexte%20links%20unten&In-Reply-To=%3C4CAC0ED1.8080007%40jost-net.de%3E"
+           TITLE="[Hibiscus-devel] Hilfetexte links unten">heiner at jost-net.de
+                  </A><BR>
+    <I>Mi Okt  6 07:53:21 CEST 2010</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000205.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000207.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#206">[ Datum ]</a>
+              <a href="thread.html#206">[ Thema ]</a>
+              <a href="subject.html#206">[ Betreff (Subject) ]</a>
+              <a href="author.html#206">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hallo Olaf,
+
+&gt;<i> Aber dann muesste man doch die Views aller Plugins ueberarbeiten
+</I>&gt;<i> und dort getHelp() implementieren, weil sonst die bisherigen
+</I>&gt;<i> Hilfe-Seiten nicht mehr gefunden werden. Oder verstehe ich dich
+</I>&gt;<i> da jetzt falsch?
+</I>&gt;<i>
+</I>&gt;<i>    
+</I>In GUI.java sieht es jetzt so aus:
+
+     InputStream is = 
+Application.getClassLoader().getResourceAsStream(path);
+     if (is == null)
+     {
+       path = &quot;help/&quot; + Locale.getDefault().toString().toLowerCase() + 
+&quot;/&quot; + view.getClass().getName() + &quot;.txt&quot;;
+       is = Application.getClassLoader().getResourceAsStream(path);
+     }
+     if (is == null)
+     {
+       if (view.getHelp() != null)
+       {
+         is = new StringBufferInputStream(view.getHelp());
+       }
+     }
+Zunächst wird versucht die bisherige &quot;.TXT&quot;-Datei zu laden. Wenn die 
+nicht existiert (is == null), wird die Methode getHelp() von 
+AbstractView aufgerufen.
+
+Bei dieser Vorgehensweise muss niemand seine Plugins verändern. Ich kann 
+die getHelp()-Methode von AbstractView in den einzelnen Views 
+überschreiben und damit relativ einfach kontrollieren, ob alle Views die 
+Methode überschreiben.
+&gt;<i> Kann es sein, dass das Patch unvollstaendig ist?
+</I>&gt;<i>    
+</I>Ich habe die Patches in Datei-Form angehängt.
+
+Heiner
+-------------- nächster Teil --------------
+Ein Dateianhang mit Binärdaten wurde abgetrennt...
+Dateiname   : AbstractView.patch
+Dateityp    : text/x-patch
+Dateigröße  : 1426 bytes
+Beschreibung: nicht verfügbar
+URL         : &lt;<A HREF="https://lists.berlios.de/pipermail/hibiscus-devel/attachments/20101006/16056c35/attachment.bin">https://lists.berlios.de/pipermail/hibiscus-devel/attachments/20101006/16056c35/attachment.bin</A>&gt;
+-------------- nächster Teil --------------
+Ein Dateianhang mit Binärdaten wurde abgetrennt...
+Dateiname   : GUI.patch
+Dateityp    : text/x-patch
+Dateigröße  : 937 bytes
+Beschreibung: nicht verfügbar
+URL         : &lt;<A HREF="https://lists.berlios.de/pipermail/hibiscus-devel/attachments/20101006/16056c35/attachment-0001.bin">https://lists.berlios.de/pipermail/hibiscus-devel/attachments/20101006/16056c35/attachment-0001.bin</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000205.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000207.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#206">[ Datum ]</a>
+              <a href="thread.html#206">[ Thema ]</a>
+              <a href="subject.html#206">[ Betreff (Subject)]</a>
+              <a href="author.html#206">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

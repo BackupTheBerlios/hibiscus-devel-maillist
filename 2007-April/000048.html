@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Trennung von de.willuhn.datasource aus Jameica (Teil 2)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-April/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Trennung%20von%20de.willuhn.datasource%20aus%20Jameica%0A%20%28Teil%202%29&In-Reply-To=%3C461DC9C0.4080200%40jost-net.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000046.html">
+   <LINK REL="Next"  HREF="000047.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Trennung von de.willuhn.datasource aus Jameica (Teil 2)</H1>
+    <B>Heiner Jostkleigrewe</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Trennung%20von%20de.willuhn.datasource%20aus%20Jameica%0A%20%28Teil%202%29&In-Reply-To=%3C461DC9C0.4080200%40jost-net.de%3E"
+           TITLE="[Hibiscus-devel] Trennung von de.willuhn.datasource aus Jameica (Teil 2)">heiner at jost-net.de
+                  </A><BR>
+    <I>Do Apr 12 07:55:12 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000046.html">[Hibiscus-devel] Trennung von de.willuhn.datasource aus Jameica	(Teil 2)
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000047.html">[Hibiscus-devel] Update: NoSuchMethodError aufgrund von	API-Aenderungen
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#48">[ Datum ]</a>
+              <a href="thread.html#48">[ Thema ]</a>
+              <a href="subject.html#48">[ Betreff (Subject) ]</a>
+              <a href="author.html#48">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hallo,
+
+in JVerein war nur eine kleine Änderung notwendig. Ist ohne Probleme 
+gelaufen.
+
+Heiner
+
+Olaf Willuhn schrieb:
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>&gt;&gt;<i> Mit &quot;TablePart&quot; werde ich genauso vorgehen. Anschliessend
+</I>&gt;&gt;<i> wird man man die Jameica-GUI-Komponenten mit relativ beliebigen
+</I>&gt;&gt;<i> Daten fuettern koennen.
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> Heute nun Teil 2 - ich habe gerade die direkten Abhaengigkeiten
+</I>&gt;<i> von GenericObject und GenericIterator aus TablePart entfernt.
+</I>&gt;<i> Damit laesst sich eine Tabelle nun auch mit einer allgemeinen
+</I>&gt;<i> jaba.util.List mit Standard-Java-Beans befuellen. Hierzu waren
+</I>&gt;<i> jedoch einige kleine API-Aenderungen notwendig. Falls es
+</I>&gt;<i> bei euren Plugins nun also zu Compiler-Fehlern kommt, hier
+</I>&gt;<i> die Aenderungen im Detail:
+</I>&gt;<i>
+</I>&gt;<i> I) TablePart
+</I>&gt;<i>
+</I>&gt;<i> 1) Neuer Konstruktor:
+</I>&gt;<i>    Neben &quot;public TablePart(GenericIterator, Action)&quot; gibt
+</I>&gt;<i>    es nun einen zusaetzlichen generischen Konstruktor
+</I>&gt;<i>    &quot;public TablePart(java.util.List, Action)&quot;
+</I>&gt;<i>
+</I>&gt;<i> 2) Die beiden Funktionen
+</I>&gt;<i>
+</I>&gt;<i>    &quot;addItem(GenericObject, int)&quot;
+</I>&gt;<i>    &quot;addItem(GenericObject)&quot;
+</I>&gt;<i>
+</I>&gt;<i>    wurden verallgemeinert zu
+</I>&gt;<i>
+</I>&gt;<i>    &quot;addItem(Object, int)&quot;
+</I>&gt;<i>    &quot;addItem(Object)&quot;
+</I>&gt;<i>
+</I>&gt;<i>    Hier sollte es also keine Compile-Fehler geben
+</I>&gt;<i>
+</I>&gt;<i> 3) Die Funktion
+</I>&gt;<i>
+</I>&gt;<i>    &quot;removeItem(GenericObject)&quot;
+</I>&gt;<i>
+</I>&gt;<i>    wurde verallgemeinert zu
+</I>&gt;<i>
+</I>&gt;<i>    &quot;removeItem(Object)&quot;
+</I>&gt;<i>
+</I>&gt;<i>    Sollte ebenfalls keine Compile-Fehler geben
+</I>&gt;<i>
+</I>&gt;<i> 4) Die beiden Funktionen
+</I>&gt;<i>
+</I>&gt;<i>    &quot;select(GenericObject[])&quot;
+</I>&gt;<i>    &quot;select(GenericObject)&quot;
+</I>&gt;<i>
+</I>&gt;<i>    wurden verallgemeinert zu
+</I>&gt;<i>
+</I>&gt;<i>    &quot;select(Object[])&quot;
+</I>&gt;<i>    &quot;select(Object)&quot;
+</I>&gt;<i>
+</I>&gt;<i>    Ebenfalls keine Compile-Fehler
+</I>&gt;<i>
+</I>&gt;<i> 5) Die Funktion
+</I>&gt;<i>
+</I>&gt;<i>    &quot;getItems()&quot; liefert nun nicht mehr
+</I>&gt;<i>    einen &quot;GenericIterator&quot; sondern eine
+</I>&gt;<i>    Liste vom Typ &quot;java.util.List&quot;. Falls ihr
+</I>&gt;<i>    die Funktion benutzt, wird es einen Fehler
+</I>&gt;<i>    geben. Das laesst sich jedoch leicht
+</I>&gt;<i>    anpassen, da beide Klassen recht aehnlich sind.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> II) TableChangeListener
+</I>&gt;<i>
+</I>&gt;<i> 1) Die Funktion
+</I>&gt;<i>
+</I>&gt;<i>    &quot;itemChanged(GenericObject, String, String)&quot;
+</I>&gt;<i>
+</I>&gt;<i>    wurde verallgemeinert zu
+</I>&gt;<i>
+</I>&gt;<i>    &quot;itemChanged(Object, String, String)&quot;
+</I>&gt;<i>
+</I>&gt;<i>    Falls die Klasse benutzt wird, ist in der
+</I>&gt;<i>    Implementierung nun also ggf. ein explizites
+</I>&gt;<i>    Casten auf &quot;GenericObject&quot; noetig.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Das war's schon. Wirklich relevant sind also
+</I>&gt;<i> nur I/5 und II/1. Und auch dort sind die Aenderungen
+</I>&gt;<i> eher marginal.
+</I>&gt;<i>
+</I>&gt;<i> Gruss
+</I>&gt;<i> Olaf
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Hibiscus-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Hibiscus-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">https://lists.berlios.de/mailman/listinfo/hibiscus-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>
+-------------- nächster Teil --------------
+Ein Dateianhang mit HTML-Daten wurde abgetrennt...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/hibiscus-devel/attachments/20070412/ad48ebd2/attachment.html">https://lists.berlios.de/pipermail/hibiscus-devel/attachments/20070412/ad48ebd2/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000046.html">[Hibiscus-devel] Trennung von de.willuhn.datasource aus Jameica	(Teil 2)
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000047.html">[Hibiscus-devel] Update: NoSuchMethodError aufgrund von	API-Aenderungen
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#48">[ Datum ]</a>
+              <a href="thread.html#48">[ Thema ]</a>
+              <a href="subject.html#48">[ Betreff (Subject)]</a>
+              <a href="author.html#48">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

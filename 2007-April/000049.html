@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Neues Container-Plugin &quot;jameica.webadmin&quot;
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-April/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Neues%20Container-Plugin%20%22jameica.webadmin%22&In-Reply-To=%3C200704121549.51611.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000047.html">
+   <LINK REL="Next"  HREF="000050.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Neues Container-Plugin &quot;jameica.webadmin&quot;</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Neues%20Container-Plugin%20%22jameica.webadmin%22&In-Reply-To=%3C200704121549.51611.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Neues Container-Plugin &quot;jameica.webadmin&quot;">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Do Apr 12 15:49:51 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000047.html">[Hibiscus-devel] Update: NoSuchMethodError aufgrund von	API-Aenderungen
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000050.html">[Hibiscus-devel] Liste der Umsätze nach Kategorien
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#49">[ Datum ]</a>
+              <a href="thread.html#49">[ Thema ]</a>
+              <a href="subject.html#49">[ Betreff (Subject) ]</a>
+              <a href="author.html#49">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+Neben jameica.xmlrpc habe ich gerade die erste Version
+eines weiteren &quot;Meta-Plugins&quot; - &quot;jameica.webadmin&quot; eingecheckt.
+Konkret handelt es sich hierbei einen HTTPS-Connector, mit dem
+Jameica und dessen Plugins auch ueber einen Browser bedient oder
+administriert werden koennen. Falls Jameica im Server-Modus,
+also ohne GUI laeuft, bleibt normalerweise nur das direkte
+Editieren der Config-Dateien. Mit diesem Plugin soll das
+nun auch ueber den Browser moeglich sein.
+
+Realisiert ist das ganze mit einem embedded Servlet-Container
+(Jetty - <A HREF="http://jetty.mortbay.org/">http://jetty.mortbay.org/</A>), der automatisch konfiguriert
+und gestartet wird. Er verwendet fuer die HTTPS-Verbindung
+gleich das Jameica-Zertifikat und fuer die Authentifizierung
+des Admins das Master-Passwort.
+
+Derzeit liefert der Webserver jedoch nur ein einfaches &quot;Hello world&quot;
+auf <A HREF="https://localhost:8080/">https://localhost:8080/</A> aus.
+
+Der Code ist eingecheckt unter:
+<A HREF="http://cvs.berlios.de/cgi-bin/viewcvs.cgi/jameica/jameica.webadmin/">http://cvs.berlios.de/cgi-bin/viewcvs.cgi/jameica/jameica.webadmin/</A>
+
+Gruss
+Olaf
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000047.html">[Hibiscus-devel] Update: NoSuchMethodError aufgrund von	API-Aenderungen
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000050.html">[Hibiscus-devel] Liste der Umsätze nach Kategorien
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#49">[ Datum ]</a>
+              <a href="thread.html#49">[ Thema ]</a>
+              <a href="subject.html#49">[ Betreff (Subject)]</a>
+              <a href="author.html#49">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

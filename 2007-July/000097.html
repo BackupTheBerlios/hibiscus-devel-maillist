@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Release-Koordination
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-July/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Release-Koordination&In-Reply-To=%3C200707161325.31842.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000096.html">
+   <LINK REL="Next"  HREF="000098.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Release-Koordination</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Release-Koordination&In-Reply-To=%3C200707161325.31842.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Release-Koordination">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mo Jul 16 13:25:31 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000096.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000098.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#97">[ Datum ]</a>
+              <a href="thread.html#97">[ Thema ]</a>
+              <a href="subject.html#97">[ Betreff (Subject) ]</a>
+              <a href="author.html#97">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> ja, mit der geänderten Methode funktioniert der Export auch!
+</I>
+YESSSS!!!!!!!
+
+Dann kann ich die Release endlich fertig machen! ;)
+
+&gt;<i> Jetzt ist eigentlich nur noch eine Kleinigkeit nicht rund: wenn man
+</I>&gt;<i> eine bestehende PDF-Datei ersetzen will, dann fragt erst der Save-
+</I>&gt;<i> Dialog, dann nochmals ein eigener Dialog von Hibiscus, ob man die
+</I>&gt;<i> Datei wirklich ersetzen will. Man muss das also zweimal bestätigen.
+</I>&gt;<i> Ist das auch eine Eigenart von MacOS oder triff das bei Dir auch auf?
+</I>
+Das muss eine Eigenheit von MacOS sein. Ich zeige explizit einen
+solchen Dialog an. Hier koennte man eine Sonderbehandlung fuer MacOS
+einbauen - sprich, den Dialog dort nicht anzeigen. Er wird in
+de.willuhn.jameica.hbci.gui.dialogs.ExportDialog (ab Zeile 167)
+angezeigt. Allerdings muesste man noch pruefen, was passiert,
+wenn man in dem MacOS-eigenen &quot;Datei ueberschreiben&quot;-Dialog
+&quot;Nein&quot; auswaehlt. Fliegt dann eine Exception oder wird dann
+in Zeile 158 null zurueckgegeben?
+
+Das koennen wir aber getrost nach der Release noch einbauen.
+Ich mach jetzt nochmal nen Test mit dem Background-Task
+und bereite dann das Release vor.
+
+Gruss und Danke fuer deine Hilfe
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000096.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000098.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#97">[ Datum ]</a>
+              <a href="thread.html#97">[ Thema ]</a>
+              <a href="subject.html#97">[ Betreff (Subject)]</a>
+              <a href="author.html#97">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Support fuer externe Adressbuecher
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-April/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Support%20fuer%20externe%20Adressbuecher&In-Reply-To=%3C200704201701.39083.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000057.html">
+   <LINK REL="Next"  HREF="000063.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Support fuer externe Adressbuecher</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Support%20fuer%20externe%20Adressbuecher&In-Reply-To=%3C200704201701.39083.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Support fuer externe Adressbuecher">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Fr Apr 20 17:01:38 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000057.html">[Hibiscus-devel] MySQL-Support
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000063.html">[Hibiscus-devel] Umbenennungen in der API
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#62">[ Datum ]</a>
+              <a href="thread.html#62">[ Thema ]</a>
+              <a href="subject.html#62">[ Betreff (Subject) ]</a>
+              <a href="author.html#62">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+und wieder ein etwas groesseres CVS-Commit ;)
+Ich gerade Hibiscus-Erweiterungen eingecheckt,
+die es ermoeglichen werden, externe Adressbuecher
+anzubinden. Daher werden Adressen nun nicht mehr
+direkt aus der Datenbank gelesen sondern ueber
+einen neuen Adressbook-Service. Beispiel:
+
+-----------
+String suchtext = &quot;blz, kontonummer oder name&quot;;
+
+AddressbookService service = (AddressbookService)
+   Application.getServiceFactory().lookup(HBCI.class,&quot;addressbook&quot;);
+
+GenericIterator found = service.findAddresses(suchtext);
+-----------
+
+Der Adressbuch-Service sucht beim Start nach verfuegbaren
+Adressbuch-Implementierungen und fragt diese ab.
+
+Falls kein Suchtext angegeben ist, bleibt es der
+Adressbuch-Implementierung ueberlassen, ob sie
+entweder alle Adressen oder gar keine zurueckliefert.
+Das Hibiscus-eigene Adressbuch liefert in dem Fall
+alle Adressen. Andere Implementierungen (typischerweise
+welche mit grossen Datenmengen) koennten stattdessen
+nur dann Daten liefern, wenn ein Suchtext eingegeben
+wurde.
+
+Existieren zusaetzliche Adressbuecher, wird der Adressbuch-Dialog
+von Hibiscus automatisch um eine Auswahl-Box erweitert,
+in der der User entweder in allen oder in einem
+speziellen Adressbuch suchen kann.
+
+Weitere Details - unter anderem eine Anleitung, welche
+Interfaces man implementieren muss, um eigene Adressbuecher
+hinzuzufuegen, werde ich in's Jameica-Wiki schreiben.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000057.html">[Hibiscus-devel] MySQL-Support
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000063.html">[Hibiscus-devel] Umbenennungen in der API
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#62">[ Datum ]</a>
+              <a href="thread.html#62">[ Thema ]</a>
+              <a href="subject.html#62">[ Betreff (Subject)]</a>
+              <a href="author.html#62">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

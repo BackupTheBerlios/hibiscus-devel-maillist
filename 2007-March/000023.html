@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Auswertung der Kategorien
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-March/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Auswertung%20der%20Kategorien&In-Reply-To=%3C200703121512.54465.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000022.html">
+   <LINK REL="Next"  HREF="000024.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Auswertung der Kategorien</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Auswertung%20der%20Kategorien&In-Reply-To=%3C200703121512.54465.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Auswertung der Kategorien">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mo Mär 12 15:12:54 CET 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000022.html">[Hibiscus-devel] Auswertung der Kategorien
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000024.html">[Hibiscus-devel] Auswertung der Kategorien
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#23">[ Datum ]</a>
+              <a href="thread.html#23">[ Thema ]</a>
+              <a href="subject.html#23">[ Betreff (Subject) ]</a>
+              <a href="author.html#23">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> ich habe die Auswertung der Umsatz-Kategorien jetzt um die Sortierung
+</I>&gt;<i> nach einer Nummer erweitert.
+</I>&gt;<i>
+</I>&gt;<i> Die Tabelle Umsatztyp wurde um eine Spalte Nummer erweitert. Bislang
+</I>&gt;<i> konnten in die Umsatztyp-Tabelle nur Datensätze eingefügt oder gelöscht
+</I>&gt;<i> werden. Jetzt sind auch Änderungen möglich. Dafür habe ich die Prüfung
+</I>&gt;<i> auf doppelte Einträge vom Programm-Code in die Datenbank verlagert
+</I>&gt;<i> (UNIQUE-KEY).
+</I>
+OK, ich hab den Pruef-Code in insertCheck() trotzdem erstmal wieder
+aktiviert. Wenn beim Speichern eine SQLException wegen Verstosses
+gegen den UNIQUE-Key auftritt, wird diese in mindestens eine RemoteException
+&quot;gewrappt&quot; sein. Ich muesste mich in dem catch-Block also rekursiv
+mittels getCause() durch die Exception-Kaskade arbeiten und nach
+einer SQL-Exception suchen. Das war mir zu umstaendlich.
+
+&gt;<i> Der Aufbau des Baumes wurde entsprechend angepaßt. Eigentlich hatte ich
+</I>&gt;<i> vor, auch die nicht zugeordneten Umsätze in den Baum aufzunehmen. Du
+</I>&gt;<i> hast aber die Mimik an dieser Stelle (getChild()) so umgebogen, dass ich
+</I>&gt;<i> das jetzt nicht auf Anhieb machen kann. Übernimmst du diesen Part?
+</I>
+Hierfuer waere es vielleicht sinnvoll, das Laden der Umsaetze dort
+komplett umzubauen. Da ein Umsatz ja auch dynamisch mittels Such-Pattern
+zu einer Kategorie gehoeren kann, muesste ich den Umsatz mit jeder
+Kategorie vergleichen, um herauszufinden, ob er dazugehoert oder nicht.
+Das muesste ich mit allen Umsaetzen machen, um die nicht zugeordnete
+Restmenge zu erhalten. Dann sollte man das vielleicht komplett umbauen.
+
+Derzeit: Alle Umsatzkategorien werden geladen. Diese wiederrum laden ihre
+Umsaetze.
+
+Umbau-Vorschlag: Alle Umsatzkategorien werden geladen und in eine
+Map/List gepackt. Nun werden alle Umsaetze geladen. Fuer jeden einzeln
+wird dann die Zugehoerigkeit via umsatz.getUmsatzTyp() ermittelt
+und in der Map/List dem Umsatztyp zugeordnet.
+Alle Umsaetze, die zum Schluss uebrig bleiben, werden einer virtuellen
+Umsatz-Kategorie mit dem Namen &quot;nicht zugeordnet&quot; zugeordnet.
+Da die Umsatztypen in umsatz.getUmsatzTyp() gecached werden, muss
+auf SQL-Ebene nur einmal die Umsatzliste und einmal die Umsatztyp-
+Liste ermittelt werden.
+
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000022.html">[Hibiscus-devel] Auswertung der Kategorien
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000024.html">[Hibiscus-devel] Auswertung der Kategorien
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#23">[ Datum ]</a>
+              <a href="thread.html#23">[ Thema ]</a>
+              <a href="subject.html#23">[ Betreff (Subject)]</a>
+              <a href="author.html#23">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

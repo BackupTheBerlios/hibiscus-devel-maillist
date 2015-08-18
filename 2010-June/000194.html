@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Offline-Konten - nächster Teil
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2010-June/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%0A%09%3D%3Fiso-8859-15%3Fq%3FOffline-Konten_-_n%3DE4chster_Teil%3F%3D&In-Reply-To=%3C4C06D37F.9030507%40yahoo.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   <LINK REL="Next"  HREF="000195.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Offline-Konten - nächster Teil</H1>
+    <B>Ralf Lehmann</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%0A%09%3D%3Fiso-8859-15%3Fq%3FOffline-Konten_-_n%3DE4chster_Teil%3F%3D&In-Reply-To=%3C4C06D37F.9030507%40yahoo.de%3E"
+           TITLE="[Hibiscus-devel] Offline-Konten - nächster Teil">rl_lehmann at yahoo.de
+                  </A><BR>
+    <I>Mi Jun  2 23:56:15 CEST 2010</I>
+    <P><UL>
+        
+        <LI>Nächste Nachricht: <A HREF="000195.html">[Hibiscus-devel] Offline-Konten - nächster Teil
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#194">[ Datum ]</a>
+              <a href="thread.html#194">[ Thema ]</a>
+              <a href="subject.html#194">[ Betreff (Subject) ]</a>
+              <a href="author.html#194">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi Olaf,
+
+so - hat jetzt etwas länger gedauert bis ich zum Antworten kam.
+Dann schicke ich die Antwort jetzt mal über die Mailingliste - mal
+schauen ob das auf Anhieb klappt...
+
+Jetzt aber zu Hibiscus:
+&gt;<i> ... dass wir doch anfangs ueberlegt
+</I>&gt;<i> hatten, ob wir eine separate Passport-Implementierung
+</I>&gt;<i> nehmen oder ein Konto-Flag. ... Jetzt, wo
+</I>&gt;<i> ich den Code reingemerged hab, hab ich aber festgestellt,
+</I>&gt;<i> dass das mit dem Flag doch nicht so aufwaendig war, wie
+</I>&gt;<i> ich anfangs dachte.
+</I>Zwischenzeitlich fand ich die Lösung über ein eigenes Passport
+eigentlich fast besser - aber gut, es funktioniert so ja.
+Hinsichtlich Banking-Backend &amp; Offlinekonten würde ich jetzt (auf die
+schnelle betrachtet) denken, dass es da ggf. 2 unterschiedliche
+Abstraktionsebenen gibt:
+1. das tatsächliche Backend wie von dir beschrieben, also das was im
+Hintergrund automatisch ausgeführt werden kann (HBCI, ...)
+2. die Definition/Struktur eines &quot;Kontos&quot; an sich
+Offline-Konten sind von der Struktur her ja den HBCI-Konten gleich - nur
+bietet die Bank keine Möglichkeit zum Abruf an. Man könnte auch sagen,
+es ist der gleiche &quot;Kontotyp&quot;. Paypal hingegen (hab mich bisher wenig
+damit beschäftigt, aber hoffe die folgenden Aussagen stimmen so) ist
+etwas ganz anderes, schonmal da es keine klassische BLZ/KontoNr oder
+IBAN/BIC gibt, wodurch Empfänger angesprochen werden können. Wie sich
+das bei Kreditkarten verhält weiß ich nicht - hab ich selber keine.
+
+
+&gt;<i> Daher ist meine Zukunftsidee, dass Hibiscus nach und
+</I>&gt;<i> nach so umgebaut wird, dass es nicht mehr direkt auf
+</I>&gt;<i> die HBCI4Java-API zugreift sondern eine Schicht
+</I>&gt;<i> dazwischengezogen wird. Ich nenne sie mal &quot;Banking-Backend&quot;.
+</I>&gt;<i>
+</I>Hört sich gut an!
+
+&gt;<i> Die User haben erstmal rudimentare Offline-Funktionen
+</I>&gt;<i> und man koennte sich in Ruhe der Banking-API widmen.
+</I>&gt;<i>
+</I>&gt;<i> Ich wuerde jetzt ungern noch mehr Code fuer Offline-Support
+</I>&gt;<i> einbauen, wenn man den irgendwann ohnehin wieder komplett
+</I>&gt;<i> umschreiben muesste, um ihn auf die Banking-API zu
+</I>&gt;<i> portieren.
+</I>Unter dem (für mich neuen) Gesichtspunkt betrachtet macht das natürlich
+Sinn.
+
+&gt;<i>
+</I>&gt;<i> &gt; Interessant wird das ganze dann auch, wenn ich z.B. eine &quot;Überweisung&quot;
+</I>&gt;<i> &gt; zwischen 2 Offline-Konten durchführe. Und genau hier sehe ich das oben
+</I>&gt;<i> &gt; genannte neue Attribut &quot;gegenbuchung&quot; als sinnvoll:
+</I>&gt;<i> &gt; - der erste neue Umsatz kommt über das Messaging, Gegenbuchung wird
+</I>&gt;<i> angelegt
+</I>&gt;<i> &gt; - die Gegenbuchung wird für andere Consumer ebenfalls über das Messaging
+</I>&gt;<i> &gt; bekannt gemacht
+</I>&gt;<i>
+</I>&gt;<i> Ne, der erste Umsatz kommt nicht via Messaging sondern wird
+</I>&gt;<i> manuell angelegt. Bei den HBCI-Umsaetzen ist das auch so.
+</I>&gt;<i> Geht ja auch gar nicht anders. Wenn die erste via Messaging
+</I>&gt;<i> kommt, muss sie ja trotzdem erstmal von irgendwem erzeugt
+</I>&gt;<i> worden sein. Und der Erzeuger kann sie ja auch gleich
+</I>&gt;<i> speichern. Und dann lediglich via Message dafuer sorgen, dass
+</I>&gt;<i> die Gegenbuchung angelegt wird.
+</I>Das ist der einzige Punkt den ich (noch) nicht ganz nachvollziehen kann.
+Klar ist, dass der erste Umsatz erstmal irgendwie erzeugt und
+gespeichert wird =&gt; bekanntgeben des Umsatzes über das Messaging, damit
+alle möglichen Consumer ihn bearbeiten können. Ein solcher Consumer ist
+der neue, der für GK-Offline-Konto-Umsätze die entsprechende
+Gegenbuchung anlegt. So - und konsequenterweiße gehört dieser neue
+Umsatz (also der Gegenumsatz) ja ebenfalls über das Messaging bekannt
+gegeben, damit die Consumer darüber informiert werden dass nun noch ein
+Umsatz da ist.
+In diesem Fall würden wir allerdings in eine Endlosschleife laufen, wenn
+ein Umsatz angelegt wird, welcher von einem Offline-Konto auf ein
+anderes gebucht wurde, da sich ja nicht eindeutig sicherstellen ließe ob
+der aktuell vom CheckOfflineUmsatzMessageConsumer bearbeitete Umsatz
+jetzt ein neuer ist oder schon eine Gegenbuchung. Anhand der vorhandenen
+Informationen im Umsatz (Gegenkonto, Betrag, Datum) kann man bei
+Übereinstimmung zwar darauf schließen, wenn es bereits die Gegenbuchung
+ist - sicher sagen lässt es sich allerdings nicht.
+Oder hab ich da jetzt einen Denkfehler?
+
+
+&gt;<i> &gt;     - Rückfrage an den Benutzer, ob der neue Saldo durch einen einzigen
+</I>&gt;<i> &gt; oder mehrere Umsätze zustande gekommen ist
+</I>&gt;<i> &gt;     - bei mehreren Umsätzen: Der Benutzer kann diese dann angeben
+</I>&gt;<i> &gt; (tabellarisches Formular?), wobei die Summe aller Umsätze der Differenz
+</I>&gt;<i> &gt; alter/neuer Saldo entsprechen muss
+</I>&gt;<i> &gt;     - der aktuelle &quot;Restbetrag&quot; kann hierfür ja immer für die nächste
+</I>&gt;<i> &gt; Zeile vorgeschlagen werden
+</I>&gt;<i> &gt; =&gt; auf diesem Wege könnten alle Umsätze zu Offlinekonten (auch mit
+</I>&gt;<i> &gt; fremden Konten als Gegenkonto) nachvollziehbar in Hibiscus verwaltet
+</I>&gt;<i> werden!
+</I>&gt;<i>
+</I>&gt;<i> Hui, das ist aber ne Menge Holz! ;)
+</I>&gt;<i> Wuerdest du diese ganze Funktionalitaet dann echt nutzen?
+</I>Hm, gute Frage. Das waren mal so meine Überlegungen, wie sich die
+Nutzung von Offlinekonten möglichst Effizient gestalten lassen könnten.
+Gedacht habe ich dabei z.B. an das Szenario, dass ein Benutzer einmal im
+Monat oder Quartal einen Kontoauszug des Kontos holt und die Umsatzdaten
+dann en bloc nachträgt. Mein persönlicher Bedarf hinsichtlich
+Offlinekonten ist da nicht so extensiv - mit der automatischen
+Gegenbuchung kann ich im Moment vermutlich sogar ganz ohne
+manuell-angelegte Umsätze auskommen.
+Aus meiner Sicht ist das jetzt aber nichts, was zwingend sein muss -
+kann gerne bis zum Banking-Backend warten oder auch wegfallen, wenn es
+nicht von den Anwendern explizit gefordert wird.
+
+
+
+Da das Thema Banking-Backend für mich doch recht überraschend aufkam
+(woher hätte ich es auch wissen sollen?) wollte ich mal noch Fragen wie
+sonst so die &quot;Lage&quot; ist:
+- gibt es noch andere (größere) geplante Änderungen/Umbauten?
+- gibt es eine Prioliste, was als nächstes umgesetzt werden sollte? /
+Sind (auch kleiner Dinge) im Moment in der Umsetzung was wichtig zu
+wissen wäre?
+
+Und falls oben nicht schon enthalten noch eine Frage:
+Ist sowas wie eine &quot;Finanzplanungssicht&quot; angedacht?
+
+viele Grüße,
+Ralf
+
+		
+___________________________________________________________ 
+Telefonate ohne weitere Kosten vom PC zum PC: <A HREF="http://messenger.yahoo.de">http://messenger.yahoo.de</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Nächste Nachricht: <A HREF="000195.html">[Hibiscus-devel] Offline-Konten - nächster Teil
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#194">[ Datum ]</a>
+              <a href="thread.html#194">[ Thema ]</a>
+              <a href="subject.html#194">[ Betreff (Subject)]</a>
+              <a href="author.html#194">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Auswertung der Kategorien
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-March/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Auswertung%20der%20Kategorien&In-Reply-To=%3C200703071139.30234.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000015.html">
+   <LINK REL="Next"  HREF="000017.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Auswertung der Kategorien</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Auswertung%20der%20Kategorien&In-Reply-To=%3C200703071139.30234.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Auswertung der Kategorien">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mi Mär  7 11:39:30 CET 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000015.html">[Hibiscus-devel] Auswertung der Kategorien
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000017.html">[Hibiscus-devel] Auswertung der Kategorien
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#16">[ Datum ]</a>
+              <a href="thread.html#16">[ Thema ]</a>
+              <a href="subject.html#16">[ Betreff (Subject) ]</a>
+              <a href="author.html#16">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi Heiner,
+
+&gt;<i> ich habe eine 1. Testversion eingecheckt. Zur Zeit wird ein Baum mit den
+</I>&gt;<i> Kategorien und den zugehörigen Summen aufgebaut. Zu den Kategorien sind
+</I>&gt;<i> die Einzelbuchungen verfügbar. 
+</I>
+Sieht ja schonmal nicht schlecht aus. Wenn ich dazukomme, muss ich das
+&quot;TreePart&quot; aus Jameica mal noch so erweitern, dass es auch mehrspaltige
+Trees unterstuetzt. Damit lassen sie die Werte der Kategorien und Umsaetze
+uebersichtlicher gestalten.
+Beispiel 2 in
+<A HREF="http://www.eclipse.org/swt/R3_2/new_and_noteworthy.html">http://www.eclipse.org/swt/R3_2/new_and_noteworthy.html</A>
+zeigt das sehr schoen. Dann koennte man z.Bsp. die Betraege rechtsbuendig
+in einer separaten Spalte anzeigen.
+
+&gt;<i> Jetzt habe ich aber ein Problem: Durch 
+</I>&gt;<i> einen Klick im Menü auf den entsprechenden Menüpunkt wird die View
+</I>&gt;<i> aufgebaut. Darin sind die Auswahlfelder &quot;Konto&quot;, &quot;von-Datum&quot; und
+</I>&gt;<i> &quot;bis-Datum&quot;, ein Button zum Start der Auswertung und der Baum enthalten.
+</I>&gt;<i> Der Baum wird sofort mit den vorgegebenen Standardwerten aufgebaut. Nach
+</I>&gt;<i> Veränderung der Werte in den Auswahlfeldern und Betätigung des
+</I>&gt;<i> &quot;Anzeigen&quot;-Knopfes wird der Baum intern auch neu aufgebaut. Allerdings
+</I>&gt;<i> wird er nicht angezeigt.
+</I>
+Ja, das ist typisches SWT-Verhalten mit dem ich auch schon zu kaempfen
+hatte. Um ein Control auf einem SWT-Composite nochmal neu zu zeichnen,
+muss man den Inhalt des Composite erst mittels dispose() aufraeumen,
+anschliessend das Control neu hineinzeichnen und dem Composite dann
+klar machen, dass es sich bitte aktualisieren soll.
+
+Ich hab's eingecheckt, hier mal der relevante Code aus views.Kategorien:
+
+// Ich zeichne den Tree nicht direkt in das Parent, da
+// die Elemente in dem Composite beim Aktualisieren disposed
+// werden muessen und daher auch die anderen Controls (von, bis, etc.)
+// mit disposed werden muessen. Also packen wir den Tree in
+// ein separates &quot;Kind-Composite&quot;
+
+final Composite comp = new Composite(getParent(),SWT.NONE);
+// Layout nicht vergessen
+comp.setLayoutData(new GridData(GridData.FILL_BOTH));
+comp.setLayout(new GridLayout());
+    
+buttons1.addButton(i18n.tr(&quot;Anzeigen&quot;), new Action()
+{
+  public void handleAction(Object context) throws ApplicationException
+  {
+    [...]
+      if (comp != null &amp;&amp; !comp.isDisposed())
+      {
+        // Erst Composite leer machen
+        SWTUtil.disposeChildren(comp);
+
+        // Tree mit aktualisierten Werten neu erzeugen
+        TreePart tree = control.getTree();
+        tree.paint(comp);
+
+        // Dem Composite klar machen, dass es sich neu zeichnen soll
+        comp.layout(true);
+      }
+    [...]
+    });
+
+// Wir zeichen den Tree in das Kind-Composite
+TreePart tree = control.getTree();
+tree.paint(comp);
+
+
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000015.html">[Hibiscus-devel] Auswertung der Kategorien
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000017.html">[Hibiscus-devel] Auswertung der Kategorien
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#16">[ Datum ]</a>
+              <a href="thread.html#16">[ Thema ]</a>
+              <a href="subject.html#16">[ Betreff (Subject)]</a>
+              <a href="author.html#16">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

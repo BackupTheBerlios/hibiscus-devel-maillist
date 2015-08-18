@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Jameica Update Server
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2008-December/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Jameica%20Update%20Server&In-Reply-To=%3C49521B90.8000204%40emedia-solutions-wolf.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000145.html">
+   <LINK REL="Next"  HREF="000151.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Jameica Update Server</H1>
+    <B>Markus Wolf</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Jameica%20Update%20Server&In-Reply-To=%3C49521B90.8000204%40emedia-solutions-wolf.de%3E"
+           TITLE="[Hibiscus-devel] Jameica Update Server">markus at emedia-solutions-wolf.de
+                  </A><BR>
+    <I>Mi Dez 24 12:22:56 CET 2008</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000145.html">[Hibiscus-devel] emediaservices CRM 1.0.0-beta1 fertig
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000151.html">[Hibiscus-devel] Jameica Update Server
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#150">[ Datum ]</a>
+              <a href="thread.html#150">[ Thema ]</a>
+              <a href="subject.html#150">[ Betreff (Subject) ]</a>
+              <a href="author.html#150">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hallo,
+
+ich habe angefangen einen Update-Server zu basteln.
+Es ist zwar auch einfach möglich nur über den Apache ein
+Update-Repository zu bauen, aber so ist das evlt. kompfortabler.
+
+Das ganze wird unter GPL veröffentlicht.
+Derzeitig ist das der erste Entwicklungsstand und nicht für produktive
+Umgebungen geeignet, da noch eine Authenfizierung zur Admin-Oberfläche
+fehlt.
+Ausserdem ist die eingesetzte H2-Datenbank derzeit eine Memory-Datenbank
+und daher wird mit jedem Server-Neustart alles gelöscht.
+
+Folgende Funktionen sind im Moment vorhanden:
+* Upload von Plugins
+* Automatische Erstellung der repository.xml
+* Automatisch Extraktion der plugin.xml aus den hochgeladenen Plugins
+mit Anpassung der Download-URL in der plugin.xml
+
+Damit muss man sich nicht mehr um die korrekten URLs in der plugin.xml
+und repository.xml kümmern.
+
+Das ganze Packet wird mit Maven2 gebaut und ist direkt im Tomcat oder
+Jetty Server lauffähig.
+
+Hier ist der erste Source-Code.
+<A HREF="https://secure.emedia-solutions-wolf.de/svn/jameica-update-server/trunk/">https://secure.emedia-solutions-wolf.de/svn/jameica-update-server/trunk/</A>
+
+Vielleicht kann das ja noch jemand außer mir gebrauchen. :)
+
+Gruß
+Markus
+- --
+&gt;<i> emedia-solutions wolf    web: <A HREF="http://www.emedia-solutions-wolf.de">http://www.emedia-solutions-wolf.de</A>
+</I>&gt;<i> Eimsbüttler Straße 115  mail: <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">markus at emedia-solutions-wolf.de</A>
+</I>&gt;<i> 22769 Hamburg            pgp: <A HREF="http://wwwkeys.de.pgp.net">http://wwwkeys.de.pgp.net</A>
+</I>&gt;<i> +49 40 432 635 83      taxid: 57 / 126 / 16123
+</I>-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - <A HREF="http://enigmail.mozdev.org">http://enigmail.mozdev.org</A>
+
+iEYEARECAAYFAklSG48ACgkQeyJE91ndMG5lPACfQG7BR9Y90yUd0w7l5yFKqhGH
+fcwAniffOfadJIlQPynBBgA0ec0vYRbv
+=A1Jp
+-----END PGP SIGNATURE-----
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000145.html">[Hibiscus-devel] emediaservices CRM 1.0.0-beta1 fertig
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000151.html">[Hibiscus-devel] Jameica Update Server
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#150">[ Datum ]</a>
+              <a href="thread.html#150">[ Thema ]</a>
+              <a href="subject.html#150">[ Betreff (Subject)]</a>
+              <a href="author.html#150">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

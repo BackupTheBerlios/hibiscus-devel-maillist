@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Trennung von de.willuhn.datasource aus Jameica
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-April/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Trennung%20von%20de.willuhn.datasource%20aus%20Jameica&In-Reply-To=%3C200704030121.22306.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   <LINK REL="Next"  HREF="000045.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Trennung von de.willuhn.datasource aus Jameica</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Trennung%20von%20de.willuhn.datasource%20aus%20Jameica&In-Reply-To=%3C200704030121.22306.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Trennung von de.willuhn.datasource aus Jameica">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Di Apr  3 01:21:22 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Nächste Nachricht: <A HREF="000045.html">[Hibiscus-devel] [Jameica-Pluginloader] Abhaengigkeiten von Plugins
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#44">[ Datum ]</a>
+              <a href="thread.html#44">[ Thema ]</a>
+              <a href="subject.html#44">[ Betreff (Subject) ]</a>
+              <a href="author.html#44">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+ich hab mir ja vorgenommen, den Jameica-Code von direkten
+Verbindungen zum Package de.willuhn.datasource zu befreien,
+damit die GUI-Komponenten auch von Plugins verwendet werden
+koennen, die nicht auf diesem Datenbank-Layer basieren sondern
+z.Bsp. auf Hibernate.
+Erstaunlicherweise sind die Abhaengigkeiten gar nicht
+so tief, wie ich annahm. Im wesentlichen sind es nur
+die beiden Komponenten &quot;SelectInput&quot; und &quot;TableInput&quot;,
+welche stark von Objekten des Typs GenericObject/DBObject
+Gebrauch machen.
+
+SelectInput habe ich gerade umgebaut. Es besitzt nun
+auch einen generischen Konstruktor des Typs:
+
+&quot;public SelectInput(java.util.List list, java.lang.Object preselected);&quot;
+
+Hier kann man entweder ganz banal eine Liste von Strings
+uebergeben oder aber herkoemmliche Java-Beans. Oder
+noch allgemeiner: Alles, was in der &quot;toString()&quot;-Funktion
+etwas sinnvolles ausgibt. Wird mit &quot;setAttribute(String)&quot;
+der Name des anzuzeigenden Attributes vorgegeben, dann
+wird - falls es sich um ein Bean handelt - der zugehoerige
+Getter aufgerufen oder bei Objekten des Typs GenericObject
+das gleichnamige Attribute abgefragt.
+Wird kein Attribut manuell vorgegeben, wird in der Select-Box
+der Inhalt von &quot;Object#toString()&quot; angezeigt. Das Ermitteln der
+anzuzeigenden Werte uebernimmt eine kleine statische
+Helfer-Klasse &quot;BeanUtil&quot;.
+&quot;SelectInput#getValue()&quot; liefert dennoch weiterhin nicht
+zwingend den angezeigten Text sondern das zugehoerige
+Fach-Objekt/die Bean. 
+
+Achtung: In dem Zusammenhang hat der urspruengliche
+Konstruktor ein &quot;throws RemoteException&quot; erhalten. Falls
+jetzt also irgendwo Compiler-Fehler auftreten, dann wahrscheinlich,
+weil dieser Fehler an der betroffenen Stelle nicht behandelt
+wird ;)
+
+
+Mit &quot;TablePart&quot; werde ich genauso vorgehen. Anschliessend
+wird man man die Jameica-GUI-Komponenten mit relativ beliebigen
+Daten fuettern koennen.
+
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Nächste Nachricht: <A HREF="000045.html">[Hibiscus-devel] [Jameica-Pluginloader] Abhaengigkeiten von Plugins
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#44">[ Datum ]</a>
+              <a href="thread.html#44">[ Thema ]</a>
+              <a href="subject.html#44">[ Betreff (Subject)]</a>
+              <a href="author.html#44">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

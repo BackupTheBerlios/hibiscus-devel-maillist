@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Chipkartenleser Probleme
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-January/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Chipkartenleser%20Probleme&In-Reply-To=%3C45A2BD66.7040305%40jammerhund.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   <LINK REL="Next"  HREF="000001.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Chipkartenleser Probleme</H1>
+    <B>Matthias Scholz</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Chipkartenleser%20Probleme&In-Reply-To=%3C45A2BD66.7040305%40jammerhund.de%3E"
+           TITLE="[Hibiscus-devel] Chipkartenleser Probleme">ms at jammerhund.de
+                  </A><BR>
+    <I>Mo Jan  8 22:53:42 CET 2007</I>
+    <P><UL>
+        
+        <LI>Nächste Nachricht: <A HREF="000001.html">[Hibiscus-devel] Chipkartenleser Probleme
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#0">[ Datum ]</a>
+              <a href="thread.html#0">[ Thema ]</a>
+              <a href="subject.html#0">[ Betreff (Subject) ]</a>
+              <a href="author.html#0">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hallo zusammen,
+Hallo Olaf!
+
+Ich hatte eben versucht Jameica 1.4 und Hibiscus 1.6 auf meiner Debian 
+testing Box zum laufen zu bringen. Ich habe ein Chipdrive Micro USB von 
+Towitoko und eine Karte von der Deutschen Bank. Mit
+
+hbcicard info
+
+kommt das hier:
+
+Kontaktiere Karte.
+Bitten legen Sie Ihre Karte in einen Leser ein
+Karte ist eingelegt.
+Kartentyp    : RSA
+Kartennummer : 0000020462
+ATR          : 3B B7 94 00 81 31 FE 65 53 50 4B 32 33 90 00 D1
+
+Also gehe ich mal von der Funktionsfähigkeit aus. Den &quot;chipcardd&quot; habe 
+ich dann wieder gestoppt, wenn Hibiscus läuft.
+Dann gehe ich auf Sicherheitsmedium einrichten-&gt;Chipkarte DDV und nehme 
+den vorkonfigurierten Leser &quot;Chipdrive Micro/Towitoko Kartenzwerg&quot;. Ich 
+hatte alle Schittstellen durchprobiert, leider ohne Erfolg. Die rote 
+aktivitäts-LED hatte nie geleuchtet. Debuglevel habe ich mal eingeschaltet.
+
+Das logfile liegt hier <A HREF="https://devinno.kpln.de/jammerhund/jameica.log">https://devinno.kpln.de/jammerhund/jameica.log</A>
+(Sorry wollte das Ding nicht in die Mail reinploppen oder irgendwoanders 
+ablegen)
+
+Was mich nur wundert ist folgendes:
+
+Caused by: org.kapott.hbci.exceptions.CTException: 
+Chipkarten-Terminal-Fehler: can not load ctapi lib 
+/opt/jameica/plugins/hibiscus/lib/libtowitoko-2.0.7.so - ret=0 
+response=00 00 (0000)
+
+Als normaler User kann ich auf diese Lib und das komplette /opt/jameica 
+zugreifen. Zugrif auf /dev/ttyUSB0 habe ich auch.
+
+Wo könnte noch mein Problem liegen???
+
+Danke für die Hilfe!
+
+Matthias
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Nächste Nachricht: <A HREF="000001.html">[Hibiscus-devel] Chipkartenleser Probleme
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#0">[ Datum ]</a>
+              <a href="thread.html#0">[ Thema ]</a>
+              <a href="subject.html#0">[ Betreff (Subject)]</a>
+              <a href="author.html#0">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

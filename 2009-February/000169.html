@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Umsaetze mit und ohne Umsatztyp
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2009-February/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Umsaetze%20mit%20und%20ohne%20Umsatztyp&In-Reply-To=%3C1234784263-sup-3493%40h984274.serverkompetenz.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000178.html">
+   <LINK REL="Next"  HREF="000170.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Umsaetze mit und ohne Umsatztyp</H1>
+    <B>Tyberius Prime</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Umsaetze%20mit%20und%20ohne%20Umsatztyp&In-Reply-To=%3C1234784263-sup-3493%40h984274.serverkompetenz.net%3E"
+           TITLE="[Hibiscus-devel] Umsaetze mit und ohne Umsatztyp">tyberius_prime at coonabibba.de
+                  </A><BR>
+    <I>Mo Feb 16 12:44:56 CET 2009</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000178.html">[Hibiscus-devel] CRM/emediaservices - Fehler beim Entpacken!
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000170.html">[Hibiscus-devel] Umsaetze mit und ohne Umsatztyp
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#169">[ Datum ]</a>
+              <a href="thread.html#169">[ Thema ]</a>
+              <a href="subject.html#169">[ Betreff (Subject) ]</a>
+              <a href="author.html#169">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hallo Liste,
+
+ich wollt am Wochende mal einen Regelerner fuer Hibiscus
+schreiben (schaut sich bisherige Transaktionen und ihre
+Umsatztypen an, und schlaegt fuer unkategorisierte dann
+passende vor), 
+bin aber in einen Bug (oder ein Missverstaendniss) beim
+abfragen der Umsaetze gelaufen.
+
+Ich mache
+DBIterator test = UmsatzUtil.getUmsaetzeBackwards();
+test.addFilter(&quot;umsatztyp_id is NULL&quot;);
+
+bkomme aber trotzdem Umsaetze zurueck, 
+wo test.getUmsatzTyp() != null ist.
+
+Meine Fragen:
+-Was mach ich falsch?
+-Wie kann ich den Iterator ein 'Limit 100' oder aehnlich mitgeben,
+um Beispielsweise nur von den letzten 1000 Transaktionen zu lernen?
+
+Danke &amp; schoenen Gruss
+Tyberius Prime
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000178.html">[Hibiscus-devel] CRM/emediaservices - Fehler beim Entpacken!
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000170.html">[Hibiscus-devel] Umsaetze mit und ohne Umsatztyp
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#169">[ Datum ]</a>
+              <a href="thread.html#169">[ Thema ]</a>
+              <a href="subject.html#169">[ Betreff (Subject)]</a>
+              <a href="author.html#169">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

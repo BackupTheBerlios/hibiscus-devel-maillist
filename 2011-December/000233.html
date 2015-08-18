@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] klassiker  java.lang.NullPointerException
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2011-December/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20klassiker%20%20java.lang.NullPointerException&In-Reply-To=%3C4EF09304.6000208%40federa.firma.cc%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000232.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] klassiker  java.lang.NullPointerException</H1>
+    <B>hbci at federa.firma.cc</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20klassiker%20%20java.lang.NullPointerException&In-Reply-To=%3C4EF09304.6000208%40federa.firma.cc%3E"
+           TITLE="[Hibiscus-devel] klassiker  java.lang.NullPointerException">hbci at federa.firma.cc
+                  </A><BR>
+    <I>Di Dez 20 14:52:04 CET 2011</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000232.html">[Hibiscus-devel] klassiker  java.lang.NullPointerException
+</A></li>
+        
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#233">[ Datum ]</a>
+              <a href="thread.html#233">[ Thema ]</a>
+              <a href="subject.html#233">[ Betreff (Subject) ]</a>
+              <a href="author.html#233">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Am 20.12.2011 14:28, schrieb Olaf Willuhn:
+[...]
+&gt;<i> Wie sieht denn der Stacktrace dazu aus? Vermutlich hast du bei einem
+</I>&gt;<i> Aufruf lediglich einen Parameter nicht angegeben.
+</I>Hier der Aufruf aus plugins.xml
+[...]
+       &lt;item name=&quot;New Article&quot; shortcut=&quot;ALT+P&quot; 
+action=&quot;reibach.gui.action.ArticleDetail&quot; /&gt;
+[...]
+
+und  hier der Stacktrace:
+
+java.lang.NullPointerException
+	at reibach.gui.control.ArticleControl.getName(ArticleControl.java:81)
+	at reibach.gui.view.ArticleDetail.bind(ArticleDetail.java:41)
+	at de.willuhn.jameica.gui.GUI$4.run(GUI.java:605)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(Unknown Source)
+	at de.willuhn.jameica.gui.GUI$5.run(GUI.java:764)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Unknown Source)
+	at org.eclipse.swt.widgets.Display.syncExec(Unknown Source)
+	at de.willuhn.jameica.gui.GUI.startSync(GUI.java:760)
+	at de.willuhn.jameica.gui.GUI.startView(GUI.java:514)
+	at de.willuhn.jameica.gui.GUI.startView(GUI.java:449)
+	at de.willuhn.jameica.gui.GUI.startView(GUI.java:486)
+	at reibach.gui.action.ArticleDetail.handleAction(ArticleDetail.java:77)
+	at de.willuhn.jameica.gui.Menu$1.handleEvent(Menu.java:181)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(Unknown Source)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Unknown Source)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Unknown Source)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Unknown Source)
+	at de.willuhn.jameica.gui.GUI.loop(GUI.java:781)
+	at de.willuhn.jameica.gui.GUI.init(GUI.java:290)
+	at de.willuhn.jameica.system.Application.init(Application.java:143)
+	at de.willuhn.jameica.system.Application.newInstance(Application.java:85)
+	at de.willuhn.jameica.Main.main(Main.java:78)
+
+
+danke
+
+/guenter
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000232.html">[Hibiscus-devel] klassiker  java.lang.NullPointerException
+</A></li>
+	
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#233">[ Datum ]</a>
+              <a href="thread.html#233">[ Thema ]</a>
+              <a href="subject.html#233">[ Betreff (Subject)]</a>
+              <a href="author.html#233">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

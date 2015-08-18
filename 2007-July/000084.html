@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Release-Koordination
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-July/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Release-Koordination&In-Reply-To=%3C200707021104.46647.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   <LINK REL="Next"  HREF="000085.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Release-Koordination</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Release-Koordination&In-Reply-To=%3C200707021104.46647.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Release-Koordination">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mo Jul  2 11:04:46 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Nächste Nachricht: <A HREF="000085.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#84">[ Datum ]</a>
+              <a href="thread.html#84">[ Thema ]</a>
+              <a href="subject.html#84">[ Betreff (Subject) ]</a>
+              <a href="author.html#84">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> Ich habe die swt.jar entsprechend ausgetauscht. jnilib-Dateien sind
+</I>&gt;<i> da zunächst keine dabei, sind aber im jar drin. 
+</I>
+Ah, das ist ja genial. Von dieser Moeglichkeit hatte ich auch
+schonmal gelesen. Ich nehme an, dass die jnilibs dann zur Laufzeit
+in ein temporaeres Verzeichnis entpackt und nach Programmende
+wieder geloescht werden.
+
+&gt;<i> In Zeile 117 wird reporter.addHeaderColumn(...) aufgerufen. Hier
+</I>&gt;<i> springt der Debugger nicht einmal mehr in die Methode rein! (Step
+</I>&gt;<i> into bleibt hängen!!!) Sowas habe ich bisher noch nie gesehen???
+</I>[...]
+&gt;<i> der ClassLoader lädt die Klasse java.awt.Color nicht! Vielleicht  
+</I>&gt;<i> liegt es dann eher an meinem Rechner. Man könnte einmal die  
+</I>&gt;<i> Bibliothek tauschen und den neuen NightlyBuild dann testen. Am BUG  
+</I>&gt;<i> ist ja Sebastian auch am testen...
+</I>
+Mhh, interessant. Die komplette Funktion &quot;doExport&quot; laeuft
+in einem separaten Thread (BackgroundTask). Klingt so, als
+ob es Probleme gibt, wenn aus diesem separaten Thread auf
+irgendwelche GUI-spezifischen Sachen zugegriffen wird. Bei
+SWT muss man das zwar generell beruecksichtigen und GUI-Aufrufe
+in einem GUI.getDisplay().syncExec() bzw. GUI.getDisplay().asyncExec()
+verpacken. MacOS scheint da aber irgendwie noch empflindlicher
+zu sein.
+
+Kannst du das Verhalten - welches Sebastian beobachtet hat
+(Bug 359) auch beobachten? Wenn er bei einem Datums-Eingabefeld
+auf den Button &quot;...&quot; klickt, um den Kalender-Dialog zu oeffnen,
+passiert beim ersten Klick nichts.
+
+Ich koennte mir gut vorstellen, dass das die gleiche Ursache hat.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Nächste Nachricht: <A HREF="000085.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#84">[ Datum ]</a>
+              <a href="thread.html#84">[ Thema ]</a>
+              <a href="subject.html#84">[ Betreff (Subject)]</a>
+              <a href="author.html#84">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

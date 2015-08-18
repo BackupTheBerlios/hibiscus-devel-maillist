@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Keine hbci_passport_* Module mehr
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2010-June/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Keine%20hbci_passport_%2A%20Module%20mehr&In-Reply-To=%3C4C1ABDD2.4080704%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000195.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Keine hbci_passport_* Module mehr</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Keine%20hbci_passport_%2A%20Module%20mehr&In-Reply-To=%3C4C1ABDD2.4080704%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Keine hbci_passport_* Module mehr">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Fr Jun 18 02:29:06 CEST 2010</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000195.html">[Hibiscus-devel] Offline-Konten - nächster Teil
+</A></li>
+        
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#196">[ Datum ]</a>
+              <a href="thread.html#196">[ Thema ]</a>
+              <a href="subject.html#196">[ Betreff (Subject) ]</a>
+              <a href="author.html#196">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+Ist eigentlich nur fuer die unter euch interessant, die Hibiscus
+samt aller Abhaengigkeiten direkt aus dem CVS bauen:
+
+Die Implementierungen der Sicherheitsmedien (PIN/TAN, Chipkarte,
+Schluesseldatei) befanden sich bisher in separaten Projekten
+im CVS. Konkret waren das:
+
+  - hbci_passport_ddv
+  - hbci_passport_rdh
+  - hbci_passport_pintan
+
+Die Build-Scripts erzeugten jeweils eine Jar-Datei, die ich
+dann immer manuell nach hibiscus/lib kopiert habe.
+
+Diese Trennung hat eigentlich nie irgendwelche Vorteile
+gebracht. Im Gegenteil - da sie in den RPM-Repositories
+von Packman ebenfalls als getrennte Pakete umgesetzt sind,
+kam es regelmaessig vor, dass mir User schrieben, die das
+gewuenschte Verfahren nicht auswaehlen konnten. Und das nur,
+weil das zugehoerige Paket nicht mit installiert war.
+
+Ich habe diese Trennung jetzt aufgehoben und den Code
+direk in den Hibiscus-Source verschoben.
+
+Die drei o.g. Projekte sind damit obsolet. Ich habe
+sie jedoch nicht komplett aus dem CVS geloescht sondern
+lediglich deren Inhalt via &quot;cvs remove&quot; entfernt. So
+bleibt wenigstens noch fuer Archiv-Zwecke die alte
+Historie erhalten. Der Code wird jetzt aber in
+hibiscus/src/de/willuhn/jameica/hbci/passports gepflegt.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000195.html">[Hibiscus-devel] Offline-Konten - nächster Teil
+</A></li>
+	
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#196">[ Datum ]</a>
+              <a href="thread.html#196">[ Thema ]</a>
+              <a href="subject.html#196">[ Betreff (Subject)]</a>
+              <a href="author.html#196">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Weekly Digest [KW 12]
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-March/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Weekly%20Digest%20%5BKW%2012%5D&In-Reply-To=%3C200703212007.04661.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000034.html">
+   <LINK REL="Next"  HREF="000036.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Weekly Digest [KW 12]</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Weekly%20Digest%20%5BKW%2012%5D&In-Reply-To=%3C200703212007.04661.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Weekly Digest [KW 12]">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mi Mär 21 20:07:04 CET 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000034.html">[Hibiscus-devel] Umsatz-Kategorisierung
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000036.html">[Hibiscus-devel] Weekly Digest [KW 12]
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#35">[ Datum ]</a>
+              <a href="thread.html#35">[ Thema ]</a>
+              <a href="subject.html#35">[ Betreff (Subject) ]</a>
+              <a href="author.html#35">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+Damit die naechste Hibiscus-Release nun bald kommen kann,
+hab heute mal einige Aufraeumarbeiten durchgefuehrt und
+kleinere Sachen eingebaut, die mir noch unter den Nageln
+brannten. Als da waeren:
+
+1) Bei der Kommunikation mit dem Chipkartenleser kam es
+hin und wieder vor, dass Hinweistext wie &quot;Bitte Chipkarte einlegen&quot;,
+&quot;Bitte PIN eingeben&quot; nicht oder zu spaet angezeigt wurden.
+Erstaunlicherweise lag das nicht an Threading-Problemen
+sondern an einem fehlenden Redraw des SWT-Labels.
+
+2) Der Dialog zur Auswahl des Dateiformats beim Export
+von Umsaetzen/Ueberweisungen/etc merkt sich nun das
+zuletzt verwendete Format und bietet es beim naechsten
+Mal als Vorauswahl an.
+
+3) In Jameica gibt es einen neuen abstrakten Dialog
+&quot;WaitDialog&quot;. Er zeigt einen Text und einen Fortschrittsbalken
+fuer ein Timeout an. Anwendungsbeispiel:
+Der User soll einen USB-Stick mit einer Schluesseldatei einstecken.
+Waehrenddessen wird dieser Dialog anagezeigt. Dieser ueberprueft
+im Sekundentakt, ob die Datei inzwischen verfuegbar und lesbar
+ist und schliesst den Dialog selbststaendig. Hat nicht wirklich
+einen grossen Nutzen, scheint aber fuer viele User aus
+ergonomischen Gruenden wichtig zu sein ;)
+
+4) Die View &quot;Kontoauszug&quot; in den Auswertungen enthaelt
+nun eine Tabelle mit den gefundenen Umsaetzen als Vorschau.
+In dieser kann durch Klick auf die Spaltenueberschriften
+sortiert werden. Der Export (z.Bsp. im PDF-Format) geschieht
+dann genau in der angezeigten Reihenfolge. Damit koennen
+User nun selbst beeinflussen, in welcher Reihenfolge
+der Kontoauszug geschehen soll.
+
+5) In der View &quot;Sparquote&quot; kann nun ein Stichtag eingegeben
+werden, der zur Berechnung eben dieser herangezogen wird.
+Standardmaessig ist das der 1. des Monats.
+
+6) Fuer so einige Dialoge fehlte noch der Text in der
+Online-Hilfe links unten. Hab sie nachgetragen.
+
+7) Die View &quot;Umsaetze nach Kategorien&quot; wurde noch etwas
+aufgehuebscht:
+  - farbige Hervorhebung von Einnahmen/Ausgaben
+  - Spalten mit Gegenkonto/Verwendungszweck getrennt
+  - automatisches Speichern der eingestellten Spaltenbreiten
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000034.html">[Hibiscus-devel] Umsatz-Kategorisierung
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000036.html">[Hibiscus-devel] Weekly Digest [KW 12]
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#35">[ Datum ]</a>
+              <a href="thread.html#35">[ Thema ]</a>
+              <a href="subject.html#35">[ Betreff (Subject)]</a>
+              <a href="author.html#35">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

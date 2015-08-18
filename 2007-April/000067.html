@@ -1,0 +1,293 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Release-Koordination
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-April/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Release-Koordination&In-Reply-To=%3C200704262340.50470.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000066.html">
+   <LINK REL="Next"  HREF="000068.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Release-Koordination</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Release-Koordination&In-Reply-To=%3C200704262340.50470.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Release-Koordination">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Do Apr 26 23:40:49 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000066.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000068.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#67">[ Datum ]</a>
+              <a href="thread.html#67">[ Thema ]</a>
+              <a href="subject.html#67">[ Betreff (Subject) ]</a>
+              <a href="author.html#67">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> ich habe mich hierzu einmal ein wenig mit dem Debugger durch den Code
+</I>&gt;<i> gekämpft. Leider kenne ich SWT zu wenig um wirklich die Lösung
+</I>&gt;<i> gefunden zu haben.
+</I>&gt;<i> So viel:
+</I>&gt;<i> - ich kann das Problem reproduzieren.
+</I>&gt;<i> - es scheint sich nicht nur auf PDF zu beschränken, sporadisch tritt
+</I>&gt;<i> es auch bei CSV auf.
+</I>
+Das ist doch schonmal sehr interessant. Bisher wusste ich
+nur vom PDF-Export.
+
+&gt;<i> - Meine Vermutung ist, dass es sich nicht um ein Mac-Problem handelt,
+</I>&gt;<i> sondern um ein Problem bei echten Mehrprozessorsystemen.
+</I>
+Ich weiss nicht - da ich einen P4 mit Hyperthreading habe -
+der ja dem Betriebssystem gegenueber &quot;so tut&quot; wie ein SMP-System,
+muesste das dort auch auftreten. Da mir bisher nur Mac-User von
+dem Problem berichtet haben, glaube ich schon, dass es eher
+ein SWT-Problem ist. Zumal der Fehler erstmalig auftrat, nachdem
+ich ein Update der SWT-Libs in Jameica gemacht hatte. Und gerade
+weil die SWT-Implementierung fuer MacOS wohl noch nicht so richtig
+ausgereift sein soll, hatte ich damit schnell einen Schuldigen
+gefunden ;)
+
+&gt;<i> Der Code 
+</I>&gt;<i> läuft immer bis in die Klasse &quot;ExportDialog&quot; in die Methode &quot;export&quot;.
+</I>&gt;<i> Ab Zeile 202 wird ein BackgroundTask erzeugt. Dieser wird nicht
+</I>&gt;<i> ausgeführt, und an dieser Stelle weiß ich eben nicht mehr warum. Ich
+</I>&gt;<i> vermute hier irgendwo einen Deadlock oder eine Race-Condition. Ich
+</I>&gt;<i> habe mal einen Thread-Dump gemacht und paste den unten in diese Mail.
+</I>
+Vielen Dank fuer den Thread-Dump. Sehr interessant. Was mich
+daran aber wundert: In keinem der Threads findet sich die Stelle
+wieder, an der es haengt. Gehen wir mal die Threads einzeln durch:
+
+&gt;<i> &quot;Mckoi - Background Journaling&quot; daemon prio=5 tid=0x0054a0c0
+</I>&gt;<i> nid=0x1975200 in Object.wait() [0xf0911000..0xf0911b30]
+</I>&gt;<i> 	at java.lang.Object.wait(Native Method)
+</I>&gt;<i> 	- waiting on &lt;0x0719e5c8&gt; (a com.mckoi.store.JournalledSystem
+</I>&gt;<i> $JournalingThread)
+</I>&gt;<i> 	at java.lang.Object.wait(Object.java:474)
+</I>&gt;<i> 	at com.mckoi.store.JournalledSystem$JournalingThread.run
+</I>&gt;<i> (JournalledSystem.java:1783)
+</I>&gt;<i> 	- locked &lt;0x0719e5c8&gt; (a com.mckoi.store.JournalledSystem
+</I>&gt;<i> $JournalingThread)
+</I>
+Das ist die Embedded-Datenbank. Code an der Stelle:
+
+// Nothing to process so wait
+synchronized (this) {
+  if (!finished) {
+    try {
+      wait();
+    }
+    catch (InterruptedException e) { /* ignore */ }
+  }
+}
+
+Die Datenbank &quot;schlaeft&quot; und wartet auf neue Instruktionen.
+Kann also nicht die Ursache sein.
+
+&gt;<i> &quot;date watcher for statusbar calendar&quot; prio=5 tid=0x00545990
+</I>&gt;<i> nid=0x193d600 in Object.wait() [0xf0a94000..0xf0a94b30]
+</I>&gt;<i> 	at java.lang.Object.wait(Native Method)
+</I>&gt;<i> 	- waiting on &lt;0x0748b3d8&gt; (a org.eclipse.swt.widgets.RunnableLock)
+</I>&gt;<i> 	at java.lang.Object.wait(Object.java:474)
+</I>&gt;<i> 	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:169)
+</I>&gt;<i> 	- locked &lt;0x0748b3d8&gt; (a org.eclipse.swt.widgets.RunnableLock)
+</I>&gt;<i> 	at org.eclipse.swt.widgets.Display.syncExec(Display.java:3825)
+</I>&gt;<i> 	at de.willuhn.jameica.gui.StatusBarCalendarItem$Worker.run
+</I>&gt;<i> (StatusBarCalendarItem.java:113)
+</I>
+Ist nur der Thread, der die Uhrzeit links unten in Jameica aktualisiert.
+Und der schlaeft gerade. Kann man ignorieren.
+
+&gt;<i> &quot;Jameica Messaging Worker Thread&quot; prio=5 tid=0x00537d20 nid=0x192ae00
+</I>&gt;<i> waiting on condition [0xf0a13000..0xf0a13b30]
+</I>&gt;<i> 	at java.lang.Thread.sleep(Native Method)
+</I>&gt;<i> 	at de.willuhn.jameica.messaging.MessagingFactory$Worker.run
+</I>&gt;<i> (MessagingFactory.java:290)
+</I>
+Ist der Thread des Messaging-Systems von Jameica. Schlaeft ebenfalls
+und wartet auf neue zu versendende Nachrichten. Kann man auch ignorieren.
+
+&gt;<i> &quot;GC Daemon&quot; daemon prio=2 tid=0x0053fa80 nid=0x191e400 in Object.wait
+</I>&gt;<i> () [0xf0992000..0xf0992b30]
+</I>&gt;<i> 	at java.lang.Object.wait(Native Method)
+</I>&gt;<i> 	- waiting on &lt;0x06f89c38&gt; (a sun.misc.GC$LatencyLock)
+</I>&gt;<i> 	at sun.misc.GC$Daemon.run(GC.java:100)
+</I>&gt;<i> 	- locked &lt;0x06f89c38&gt; (a sun.misc.GC$LatencyLock)
+</I>
+Garbage Collector von Java.
+
+&gt;<i> &quot;RMI Reaper&quot; prio=5 tid=0x0053b290 nid=0x191d800 in Object.wait()
+</I>&gt;<i> [0xf0890000..0xf0890b30]
+</I>&gt;<i> 	at java.lang.Object.wait(Native Method)
+</I>&gt;<i> 	- waiting on &lt;0x06f89c40&gt; (a java.lang.ref.ReferenceQueue$Lock)
+</I>&gt;<i> 	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:116)
+</I>&gt;<i> 	- locked &lt;0x06f89c40&gt; (a java.lang.ref.ReferenceQueue$Lock)
+</I>&gt;<i> 	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:132)
+</I>&gt;<i> 	at sun.rmi.transport.ObjectTable$Reaper.run(ObjectTable.java:336)
+</I>&gt;<i> 	at java.lang.Thread.run(Thread.java:613)
+</I>
+RMI-Handler von Java.
+
+&gt;<i> &quot;Timer-1&quot; daemon prio=5 tid=0x0053ae40 nid=0x191d400 in Object.wait()
+</I>&gt;<i> [0xf080f000..0xf080fb30]
+</I>&gt;<i> 	at java.lang.Object.wait(Native Method)
+</I>&gt;<i> 	- waiting on &lt;0x06f89c60&gt; (a java.util.TaskQueue)
+</I>&gt;<i> 	at java.lang.Object.wait(Object.java:474)
+</I>&gt;<i> 	at java.util.TimerThread.mainLoop(Timer.java:483)
+</I>&gt;<i> 	- locked &lt;0x06f89c60&gt; (a java.util.TaskQueue)
+</I>&gt;<i> 	at java.util.TimerThread.run(Timer.java:462)
+</I>
+Keine Ahnung, zu wem der gehoert. Koennte auch von Java selbst sein.
+
+&gt;<i> &quot;RMI TCP Accept-0&quot; daemon prio=5 tid=0x0053a330 nid=0x18d6200
+</I>&gt;<i> runnable [0xf078e000..0xf078eb30]
+</I>&gt;<i> 	at java.net.PlainSocketImpl.socketAccept(Native Method)
+</I>&gt;<i> 	at java.net.PlainSocketImpl.accept(PlainSocketImpl.java:384)
+</I>&gt;<i> 	- locked &lt;0x06f89c80&gt; (a java.net.SocksSocketImpl)
+</I>&gt;<i> 	at java.net.ServerSocket.implAccept(ServerSocket.java:450)
+</I>&gt;<i> 	at java.net.ServerSocket.accept(ServerSocket.java:421)
+</I>&gt;<i> 	at sun.rmi.transport.tcp.TCPTransport.run(TCPTransport.java:340)
+</I>&gt;<i> 	at java.lang.Thread.run(Thread.java:613)
+</I>
+Nochmal RMI.
+
+&gt;<i> &quot;Session Worker Thread&quot; prio=5 tid=0x0051e830 nid=0x18b0000 waiting
+</I>&gt;<i> on condition [0xf070d000..0xf070db30]
+</I>&gt;<i> 	at java.lang.Thread.sleep(Native Method)
+</I>&gt;<i> 	at de.willuhn.util.Session$Worker.run(Session.java:302)
+</I>
+Worker-Thread fuer das Session-Handling von Jameica. Schlaeft
+ebenfalls - kann ignoriert werden.
+
+&gt;<i> &quot;Timer-0&quot; daemon prio=5 tid=0x0051a330 nid=0x1898c00 in Object.wait()
+</I>&gt;<i> [0xf068c000..0xf068cb30]
+</I>&gt;<i> 	at java.lang.Object.wait(Native Method)
+</I>&gt;<i> 	- waiting on &lt;0x06cb80e0&gt; (a java.util.TaskQueue)
+</I>&gt;<i> 	at java.util.TimerThread.mainLoop(Timer.java:509)
+</I>&gt;<i> 	- locked &lt;0x06cb80e0&gt; (a java.util.TaskQueue)
+</I>&gt;<i> 	at java.util.TimerThread.run(Timer.java:462)
+</I>
+Siehe Timer-1
+
+&gt;<i> &quot;Logger-Thread&quot; daemon prio=5 tid=0x00517db0 nid=0x1863400 waiting on
+</I>&gt;<i> condition [0xf060b000..0xf060bb30]
+</I>&gt;<i> 	at java.lang.Thread.sleep(Native Method)
+</I>&gt;<i> 	at de.willuhn.logging.Logger$LoggerThread.run(Logger.java:368)
+</I>
+Logger-Thread von Jameica. Hat nichts zu tun und schlaeft ebenfalls.
+
+&gt;<i> &quot;Low Memory Detector&quot; daemon prio=5 tid=0x00511990 nid=0x1818c00
+</I>&gt;<i> runnable [0x00000000..0x00000000]
+</I>&gt;<i>
+</I>&gt;<i> &quot;CompilerThread0&quot; daemon prio=9 tid=0x00510db0 nid=0x1818800 waiting
+</I>&gt;<i> on condition [0x00000000..0xf0488450]
+</I>&gt;<i>
+</I>&gt;<i> &quot;Signal Dispatcher&quot; daemon prio=9 tid=0x005108d0 nid=0x1814200
+</I>&gt;<i> waiting on condition [0x00000000..0x00000000]
+</I>&gt;<i>
+</I>&gt;<i> &quot;JDWP Command Reader&quot; daemon prio=5 tid=0x0050ee50 nid=0x1813e00
+</I>&gt;<i> runnable [0x00000000..0x00000000]
+</I>&gt;<i>
+</I>&gt;<i> &quot;JDWP Event Helper Thread&quot; daemon prio=5 tid=0x0050e5b0 nid=0x1813a00
+</I>&gt;<i> runnable [0x00000000..0x00000000]
+</I>&gt;<i>
+</I>&gt;<i> &quot;JDWP Transport Listener: dt_socket&quot; daemon prio=5 tid=0x0050d870
+</I>&gt;<i> nid=0x1813600 runnable [0x00000000..0xf0284800]
+</I>&gt;<i>
+</I>&gt;<i> &quot;Finalizer&quot; daemon prio=8 tid=0x005090c0 nid=0x1813200 in Object.wait
+</I>&gt;<i> () [0xf0203000..0xf0203b30]
+</I>&gt;<i> 	at java.lang.Object.wait(Native Method)
+</I>&gt;<i> 	- waiting on &lt;0x06c9e468&gt; (a java.lang.ref.ReferenceQueue$Lock)
+</I>&gt;<i> 	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:116)
+</I>&gt;<i> 	- locked &lt;0x06c9e468&gt; (a java.lang.ref.ReferenceQueue$Lock)
+</I>&gt;<i> 	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:132)
+</I>&gt;<i> 	at java.lang.ref.Finalizer$FinalizerThread.run(Finalizer.java:159)
+</I>&gt;<i>
+</I>&gt;<i> &quot;Reference Handler&quot; daemon prio=10 tid=0x00508cd0 nid=0x180f400 in
+</I>&gt;<i> Object.wait() [0xf0182000..0xf0182b30]
+</I>&gt;<i> 	at java.lang.Object.wait(Native Method)
+</I>&gt;<i> 	- waiting on &lt;0x06c9e488&gt; (a java.lang.ref.Reference$Lock)
+</I>&gt;<i> 	at java.lang.Object.wait(Object.java:474)
+</I>&gt;<i> 	at java.lang.ref.Reference$ReferenceHandler.run(Reference.java:116)
+</I>&gt;<i> 	- locked &lt;0x06c9e488&gt; (a java.lang.ref.Reference$Lock)
+</I>
+Alles Java-eigene Threads.
+
+&gt;<i> &quot;main&quot; prio=5 tid=0x00501650 nid=0xa000ed88 runnable
+</I>&gt;<i> [0xbfffc000..0xbfffdf30]
+</I>&gt;<i> 	at org.eclipse.swt.internal.carbon.OS.CallNextEventHandler(Native
+</I>&gt;<i> Method)
+</I>&gt;<i> 	at org.eclipse.swt.widgets.Widget.callPaintEventHandler(Widget.java:
+</I>&gt;<i> 170)
+</I>&gt;<i> 	at org.eclipse.swt.widgets.Widget.kEventControlDraw(Widget.java:1000)
+</I>&gt;<i> 	at org.eclipse.swt.widgets.Canvas.kEventControlDraw(Canvas.java:137)
+</I>&gt;<i> 	at org.eclipse.swt.widgets.Widget.controlProc(Widget.java:352)
+</I>&gt;<i> 	at org.eclipse.swt.widgets.Display.controlProc(Display.java:838)
+</I>&gt;<i> 	at org.eclipse.swt.internal.carbon.OS.ReceiveNextEvent(Native Method)
+</I>&gt;<i> 	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:2905)
+</I>&gt;<i> 	at de.willuhn.jameica.gui.GUI.loop(GUI.java:657)
+</I>&gt;<i> 	at de.willuhn.jameica.gui.GUI.init(GUI.java:212)
+</I>&gt;<i> 	at de.willuhn.jameica.system.Application.init(Application.java:267)
+</I>&gt;<i> 	at de.willuhn.jameica.system.Application.newInstance
+</I>&gt;<i> (Application.java:91)
+</I>&gt;<i> 	at de.willuhn.jameica.Main.main(Main.java:78)
+</I>
+Das ist eigentlich der einzige relevante Thread. Und es ist sogar
+der Main-Thread. Da der sich aber im GUI-Loop befindet, wuerde ich
+behaupten, dass auch er nichts zu tun hat und lediglich auf neue
+Redraw-Events wartet.
+
+&gt;<i> &quot;VM Thread&quot; prio=9 tid=0x005084d0 nid=0x1803c00 runnable
+</I>&gt;<i>
+</I>&gt;<i> &quot;VM Periodic Task Thread&quot; prio=9 tid=0x00513200 nid=0x1819000 waiting
+</I>&gt;<i> on condition
+</I>
+Java-eigene Threads.
+
+&gt;<i> &quot;Exception Catcher Thread&quot; prio=10 tid=0x00501860 nid=0x1805200 runnable
+</I>
+Koennte ein Debugger-Thread sein. Hattest du Jameica in Eclipse laufen lassen?
+
+
+Sehr merkwuerdig. Laut den Stacktraces wuerde ich behaupten, dass
+Hibiscus hier gerade gar nichts macht. Also weder beim Export haengt
+noch sonst irgendwo. Wenn du die Anwendung in Eclipse im Debugger
+eingerichtet hast, kannst du dann mal in ExportDialog in Zeile
+207 ein System.out.println(&quot;foo&quot;) eintragen oder einen Breakpoint
+setzen? Dann koennte man erkennen, ob wenigstens noch der Task gestartet
+wird.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000066.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000068.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#67">[ Datum ]</a>
+              <a href="thread.html#67">[ Thema ]</a>
+              <a href="subject.html#67">[ Betreff (Subject)]</a>
+              <a href="author.html#67">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

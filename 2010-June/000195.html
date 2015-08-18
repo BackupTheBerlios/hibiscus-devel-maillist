@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Offline-Konten - nächster Teil
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2010-June/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%0A%20%3D%3Fiso-8859-1%3Fq%3FOffline-Konten_-_n%3DE4chster_Teil%3F%3D&In-Reply-To=%3C4C06E2D2.5020202%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000194.html">
+   <LINK REL="Next"  HREF="000196.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Offline-Konten - nächster Teil</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%0A%20%3D%3Fiso-8859-1%3Fq%3FOffline-Konten_-_n%3DE4chster_Teil%3F%3D&In-Reply-To=%3C4C06E2D2.5020202%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Offline-Konten - nächster Teil">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Do Jun  3 01:01:38 CEST 2010</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000194.html">[Hibiscus-devel] Offline-Konten - nächster Teil
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000196.html">[Hibiscus-devel] Keine hbci_passport_* Module mehr
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#195">[ Datum ]</a>
+              <a href="thread.html#195">[ Thema ]</a>
+              <a href="subject.html#195">[ Betreff (Subject) ]</a>
+              <a href="author.html#195">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> Dann schicke ich die Antwort jetzt mal über die Mailingliste - mal
+</I>&gt;<i> schauen ob das auf Anhieb klappt...
+</I>
+Hat geklappt ;)
+
+&gt;<i> Zwischenzeitlich fand ich die Lösung über ein eigenes Passport
+</I>&gt;<i> eigentlich fast besser - aber gut, es funktioniert so ja.
+</I>
+Naja, die Loesung mit dem Flag direkt im Konto ist halt
+die pragmatische. Und da es ein Flag-Bitfeld ohnehin
+schon gab, konnte man es ja gleich auch dafuer nutzen.
+
+&gt;<i> Hinsichtlich Banking-Backend &amp; Offlinekonten würde ich jetzt (auf die
+</I>&gt;<i> schnelle betrachtet) denken, dass es da ggf. 2 unterschiedliche
+</I>&gt;<i> Abstraktionsebenen gibt:
+</I>&gt;<i> 1. das tatsächliche Backend wie von dir beschrieben, also das was im
+</I>&gt;<i> Hintergrund automatisch ausgeführt werden kann (HBCI, ...)
+</I>&gt;<i> 2. die Definition/Struktur eines &quot;Kontos&quot; an sich
+</I>
+Korrekt. Allerdings ist das ein wirklich riesiger Batzen
+Arbeit. Bisher habe ich mich gescheut, das Thema anzugehen.
+Man will ja auch nicht nach 100h Arbeit feststellen, dass
+man sich verrannt hat ;)
+
+&gt;<i> Das ist der einzige Punkt den ich (noch) nicht ganz nachvollziehen kann.
+</I>&gt;<i> Klar ist, dass der erste Umsatz erstmal irgendwie erzeugt und
+</I>&gt;<i> gespeichert wird =&gt; bekanntgeben des Umsatzes über das Messaging, damit
+</I>&gt;<i> alle möglichen Consumer ihn bearbeiten können. Ein solcher Consumer ist
+</I>&gt;<i> der neue, der für GK-Offline-Konto-Umsätze die entsprechende
+</I>&gt;<i> Gegenbuchung anlegt. So - und konsequenterweiße gehört dieser neue
+</I>&gt;<i> Umsatz (also der Gegenumsatz) ja ebenfalls über das Messaging bekannt
+</I>&gt;<i> gegeben, damit die Consumer darüber informiert werden dass nun noch ein
+</I>&gt;<i> Umsatz da ist.
+</I>&gt;<i> In diesem Fall würden wir allerdings in eine Endlosschleife laufen
+</I>
+Ja, das stimmt. Allerdings wird die ImportMessage ohnehin
+nur verschickt, um die GUI asynchron und ohne Reload der View
+aktualisieren zu koennen. Und da die automatisch erstellte
+Gegenbuchung ja ohnehin nur ein &quot;Spiegelbild&quot; der urspruenglichen
+Buchung ist (Konten andersrum und Betrag negiert), finde ich
+es nicht so wichtig, dass die dann auch noch via ImportMessage
+bekannt gemacht wird. Womoeglich irritiert das den User
+sogar, wenn er Umsaetze von der Bank abruft und einige
+Buchungen oberflaechlich doppelt angezeigt werden.
+
+&gt;<i> Da das Thema Banking-Backend für mich doch recht überraschend aufkam
+</I>&gt;<i> (woher hätte ich es auch wissen sollen?) wollte ich mal noch Fragen wie
+</I>&gt;<i> sonst so die &quot;Lage&quot; ist:
+</I>&gt;<i> - gibt es noch andere (größere) geplante Änderungen/Umbauten?
+</I>
+Umbauten habe ich keine geplant. Sicher hab ich mal darueber
+nachgedacht, meinen selbstgestrickten Persistenz-Layer (de_willuhn_ds)
+gegen was Aktuelles (z.Bsp. JPA via Hibernate) zu ersetzen und
+bei der Gelegenheit auch gleich den ganzen RMI-Kram rauszuwerfen
+(der wird ohnehin nicht genutzt). Aber eigentlich ist das vergebene
+Liebesmueh. Die Anwendung tut ihren Dienst und der existierende
+Code ist keine Sackgasse. Von daher sehe ich keinen Grund
+fuer groessere Umbauten am technischen Design. Es haette keinen
+Vorteil fuer den User.
+
+Ich konzentriere mich daher eher auf fachliche Erweiterungen.
+Und da waeren die Haupt-Themen aus meiner Sicht derzeit:
+
+- <A HREF="https://www.willuhn.de/bugzilla/show_bug.cgi?id=699">https://www.willuhn.de/bugzilla/show_bug.cgi?id=699</A>
+  Zurueckgeben von Lastschriften direkt in Hibiscus
+
+- <A HREF="https://www.willuhn.de/bugzilla/show_bug.cgi?id=669">https://www.willuhn.de/bugzilla/show_bug.cgi?id=669</A>
+  MT940-Export (bisher gibts nur Import)
+
+- <A HREF="https://www.willuhn.de/bugzilla/show_bug.cgi?id=559">https://www.willuhn.de/bugzilla/show_bug.cgi?id=559</A>
+  Verwaltung von Termin-Ueberweisungen. Also nicht
+  nur das Absenden sondern auch das Loeschen und
+  Aendern von bereits abgeschickten aber noch nicht
+  ausgefuehrten.
+
+- Unterstuetzung fuer mehrere Kartenleser. Bisher kann
+  man in Hibiscus nur einen einrichten
+
+- <A HREF="https://www.willuhn.de/bugzilla/show_bug.cgi?id=827">https://www.willuhn.de/bugzilla/show_bug.cgi?id=827</A>
+  smsTAN mit HKTAN-3. Da koennen wir aber nichts machen,
+  das geschieht in HBCI4Java
+
+&gt;<i> - gibt es eine Prioliste, was als nächstes umgesetzt werden sollte? /
+</I>&gt;<i> Sind (auch kleiner Dinge) im Moment in der Umsetzung was wichtig zu
+</I>&gt;<i> wissen wäre?
+</I>
+Ich die Punkte oben in der Reihenfolge sortiert, wie
+ich sie derzeit priorisieren wuerde.
+
+&gt;<i> Und falls oben nicht schon enthalten noch eine Frage:
+</I>&gt;<i> Ist sowas wie eine &quot;Finanzplanungssicht&quot; angedacht?
+</I>
+Nein, eigentlich gar nicht. Das ist ein Thema, an dem
+ich persoenlich wenig Interesse habe und auch gar nicht
+so richtig weiss, was man da so implementieren koennte
+und wozu das gut ist. Man kann da viele bunte Charts
+malen. Aber ich persoenlich bin da skeptisch. Selbst
+die bisherigen Auswertungen in Hibiscus nutze ich
+nicht. Ich weiss, wer wann wieviel abbucht und hab
+die Salden im Blick. Mir reichen diese Informationen
+voellig aus, um meine finanzielle Situation einschaetzen
+zu koennen. Fuer mich ist Hibiscus ein schlichtes
+Arbeitswerkzeug fuer den taeglichen Einsatz und
+weniger ein Planungstool fuers Vermoegensmanagement.
+
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000194.html">[Hibiscus-devel] Offline-Konten - nächster Teil
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000196.html">[Hibiscus-devel] Keine hbci_passport_* Module mehr
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#195">[ Datum ]</a>
+              <a href="thread.html#195">[ Thema ]</a>
+              <a href="subject.html#195">[ Betreff (Subject)]</a>
+              <a href="author.html#195">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

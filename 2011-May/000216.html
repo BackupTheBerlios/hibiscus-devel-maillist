@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] HBCI4Java &quot;Hibiscus-Branch&quot; fuer smsTAN/chipTAN
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2011-May/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20HBCI4Java%20%22Hibiscus-Branch%22%20fuer%20smsTAN/chipTAN&In-Reply-To=%3C4DC40F0F.5000203%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   <LINK REL="Next"  HREF="000217.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] HBCI4Java &quot;Hibiscus-Branch&quot; fuer smsTAN/chipTAN</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20HBCI4Java%20%22Hibiscus-Branch%22%20fuer%20smsTAN/chipTAN&In-Reply-To=%3C4DC40F0F.5000203%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] HBCI4Java &quot;Hibiscus-Branch&quot; fuer smsTAN/chipTAN">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Fr Mai  6 17:09:03 CEST 2011</I>
+    <P><UL>
+        
+        <LI>Nächste Nachricht: <A HREF="000217.html">[Hibiscus-devel] HBCI4Java &quot;Hibiscus-Branch&quot; fuer smsTAN/chipTAN
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#216">[ Datum ]</a>
+              <a href="thread.html#216">[ Thema ]</a>
+              <a href="subject.html#216">[ Betreff (Subject) ]</a>
+              <a href="author.html#216">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+[Ich habe das gleiche Posting gerade auch schon in die
+HBCI4Java-Mailingliste geschickt. Also Kopie auch nochmal hier, um mehr
+Entwickler zu erreichen]
+
+Hallo Liste,
+
+inzwischen ist ja absehbar, dass so ziemlich alle Banken ihre
+TAN-Verfahren in den naechsten 1-2 Monaten auf smsTAN/chipTAN umstellen
+werden oder bereits umgestellt haben. Im aktuellen HBCI4Java 2.5.12
+werden sie noch nicht vollstaendig unterstuetzt.
+
+ - smsTAN nur ohne Medienbezeichnung
+ - chipTAN nur manuell
+
+Ausserdem fehlt noch HHD 1.4 (welches die Postbank meines Wissens nach
+bereits verwendet, wodurch dort auch chipTAN manuell nicht funktioniert)
+
+Alles in allem sieht es dann in HBCI4Java mit der PIN/TAN-Unterstuetzung
+ziemlich truebe aus. Leider ist ausgerechnet dieses Verfahren auch noch
+das am weitesten verbreitete.
+
+Da Stefan ja mit HBCI4Java 3 beschaeftigt ist, habe ich im Hibiscus-CVS
+meinen aktuellen 2.5.12er Snapshot von HBCI4Java eingecheckt (konkret
+ist das r227 + eine Hand voll Patches) und will versuchen, dort die
+noetigsten Sachen nachzuruesten.
+
+<A HREF="http://cvs.berlios.de/cgi-bin/viewvc.cgi/hibiscus/hbci4java/">http://cvs.berlios.de/cgi-bin/viewvc.cgi/hibiscus/hbci4java/</A>
+
+@Stefan: Ich hoffe, du hast kein Problem damit ;)
+
+
+Im ersten Schritt will ich versuchen, die Unterstuetzung fuer die
+smsTAN-Medienbezeichnung einzubauen, das scheint mir noch der am
+wenigsten aufwaendige Teil zu sein.
+
+  - In hbci-${version.xml scheint es (bei hhd 1.2 und 1.3) schon
+    drin zu stehen (Parameter &quot;tanmedia&quot;)
+  - in GVTAN2Step.java, Zeile 70 steht schon ein TODO
+  - in AbstractPinTanPassport.java, Zeile 962 muesste noch hhd 1.4
+    beruecksichtigt werden (das aber spaeter)
+  - in AbstractPinTanPassport.java, ab Zeile 1034 muesste ich
+    wahrscheinlich den Callback mit der User-Abfrage fuer die
+    Handy-Bezeichnung (erstmal Freitext, keine Auswahlbox) reinbauen.
+    Wobei ich hier noch nicht weiss, wie ich erkennen kann, ob der
+    Callback noetig ist oder nicht (vermutlich in
+    GVTAN2Step#extractResults schauen, ob &quot;needtanmedia&quot; gesetzt ist).
+
+Wenn ich das hinkriege, will ich versuchen, hhd 1.4 nachzuruesten. Dann
+habe ich mich hoffentlich weit genug eingearbeitet, um mich an optisches
+chipTAN zu wagen.
+
+
+Ein echtes Testkonto hab ich zwar nicht. Aber meine Sparkasse bietet
+beide TAN-Verfahren an. Werde naechste Woche mal zur Filiale fahren und
+das freischalten lassen, damit ich testen kann.
+
+
+Lange Rede, kurzer Sinn. Wenn ihr Code-Schnippsel oder Patches fuer
+HBCI4Java 2.5.12 habt, die mit dem Thema zu tun haben oder anderweitig
+helfen koennt und wollt, wuerde ich mich ueber Unterstuetzung freuen.
+Mir helfen sicher auch schon ganz allgemeine Hinweise wie: &quot;Schau mal in
+Klasse XY, dort muesste das stehen&quot;.
+
+Gruss
+Olaf
+
+
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.16 (GNU/Linux)
+
+iQEcBAEBAgAGBQJNxA8PAAoJEFqO2c/A22xwKd8H/jHeSmjXjAzNUZhyKFCSKdRl
+Xoril3u85mcZnHPKSMCRrhPZR8umXCYGErakWrS/rvcfhEqYkKwdAurACqggAvQ/
+dsKsn6SPQ3k815/ODpp8MRXWXg9+eFRMYDDYqLQkHoqLw5j00qsT2VYRhcH6jIeb
+COTccHPk+r6ejvqmBPFcyO9IegAWwtDsKxV0Sa+tB8N7/CtAjKor46Q197vyABPw
+jKDwv+oLHeym150ASmNXjI77A/x4Gb3grIQ5KFEvITFrcS7Pc3g+b/RCvO7gRRA0
+m2BNyBHMv6AILE7GFW3KhGSRbUwWip6DHxLZMVSqjnFFix1XcKSz5Q1m0c/0LYU=
+=aCRG
+-----END PGP SIGNATURE-----
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Nächste Nachricht: <A HREF="000217.html">[Hibiscus-devel] HBCI4Java &quot;Hibiscus-Branch&quot; fuer smsTAN/chipTAN
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#216">[ Datum ]</a>
+              <a href="thread.html#216">[ Thema ]</a>
+              <a href="subject.html#216">[ Betreff (Subject)]</a>
+              <a href="author.html#216">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Saldo Abruf Probleme
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-February/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Saldo%20Abruf%20Probleme&In-Reply-To=%3C200702230011.55102.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000010.html">
+   <LINK REL="Next"  HREF="000012.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Saldo Abruf Probleme</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Saldo%20Abruf%20Probleme&In-Reply-To=%3C200702230011.55102.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Saldo Abruf Probleme">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Fr Feb 23 00:11:54 CET 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000010.html">[Hibiscus-devel] Saldo Abruf Probleme
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000012.html">[Hibiscus-devel] Saldo Abruf Probleme
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#11">[ Datum ]</a>
+              <a href="thread.html#11">[ Thema ]</a>
+              <a href="subject.html#11">[ Betreff (Subject) ]</a>
+              <a href="author.html#11">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> So langsam treibt mich meine Deutsche Bank in den Wahnsinn. Erst geben
+</I>&gt;<i> die mir ne RSA Karte, die mir nix nützt, dann habe ich mein Konto für
+</I>&gt;<i> PIN/TAN freischalten lassen und konnte genau einmal die Umsätze/Salden
+</I>&gt;<i> abrufen :-(
+</I>&gt;<i> Leider weiß ich noch nicht so viel mit den Meldungen anzufangen und
+</I>&gt;<i> hoffe auf eure Hilfe. Logfile is hier:
+</I>&gt;<i> <A HREF="https://devinno.kpln.de/jammerhund/jameica.log">https://devinno.kpln.de/jammerhund/jameica.log</A>
+</I>
+Die Bank antwortet hier mit einem lapidaren
+&quot;Keine gültige Kontoverbindung&quot;. Sehr hilfreich :-(
+Ansonsten sieht das Log aber korrekt aus. Ich kann
+jetzt nur spekulieren, was die Ursache sein koennte:
+Falsche URL oder falsche HBCI-Version schliesse ich
+aus - dann waerst du nicht so weit gekommen. Daher bleiben
+eigentlich nur BLZ, Kontonummer, Kunden-/Benutzerkennung.
+Es koennte sein, dass die Bank nur fuer HBCI vielleicht
+eine abweichende BLZ verwendet. Die Dresdner Bank macht
+das z.Bsp. auch so. Bei Kontonummer, Kunden-/Benutzerkennung
+koennte es sein, dass die ggf. links mit Nullen aufgefuellt
+werden muessen oder vielleicht bei der Kunden-/Benutzerkennung
+was falsches drin steht. 
+
+Ansonsten haette ich noch folgende 2 URLs, wo
+Hibiscus mit der Deutschen Bank funktioniert:
+
+<A HREF="http://www.onlinebanking-forum.de/phpBB2/viewtopic.php?p=32178">http://www.onlinebanking-forum.de/phpBB2/viewtopic.php?p=32178</A>
+<A HREF="http://www.willuhn.de/bugzilla/show_bug.cgi?id=288">http://www.willuhn.de/bugzilla/show_bug.cgi?id=288</A>
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000010.html">[Hibiscus-devel] Saldo Abruf Probleme
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000012.html">[Hibiscus-devel] Saldo Abruf Probleme
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#11">[ Datum ]</a>
+              <a href="thread.html#11">[ Thema ]</a>
+              <a href="subject.html#11">[ Betreff (Subject)]</a>
+              <a href="author.html#11">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

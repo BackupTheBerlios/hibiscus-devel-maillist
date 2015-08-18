@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Auswertung der Kategorien
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-March/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Auswertung%20der%20Kategorien&In-Reply-To=%3C45F175D5.6030601%40jost-net.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000019.html">
+   <LINK REL="Next"  HREF="000021.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Auswertung der Kategorien</H1>
+    <B>Heiner Jostkleigrewe</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Auswertung%20der%20Kategorien&In-Reply-To=%3C45F175D5.6030601%40jost-net.de%3E"
+           TITLE="[Hibiscus-devel] Auswertung der Kategorien">heiner at jost-net.de
+                  </A><BR>
+    <I>Fr Mär  9 15:57:25 CET 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000019.html">[Hibiscus-devel] Auswertung der Kategorien
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000021.html">[Hibiscus-devel] Auswertung der Kategorien
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#20">[ Datum ]</a>
+              <a href="thread.html#20">[ Thema ]</a>
+              <a href="subject.html#20">[ Betreff (Subject) ]</a>
+              <a href="author.html#20">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hallo Olaf,
+
+das nächste Problem: Ich habe die Umsatz-Typ-Tabelle um eine Spalte 
+erweitert (create.sql und update_1.6-1.7) und die entsprechenden 
+Erweiterungen in Hibiscus vorgenommen. Jetzt meldet mir Jameica beim Start:
+
+[Fri Mar 09 15:45:56 CET 
+2007][ERROR][de.willuhn.jameica.plugin.PluginLoader.init] 
+de.willuhn.util.ApplicationException: Fehler beim Prüfung der 
+Datenbank-Integrität, Plugin wird aus Sicherheitsgründen deaktiviert
+    at de.willuhn.jameica.hbci.HBCI.init(HBCI.java:177)
+    at 
+de.willuhn.jameica.plugin.PluginLoader.initPlugin(PluginLoader.java:220)
+    at de.willuhn.jameica.plugin.PluginLoader.init(PluginLoader.java:136)
+    at 
+de.willuhn.jameica.system.Application.getPluginLoader(Application.java:391)
+    at de.willuhn.jameica.system.Application.init(Application.java:234)
+    at 
+de.willuhn.jameica.system.Application.newInstance(Application.java:91)
+    at de.willuhn.jameica.Main.main(Main.java:78)
+Caused by: java.lang.Exception: database checksum does not match any 
+known version: EdG6qLQ0SXRgJ8QBtz5Vrg==
+    at de.willuhn.jameica.hbci.HBCI.checkConsistency(HBCI.java:113)
+    at de.willuhn.jameica.hbci.HBCI.init(HBCI.java:173)
+    ... 6 more
+
+
+Was kann ich tun?
+
+Wie ist das eigentlich generell mit den DB-Update geregelt? Meines 
+Wissens wird die Datei update-alterversion.neueversion.sql nur 
+ausgeführt, wenn Jameica feststellt, das ein Versionswechsel 
+stattfindet. Was sollen Nutzer der Nightly-Builds dann machen?
+
+Heiner
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000019.html">[Hibiscus-devel] Auswertung der Kategorien
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000021.html">[Hibiscus-devel] Auswertung der Kategorien
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#20">[ Datum ]</a>
+              <a href="thread.html#20">[ Thema ]</a>
+              <a href="subject.html#20">[ Betreff (Subject)]</a>
+              <a href="author.html#20">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

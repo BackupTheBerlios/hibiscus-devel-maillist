@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Trennung von de.willuhn.datasource aus Jameica	(Teil 2)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-April/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Trennung%20von%20de.willuhn.datasource%20aus%20Jameica%0A%09%28Teil%202%29&In-Reply-To=%3C200704110140.36425.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000045.html">
+   <LINK REL="Next"  HREF="000048.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Trennung von de.willuhn.datasource aus Jameica	(Teil 2)</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Trennung%20von%20de.willuhn.datasource%20aus%20Jameica%0A%09%28Teil%202%29&In-Reply-To=%3C200704110140.36425.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Trennung von de.willuhn.datasource aus Jameica	(Teil 2)">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mi Apr 11 01:40:35 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000045.html">[Hibiscus-devel] [Jameica-Pluginloader] Abhaengigkeiten von Plugins
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000048.html">[Hibiscus-devel] Trennung von de.willuhn.datasource aus Jameica (Teil 2)
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#46">[ Datum ]</a>
+              <a href="thread.html#46">[ Thema ]</a>
+              <a href="subject.html#46">[ Betreff (Subject) ]</a>
+              <a href="author.html#46">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> Mit &quot;TablePart&quot; werde ich genauso vorgehen. Anschliessend
+</I>&gt;<i> wird man man die Jameica-GUI-Komponenten mit relativ beliebigen
+</I>&gt;<i> Daten fuettern koennen.
+</I>
+Heute nun Teil 2 - ich habe gerade die direkten Abhaengigkeiten
+von GenericObject und GenericIterator aus TablePart entfernt.
+Damit laesst sich eine Tabelle nun auch mit einer allgemeinen
+jaba.util.List mit Standard-Java-Beans befuellen. Hierzu waren
+jedoch einige kleine API-Aenderungen notwendig. Falls es
+bei euren Plugins nun also zu Compiler-Fehlern kommt, hier
+die Aenderungen im Detail:
+
+I) TablePart
+
+1) Neuer Konstruktor:
+   Neben &quot;public TablePart(GenericIterator, Action)&quot; gibt
+   es nun einen zusaetzlichen generischen Konstruktor
+   &quot;public TablePart(java.util.List, Action)&quot;
+
+2) Die beiden Funktionen
+
+   &quot;addItem(GenericObject, int)&quot;
+   &quot;addItem(GenericObject)&quot;
+
+   wurden verallgemeinert zu
+
+   &quot;addItem(Object, int)&quot;
+   &quot;addItem(Object)&quot;
+
+   Hier sollte es also keine Compile-Fehler geben
+
+3) Die Funktion
+
+   &quot;removeItem(GenericObject)&quot;
+
+   wurde verallgemeinert zu
+
+   &quot;removeItem(Object)&quot;
+
+   Sollte ebenfalls keine Compile-Fehler geben
+
+4) Die beiden Funktionen
+
+   &quot;select(GenericObject[])&quot;
+   &quot;select(GenericObject)&quot;
+
+   wurden verallgemeinert zu
+
+   &quot;select(Object[])&quot;
+   &quot;select(Object)&quot;
+
+   Ebenfalls keine Compile-Fehler
+
+5) Die Funktion
+
+   &quot;getItems()&quot; liefert nun nicht mehr
+   einen &quot;GenericIterator&quot; sondern eine
+   Liste vom Typ &quot;java.util.List&quot;. Falls ihr
+   die Funktion benutzt, wird es einen Fehler
+   geben. Das laesst sich jedoch leicht
+   anpassen, da beide Klassen recht aehnlich sind.
+
+
+II) TableChangeListener
+
+1) Die Funktion
+
+   &quot;itemChanged(GenericObject, String, String)&quot;
+
+   wurde verallgemeinert zu
+
+   &quot;itemChanged(Object, String, String)&quot;
+
+   Falls die Klasse benutzt wird, ist in der
+   Implementierung nun also ggf. ein explizites
+   Casten auf &quot;GenericObject&quot; noetig.
+
+
+Das war's schon. Wirklich relevant sind also
+nur I/5 und II/1. Und auch dort sind die Aenderungen
+eher marginal.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000045.html">[Hibiscus-devel] [Jameica-Pluginloader] Abhaengigkeiten von Plugins
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000048.html">[Hibiscus-devel] Trennung von de.willuhn.datasource aus Jameica (Teil 2)
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#46">[ Datum ]</a>
+              <a href="thread.html#46">[ Thema ]</a>
+              <a href="subject.html#46">[ Betreff (Subject)]</a>
+              <a href="author.html#46">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

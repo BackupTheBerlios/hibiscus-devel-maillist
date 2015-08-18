@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] xmlrpc
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2011-June/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20xmlrpc&In-Reply-To=%3C1409868087.16449.1309171457463.JavaMail.root%40speicher.io%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000225.html">
+   <LINK REL="Next"  HREF="000227.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] xmlrpc</H1>
+    <B>Tobias Hintze</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20xmlrpc&In-Reply-To=%3C1409868087.16449.1309171457463.JavaMail.root%40speicher.io%3E"
+           TITLE="[Hibiscus-devel] xmlrpc">th-hibiscus-g2QG2vSrKt at thzn.de
+                  </A><BR>
+    <I>Mo Jun 27 12:44:17 CEST 2011</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000225.html">[Hibiscus-devel] xmlrpc
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000227.html">[Hibiscus-devel] xmlrpc
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#226">[ Datum ]</a>
+              <a href="thread.html#226">[ Thema ]</a>
+              <a href="subject.html#226">[ Betreff (Subject) ]</a>
+              <a href="author.html#226">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>
+
+----- Original Message -----
+&gt;<i> &gt; sind IDs der ueberweisungen, wie sie per find-methode
+</I>&gt;<i> &gt; zurueckgegeben werden eindeutig ueber die gesamte zeit
+</I>&gt;<i> &gt; in der das konto im hibiscus konfiguriert ist?
+</I>&gt;<i> 
+</I>&gt;<i> Ja. Die IDs sind aber nicht nur innerhalb des Kontos eindeutig sondern
+</I>&gt;<i> innerhalb der gesamten Hibiscus-Installation.
+</I>
+die konten-uebergreifende eindeutigkeit hatte ich schon
+vorausgesetzt :)
+
+&gt;<i> &gt; ist es moeglich die lokalisierung der geld-betraege auf
+</I>&gt;<i> &gt; POSIX zu setzen? im moment scheine ich mit tausender-
+</I>&gt;<i> &gt; trennzeichen und &quot;,&quot; als dezimal-trenner in einem
+</I>&gt;<i> &gt; deutschen locale zu sein. schoener waere es kein
+</I>&gt;<i> &gt; tausender-trennzeichen zu haben und einen &quot;.&quot; als
+</I>&gt;<i> &gt; dezimal-zeichen zu erhalten. so waeren die zahlen
+</I>&gt;<i> &gt; gleich weiterverwertbar...
+</I>&gt;<i> 
+</I>&gt;<i> Das ist nicht konfigurierbar. Da HBCI eine rein deutsche Erfindung
+</I>&gt;<i> ist, habe ich Locales an der Stelle nicht vorgesehen.
+</I>
+meines erachtens ist eine ausgabe wie &quot;1.234,56&quot; ja 
+durchaus eine locale-behaftete ausgabe. vielleicht muss
+ich mal in den code schauen, um zu verstehen, dass
+dies nicht so ist.
+
+&gt;<i> 
+</I>&gt;<i> &gt; beim anlegen einer ueberweisung, erhalte ich ein
+</I>&gt;<i> &gt; leeres tupel im erfolgsfall und sonst fehlermeldungen.
+</I>&gt;<i> &gt; waere es nicht sinnvoll bzw. moeglich hier die ID
+</I>&gt;<i> &gt; der angelegten ueberweisung zu erhalten?
+</I>&gt;<i> 
+</I>&gt;<i> Siehe
+</I>&gt;<i> <A HREF="http://hibiscus.berlios.de/doku.php?id=develop:xmlrpc#null-support_aktivieren_deaktivieren">http://hibiscus.berlios.de/doku.php?id=develop:xmlrpc#null-support_aktivieren_deaktivieren</A>
+</I>
+also muss ich hibiscus eine fehlinformation (supports.null=false)
+unterschieben, damit ich an die gewuenschte information (ID) gelange,
+obwohl ich sehr wohl mit NULL umgehen koennte?
+war das so gemeint?
+
+gruss,
+th
+--
+
+&gt;<i> 
+</I>&gt;<i> Gruss
+</I>&gt;<i> Olaf
+</I>
+-- 
+Tobias Hintze
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000225.html">[Hibiscus-devel] xmlrpc
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000227.html">[Hibiscus-devel] xmlrpc
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#226">[ Datum ]</a>
+              <a href="thread.html#226">[ Thema ]</a>
+              <a href="subject.html#226">[ Betreff (Subject)]</a>
+              <a href="author.html#226">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

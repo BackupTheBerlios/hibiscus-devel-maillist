@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Umsaetze mit und ohne Umsatztyp
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2009-February/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Umsaetze%20mit%20und%20ohne%20Umsatztyp&In-Reply-To=%3C1234787930-sup-2412%40h984274.serverkompetenz.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000170.html">
+   <LINK REL="Next"  HREF="000172.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Umsaetze mit und ohne Umsatztyp</H1>
+    <B>Tyberius Prime</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Umsaetze%20mit%20und%20ohne%20Umsatztyp&In-Reply-To=%3C1234787930-sup-2412%40h984274.serverkompetenz.net%3E"
+           TITLE="[Hibiscus-devel] Umsaetze mit und ohne Umsatztyp">tyberius_prime at coonabibba.de
+                  </A><BR>
+    <I>Mo Feb 16 15:03:17 CET 2009</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000170.html">[Hibiscus-devel] Umsaetze mit und ohne Umsatztyp
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000172.html">[Hibiscus-devel] Umsaetze mit und ohne Umsatztyp
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#171">[ Datum ]</a>
+              <a href="thread.html#171">[ Thema ]</a>
+              <a href="subject.html#171">[ Betreff (Subject) ]</a>
+              <a href="author.html#171">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+danke fuer Deine Antworten.
+
+&gt;<i> &gt; ich wollt am Wochende mal einen Regelerner fuer Hibiscus
+</I>&gt;<i> &gt; schreiben (schaut sich bisherige Transaktionen und ihre
+</I>&gt;<i> &gt; Umsatztypen an, und schlaegt fuer unkategorisierte dann
+</I>&gt;<i> &gt; passende vor),
+</I>&gt;<i> 
+</I>&gt;<i> Klingt interessant. Hast du dir schon Gedanken gemacht, wie
+</I>&gt;<i> diese Vorschlaege dem User praesentiert werden sollen?
+</I>
+Erklaerungstext, Liste mit Umsaetzen mit Vorschlag 
+und der Moeglichkeit, diese zu ueberschreiben, Speichernknopf.
+
+Evtl. auch Checkboxen fuer 'akzeptieren/nicht akzeptieren' einzelner
+Vorschlaege.
+
+&gt;<i> 
+</I>&gt;<i> &gt; bin aber in einen Bug (oder ein Missverstaendniss) beim
+</I>&gt;<i> &gt; abfragen der Umsaetze gelaufen.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Ich mache
+</I>&gt;<i> &gt; DBIterator test = UmsatzUtil.getUmsaetzeBackwards();
+</I>&gt;<i> &gt; test.addFilter(&quot;umsatztyp_id is NULL&quot;);
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; bkomme aber trotzdem Umsaetze zurueck,
+</I>&gt;<i> &gt; wo test.getUmsatzTyp() != null ist.
+</I>&gt;<i> 
+</I>&gt;<i> Hibiscus kennt ja zwei Arten von Kategorie-Zuordnungen.
+</I>&gt;<i> Festzugeordnet (in der Datenbank) und on-the-fly zugeordnet
+</I>&gt;<i> (mittels Suchbegriff). Bei letzteren ist umsatztyp_id zwar
+</I>&gt;<i> NULL, dennoch liefert getUmsatzTyp() u.U. eine Kategorie
+</I>&gt;<i> zurueck. Naemlich dann, wenn ein Suchbegriff zutrifft.
+</I>&gt;<i> Heisst: All jene Umaetze, bei denen umsatztyp_id zwar NULL
+</I>&gt;<i> ist, jedoch trotzdem eine Kategorie zurueckgeliefert wird,
+</I>&gt;<i> sind on-the-fly zugeordnete.
+</I>
+Ok. Das heisst ich muss meinen eigenen Iterator schnitzen um mit
+der Kontoauszugstabelle die nicht zugeordneten anzuzeigen.
+Gibt's da ein Beispiel, an dem ich mich orientieren kann?
+
+Gruss
+Tyberius
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000170.html">[Hibiscus-devel] Umsaetze mit und ohne Umsatztyp
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000172.html">[Hibiscus-devel] Umsaetze mit und ohne Umsatztyp
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#171">[ Datum ]</a>
+              <a href="thread.html#171">[ Thema ]</a>
+              <a href="subject.html#171">[ Betreff (Subject)]</a>
+              <a href="author.html#171">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

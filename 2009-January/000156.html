@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Jameica Update Server
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2009-January/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Jameica%20Update%20Server&In-Reply-To=%3C49628370.2030201%40emedia-solutions-wolf.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000155.html">
+   <LINK REL="Next"  HREF="000157.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Jameica Update Server</H1>
+    <B>Markus Wolf</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Jameica%20Update%20Server&In-Reply-To=%3C49628370.2030201%40emedia-solutions-wolf.de%3E"
+           TITLE="[Hibiscus-devel] Jameica Update Server">markus at emedia-solutions-wolf.de
+                  </A><BR>
+    <I>Mo Jan  5 23:02:24 CET 2009</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000155.html">[Hibiscus-devel] Hibiscus 1.9 aktualisiert (wegen Bug 684)
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000157.html">[Hibiscus-devel] [jameica.update] Signieren von Plugins
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#156">[ Datum ]</a>
+              <a href="thread.html#156">[ Thema ]</a>
+              <a href="subject.html#156">[ Betreff (Subject) ]</a>
+              <a href="author.html#156">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hallo,
+
+&gt;<i> Das ganze wird unter GPL veröffentlicht.
+</I>&gt;<i> Derzeitig ist das der erste Entwicklungsstand und nicht für produktive
+</I>&gt;<i> Umgebungen geeignet, da noch eine Authenfizierung zur Admin-Oberfläche
+</I>&gt;<i> fehlt.
+</I>&gt;<i> Ausserdem ist die eingesetzte H2-Datenbank derzeit eine Memory-Datenbank
+</I>&gt;<i> und daher wird mit jedem Server-Neustart alles gelöscht.
+</I>&gt;<i> 
+</I>ich habe das etwas weiter gebastelt.
+Der Server hat jetzt eine einfache User-Authentifizierung und die
+Datenbank kann konfiguriert werden.
+Damit werde ich dann in den nächsten Tagen ein Beta-Release zusammenstellen.
+
+Für alle Interessierten:
+* In der users.properties-Datei im WEB-INF Verzeichnis werden die
+User/Passwörter konfiguriert. Default ist admin/admin.
+* In der datasource.properties-Datei im WEB-INF Verzeichnis wird die
+Datenbank konfiguriert. Es sind Beispiele für H2 (in-memory und im
+home-verzeichnis), MySQL und PostgreSQL vorhanden.
+
+&gt;<i> Folgende Funktionen sind im Moment vorhanden:
+</I>&gt;<i> * Upload von Plugins
+</I>&gt;<i> * Automatische Erstellung der repository.xml
+</I>&gt;<i> * Automatisch Extraktion der plugin.xml aus den hochgeladenen Plugins
+</I>&gt;<i> mit Anpassung der Download-URL in der plugin.xml
+</I>&gt;<i> 
+</I>&gt;<i> Hier ist der erste Source-Code.
+</I>&gt;<i> <A HREF="https://secure.emedia-solutions-wolf.de/svn/jameica-update-server/trunk/">https://secure.emedia-solutions-wolf.de/svn/jameica-update-server/trunk/</A>
+</I>&gt;<i> 
+</I>
+Grüße
+Markus Wolf
+- --
+&gt;<i> emedia-solutions wolf    web: <A HREF="http://www.emedia-solutions-wolf.de">http://www.emedia-solutions-wolf.de</A>
+</I>&gt;<i> Eimsbüttler Straße 115  mail: <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">markus at emedia-solutions-wolf.de</A>
+</I>&gt;<i> 22769 Hamburg            pgp: <A HREF="http://wwwkeys.de.pgp.net">http://wwwkeys.de.pgp.net</A>
+</I>&gt;<i> +49 40 432 635 83      taxid: 57 / 126 / 16123
+</I>-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - <A HREF="http://enigmail.mozdev.org">http://enigmail.mozdev.org</A>
+
+iEYEARECAAYFAklig3AACgkQeyJE91ndMG6eIACfXKpJKwY5qe9JgwofkaF2aJ42
+zJAAnRMjeio4ifkU/6IMJBw49GoHzdVn
+=DgQc
+-----END PGP SIGNATURE-----
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000155.html">[Hibiscus-devel] Hibiscus 1.9 aktualisiert (wegen Bug 684)
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000157.html">[Hibiscus-devel] [jameica.update] Signieren von Plugins
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#156">[ Datum ]</a>
+              <a href="thread.html#156">[ Thema ]</a>
+              <a href="subject.html#156">[ Betreff (Subject)]</a>
+              <a href="author.html#156">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

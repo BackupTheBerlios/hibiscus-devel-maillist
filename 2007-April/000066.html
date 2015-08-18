@@ -1,0 +1,230 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Release-Koordination
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-April/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Release-Koordination&In-Reply-To=%3CB65D8B09-8806-400C-A352-717C5A4A8F29%40koras.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000065.html">
+   <LINK REL="Next"  HREF="000067.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Release-Koordination</H1>
+    <B>Jürgen Koras</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Release-Koordination&In-Reply-To=%3CB65D8B09-8806-400C-A352-717C5A4A8F29%40koras.de%3E"
+           TITLE="[Hibiscus-devel] Release-Koordination">Juergen at koras.de
+                  </A><BR>
+    <I>Mi Apr 25 21:17:54 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000065.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000067.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#66">[ Datum ]</a>
+              <a href="thread.html#66">[ Thema ]</a>
+              <a href="subject.html#66">[ Betreff (Subject) ]</a>
+              <a href="author.html#66">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hallo,
+
+ich habe mich hierzu einmal ein wenig mit dem Debugger durch den Code  
+gekämpft. Leider kenne ich SWT zu wenig um wirklich die Lösung  
+gefunden zu haben.
+So viel:
+- ich kann das Problem reproduzieren.
+- es scheint sich nicht nur auf PDF zu beschränken, sporadisch tritt  
+es auch bei CSV auf.
+- Meine Vermutung ist, dass es sich nicht um ein Mac-Problem handelt,  
+sondern um ein Problem bei echten Mehrprozessorsystemen. Der Code  
+läuft immer bis in die Klasse &quot;ExportDialog&quot; in die Methode &quot;export&quot;.  
+Ab Zeile 202 wird ein BackgroundTask erzeugt. Dieser wird nicht  
+ausgeführt, und an dieser Stelle weiß ich eben nicht mehr warum. Ich  
+vermute hier irgendwo einen Deadlock oder eine Race-Condition. Ich  
+habe mal einen Thread-Dump gemacht und paste den unten in diese Mail.
+
+hope this helps
+viele Grüße
+Jürgen
+
+
+
+&gt;<i> Was mich noch wirklich wurmt, sind:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="https://www.willuhn.de/bugzilla/show_bug.cgi?id=359">https://www.willuhn.de/bugzilla/show_bug.cgi?id=359</A>
+</I>&gt;<i>   Der Haenger in MacOS beim Erstellen eines PDF-Exports.
+</I>&gt;<i>   Mangels Mac kann man leider schlecht reproduzieren.
+</I>
+
+Full thread dump Java HotSpot(TM) Client VM (1.5.0_07-87 mixed mode):
+
+&quot;Mckoi - Background Journaling&quot; daemon prio=5 tid=0x0054a0c0  
+nid=0x1975200 in Object.wait() [0xf0911000..0xf0911b30]
+	at java.lang.Object.wait(Native Method)
+	- waiting on &lt;0x0719e5c8&gt; (a com.mckoi.store.JournalledSystem 
+$JournalingThread)
+	at java.lang.Object.wait(Object.java:474)
+	at com.mckoi.store.JournalledSystem$JournalingThread.run 
+(JournalledSystem.java:1783)
+	- locked &lt;0x0719e5c8&gt; (a com.mckoi.store.JournalledSystem 
+$JournalingThread)
+
+&quot;date watcher for statusbar calendar&quot; prio=5 tid=0x00545990  
+nid=0x193d600 in Object.wait() [0xf0a94000..0xf0a94b30]
+	at java.lang.Object.wait(Native Method)
+	- waiting on &lt;0x0748b3d8&gt; (a org.eclipse.swt.widgets.RunnableLock)
+	at java.lang.Object.wait(Object.java:474)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:169)
+	- locked &lt;0x0748b3d8&gt; (a org.eclipse.swt.widgets.RunnableLock)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:3825)
+	at de.willuhn.jameica.gui.StatusBarCalendarItem$Worker.run 
+(StatusBarCalendarItem.java:113)
+
+&quot;Jameica Messaging Worker Thread&quot; prio=5 tid=0x00537d20 nid=0x192ae00  
+waiting on condition [0xf0a13000..0xf0a13b30]
+	at java.lang.Thread.sleep(Native Method)
+	at de.willuhn.jameica.messaging.MessagingFactory$Worker.run 
+(MessagingFactory.java:290)
+
+&quot;GC Daemon&quot; daemon prio=2 tid=0x0053fa80 nid=0x191e400 in Object.wait 
+() [0xf0992000..0xf0992b30]
+	at java.lang.Object.wait(Native Method)
+	- waiting on &lt;0x06f89c38&gt; (a sun.misc.GC$LatencyLock)
+	at sun.misc.GC$Daemon.run(GC.java:100)
+	- locked &lt;0x06f89c38&gt; (a sun.misc.GC$LatencyLock)
+
+&quot;RMI Reaper&quot; prio=5 tid=0x0053b290 nid=0x191d800 in Object.wait()  
+[0xf0890000..0xf0890b30]
+	at java.lang.Object.wait(Native Method)
+	- waiting on &lt;0x06f89c40&gt; (a java.lang.ref.ReferenceQueue$Lock)
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:116)
+	- locked &lt;0x06f89c40&gt; (a java.lang.ref.ReferenceQueue$Lock)
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:132)
+	at sun.rmi.transport.ObjectTable$Reaper.run(ObjectTable.java:336)
+	at java.lang.Thread.run(Thread.java:613)
+
+&quot;Timer-1&quot; daemon prio=5 tid=0x0053ae40 nid=0x191d400 in Object.wait()  
+[0xf080f000..0xf080fb30]
+	at java.lang.Object.wait(Native Method)
+	- waiting on &lt;0x06f89c60&gt; (a java.util.TaskQueue)
+	at java.lang.Object.wait(Object.java:474)
+	at java.util.TimerThread.mainLoop(Timer.java:483)
+	- locked &lt;0x06f89c60&gt; (a java.util.TaskQueue)
+	at java.util.TimerThread.run(Timer.java:462)
+
+&quot;RMI TCP Accept-0&quot; daemon prio=5 tid=0x0053a330 nid=0x18d6200  
+runnable [0xf078e000..0xf078eb30]
+	at java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.net.PlainSocketImpl.accept(PlainSocketImpl.java:384)
+	- locked &lt;0x06f89c80&gt; (a java.net.SocksSocketImpl)
+	at java.net.ServerSocket.implAccept(ServerSocket.java:450)
+	at java.net.ServerSocket.accept(ServerSocket.java:421)
+	at sun.rmi.transport.tcp.TCPTransport.run(TCPTransport.java:340)
+	at java.lang.Thread.run(Thread.java:613)
+
+&quot;Session Worker Thread&quot; prio=5 tid=0x0051e830 nid=0x18b0000 waiting  
+on condition [0xf070d000..0xf070db30]
+	at java.lang.Thread.sleep(Native Method)
+	at de.willuhn.util.Session$Worker.run(Session.java:302)
+
+&quot;Timer-0&quot; daemon prio=5 tid=0x0051a330 nid=0x1898c00 in Object.wait()  
+[0xf068c000..0xf068cb30]
+	at java.lang.Object.wait(Native Method)
+	- waiting on &lt;0x06cb80e0&gt; (a java.util.TaskQueue)
+	at java.util.TimerThread.mainLoop(Timer.java:509)
+	- locked &lt;0x06cb80e0&gt; (a java.util.TaskQueue)
+	at java.util.TimerThread.run(Timer.java:462)
+
+&quot;Logger-Thread&quot; daemon prio=5 tid=0x00517db0 nid=0x1863400 waiting on  
+condition [0xf060b000..0xf060bb30]
+	at java.lang.Thread.sleep(Native Method)
+	at de.willuhn.logging.Logger$LoggerThread.run(Logger.java:368)
+
+&quot;Low Memory Detector&quot; daemon prio=5 tid=0x00511990 nid=0x1818c00  
+runnable [0x00000000..0x00000000]
+
+&quot;CompilerThread0&quot; daemon prio=9 tid=0x00510db0 nid=0x1818800 waiting  
+on condition [0x00000000..0xf0488450]
+
+&quot;Signal Dispatcher&quot; daemon prio=9 tid=0x005108d0 nid=0x1814200  
+waiting on condition [0x00000000..0x00000000]
+
+&quot;JDWP Command Reader&quot; daemon prio=5 tid=0x0050ee50 nid=0x1813e00  
+runnable [0x00000000..0x00000000]
+
+&quot;JDWP Event Helper Thread&quot; daemon prio=5 tid=0x0050e5b0 nid=0x1813a00  
+runnable [0x00000000..0x00000000]
+
+&quot;JDWP Transport Listener: dt_socket&quot; daemon prio=5 tid=0x0050d870  
+nid=0x1813600 runnable [0x00000000..0xf0284800]
+
+&quot;Finalizer&quot; daemon prio=8 tid=0x005090c0 nid=0x1813200 in Object.wait 
+() [0xf0203000..0xf0203b30]
+	at java.lang.Object.wait(Native Method)
+	- waiting on &lt;0x06c9e468&gt; (a java.lang.ref.ReferenceQueue$Lock)
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:116)
+	- locked &lt;0x06c9e468&gt; (a java.lang.ref.ReferenceQueue$Lock)
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:132)
+	at java.lang.ref.Finalizer$FinalizerThread.run(Finalizer.java:159)
+
+&quot;Reference Handler&quot; daemon prio=10 tid=0x00508cd0 nid=0x180f400 in  
+Object.wait() [0xf0182000..0xf0182b30]
+	at java.lang.Object.wait(Native Method)
+	- waiting on &lt;0x06c9e488&gt; (a java.lang.ref.Reference$Lock)
+	at java.lang.Object.wait(Object.java:474)
+	at java.lang.ref.Reference$ReferenceHandler.run(Reference.java:116)
+	- locked &lt;0x06c9e488&gt; (a java.lang.ref.Reference$Lock)
+
+&quot;main&quot; prio=5 tid=0x00501650 nid=0xa000ed88 runnable  
+[0xbfffc000..0xbfffdf30]
+	at org.eclipse.swt.internal.carbon.OS.CallNextEventHandler(Native  
+Method)
+	at org.eclipse.swt.widgets.Widget.callPaintEventHandler(Widget.java: 
+170)
+	at org.eclipse.swt.widgets.Widget.kEventControlDraw(Widget.java:1000)
+	at org.eclipse.swt.widgets.Canvas.kEventControlDraw(Canvas.java:137)
+	at org.eclipse.swt.widgets.Widget.controlProc(Widget.java:352)
+	at org.eclipse.swt.widgets.Display.controlProc(Display.java:838)
+	at org.eclipse.swt.internal.carbon.OS.ReceiveNextEvent(Native Method)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:2905)
+	at de.willuhn.jameica.gui.GUI.loop(GUI.java:657)
+	at de.willuhn.jameica.gui.GUI.init(GUI.java:212)
+	at de.willuhn.jameica.system.Application.init(Application.java:267)
+	at de.willuhn.jameica.system.Application.newInstance 
+(Application.java:91)
+	at de.willuhn.jameica.Main.main(Main.java:78)
+
+&quot;VM Thread&quot; prio=9 tid=0x005084d0 nid=0x1803c00 runnable
+
+&quot;VM Periodic Task Thread&quot; prio=9 tid=0x00513200 nid=0x1819000 waiting  
+on condition
+
+&quot;Exception Catcher Thread&quot; prio=10 tid=0x00501860 nid=0x1805200 runnable
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000065.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000067.html">[Hibiscus-devel] Release-Koordination
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#66">[ Datum ]</a>
+              <a href="thread.html#66">[ Thema ]</a>
+              <a href="subject.html#66">[ Betreff (Subject)]</a>
+              <a href="author.html#66">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

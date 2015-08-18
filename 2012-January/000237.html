@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] klassiker  java.lang.NullPointerException
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2012-January/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20klassiker%20%20java.lang.NullPointerException&In-Reply-To=%3Cebbfb91bc984abb1b7385b1682a628dd%40www.willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000236.html">
+   <LINK REL="Next"  HREF="000238.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] klassiker  java.lang.NullPointerException</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20klassiker%20%20java.lang.NullPointerException&In-Reply-To=%3Cebbfb91bc984abb1b7385b1682a628dd%40www.willuhn.de%3E"
+           TITLE="[Hibiscus-devel] klassiker  java.lang.NullPointerException">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Di Jan 10 16:03:15 CET 2012</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000236.html">[Hibiscus-devel] klassiker  java.lang.NullPointerException
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000238.html">[Hibiscus-devel] klassiker  java.lang.NullPointerException
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#237">[ Datum ]</a>
+              <a href="thread.html#237">[ Thema ]</a>
+              <a href="subject.html#237">[ Betreff (Subject) ]</a>
+              <a href="author.html#237">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>&gt;<i> Also, ich habe mal versucht den Stacktrace in Java zum sprechen zu
+</I>&gt;<i> bringen, bin aber noch nicht wirklich schlauer, das 
+</I>&gt;<i> Diagnose-Protokoll
+</I>&gt;<i> habe ich angehangen.
+</I>
+Der Stacktrace passt nicht zu deinem aktuellen Code:
+
+java.lang.NullPointerException
+   at de.willuhn.jameica.gui.util.Container.addInput(Container.java:108)
+   at reibach.gui.view.CustomerDetail.bind(CustomerDetail.java:46)
+   at de.willuhn.jameica.gui.GUI$4.run(GUI.java:605)
+
+In Zeile 46 in CustomerDetail.java steht aber gar nichts:
+<A HREF="https://github.com/reibach/reibach/blob/master/src/reibach/gui/view/CustomerDetail.java">https://github.com/reibach/reibach/blob/master/src/reibach/gui/view/CustomerDetail.java</A>
+
+Gruss
+Olaf
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000236.html">[Hibiscus-devel] klassiker  java.lang.NullPointerException
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000238.html">[Hibiscus-devel] klassiker  java.lang.NullPointerException
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#237">[ Datum ]</a>
+              <a href="thread.html#237">[ Thema ]</a>
+              <a href="subject.html#237">[ Betreff (Subject)]</a>
+              <a href="author.html#237">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

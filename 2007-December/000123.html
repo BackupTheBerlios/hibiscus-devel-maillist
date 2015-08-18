@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] [Weekly-Digest] KW 50
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-December/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%5BWeekly-Digest%5D%20KW%2050&In-Reply-To=%3C200712121838.17672.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] [Weekly-Digest] KW 50</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%5BWeekly-Digest%5D%20KW%2050&In-Reply-To=%3C200712121838.17672.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] [Weekly-Digest] KW 50">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mi Dez 12 18:38:17 CET 2007</I>
+    <P><UL>
+        
+        
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#123">[ Datum ]</a>
+              <a href="thread.html#123">[ Thema ]</a>
+              <a href="subject.html#123">[ Betreff (Subject) ]</a>
+              <a href="author.html#123">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+heute mal wieder ein Weekly-Digest, weil sich in letzter
+Zeit eine Menge Sachen getan haben:
+
+1) Ich habe in den Eclipse-Projekten den RMI-Compiler-Aufruf
+   (rmic.xml) entfernt, da ich inzwischen mit Java 1.5 arbeite
+   und diese Java-Version die RMI-Stubs &quot;on the fly&quot; erzeugen
+   kann. Das erleichert den Entwicklungs-Prozess ungemein, da
+   man nach Aenderungen an RMI-Interfaces nicht mehr
+   &quot;Project-&gt;Clean...&quot; aufrufen muss, um die RMI-Stubs neu
+   zu erzeugen.
+   In den Builf-Scripts fuer die Releases und Nightly-Builds
+   (build.xml) lass ich es aber trotzdem drin, damit die RMI-Stubs
+   weiterhin mit ausgeliefert werden und somit auch noch unter
+   Java 1.4 laufen
+
+2) Stefan findet wieder Zeit fuer HBCI4Java und konnte in den
+   letzten Tagen eine Reihe von Tests durchfuehren und Bugfixes
+   einspielen, die insbesondere die HBCI-Version FinTS3 betreffen.
+   Von HBCI4Java gibts zwar noch keine neue Release - aber er
+   hat mir die gefixten Versionen per Mail geschickt und ich habe
+   sie in's Hibiscus-CVS uebernommen. Die Nightly-Builds enthalten
+   also bereits die neue HBCI4Java-Version. Siehe hierzu auch
+   <A HREF="http://www.willuhn.de/blog/index.php?/archives/337-Hibiscus-Debugging-Session-fuer-FinTS3-bei-Volksbanken-GAD.html">http://www.willuhn.de/blog/index.php?/archives/337-Hibiscus-Debugging-Session-fuer-FinTS3-bei-Volksbanken-GAD.html</A>
+
+3) Zusammen mit Heiner haben wir einen neuen Update-Mechanismus
+   fuer die Datenbanken von Plugins gebaut. Damit koennen
+   Aenderungen/Erweiterungen an der Datenbank einfacher
+   durchgefuehrt werden. Selbst bei der Verwendung von MySQL
+   werden nun Datenbank-Updates vollautomatisch durchgefuehrt.
+   Lediglich das Update plugins/hibiscus/sql/mysql-update_1.7-1.8.sql
+   muss noch manuell eingespielt werden. Alle Folge-Updates
+   gehen dann automatisch.
+
+4) Hibiscus enthaelt nun Unterstuetzung fuer &quot;Unterkontonummern&quot;.
+   Einige Banken benutzen diese, um z.Bsp. Giro-Konto von Tagesgeld-
+   Konto zu unterscheiden. Der Bug-Report hierzu:
+   <A HREF="https://www.willuhn.de/bugzilla/show_bug.cgi?id=355">https://www.willuhn.de/bugzilla/show_bug.cgi?id=355</A>
+
+5) Weil das mit den Datenbank-Updates jetzt so schoen einfach
+   geht, habe ich mit einem neuen Hibiscus-Feature begonnen:
+   Eine &quot;Offene Posten-Verwaltung&quot;. Angenommen, man erwartet
+   von jemandem Geld (z.Bsp. Bezahlung einer Rechnung). Dann wird
+   man kuenftig einen &quot;Offenen Posten&quot; anlegen koennen, in dem
+   man einen Suchbegriff (z.Bsp. die Rechnungsnummer) sowie den
+   erwarteten Betrag angibt.
+   Trifft dann in den Umsaetzen eine Buchung ein, auf die
+   das angegebene Suchkriterium zutrifft, wird sie dem offenen
+   Posten zugeordnet. Erreicht die Summe der zugeordneten Buchungen
+   den erwarteten Betrag, wird der Offene Posten automatisch als
+   bezahlt markiert. Die OP-Verwaltung unterstuetzt damit also
+   auch Teilzahlungen.
+   Ist aber wie gesagt noch nicht fertig.
+
+   Ausserdem will ich mich demnaechst den Themen
+   &quot;EU-Auslandsueberweisungen&quot; und &quot;mehr als 2 Zeilen Verwendungszweck&quot;
+   widmen. Das sind die beiden Features, nach denen am haeufigsten
+   gefragt wird:
+   <A HREF="https://www.willuhn.de/bugzilla/show_bug.cgi?id=159">https://www.willuhn.de/bugzilla/show_bug.cgi?id=159</A>
+   <A HREF="https://www.willuhn.de/bugzilla/show_bug.cgi?id=188">https://www.willuhn.de/bugzilla/show_bug.cgi?id=188</A>
+
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#123">[ Datum ]</a>
+              <a href="thread.html#123">[ Thema ]</a>
+              <a href="subject.html#123">[ Betreff (Subject)]</a>
+              <a href="author.html#123">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Hilfetexte links unten
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2010-October/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Hilfetexte%20links%20unten&In-Reply-To=%3C4CA8F645.1080302%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000197.html">
+   <LINK REL="Next"  HREF="000199.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Hilfetexte links unten</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Hilfetexte%20links%20unten&In-Reply-To=%3C4CA8F645.1080302%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Hilfetexte links unten">hibiscus at willuhn.de
+                  </A><BR>
+    <I>So Okt  3 23:31:49 CEST 2010</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000197.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000199.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#198">[ Datum ]</a>
+              <a href="thread.html#198">[ Thema ]</a>
+              <a href="subject.html#198">[ Betreff (Subject) ]</a>
+              <a href="author.html#198">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> ich vergesse mit schöner Regelmässigkeit, die TXT-Dateien mit den
+</I>&gt;<i> Kurzhilfen, die unten links in Jameica angezeigt werden, für die
+</I>&gt;<i> einzelnen Views zu erstellen.
+</I>&gt;<i> 
+</I>&gt;<i> Wie wäre es, wenn jede View eine Map mit Hilfetexten je Locale
+</I>&gt;<i> zurückgeben müsste. Dann wäre man automatisch gezwungen, die Texte zu
+</I>&gt;<i> erfassen.
+</I>&gt;<i> 
+</I>&gt;<i> Eine Migration für die existierenden View stelle ich mir nicht allzu
+</I>&gt;<i> aufwändig vor.
+</I>&gt;<i> 
+</I>&gt;<i> Olaf, was meinst du zu meinem Vorschlag?
+</I>
+Ne, das kann ich nicht machen, weil hierdurch die Abwaerts-
+Kompatibilitaet verlorengehen wuerde. Alle existierenden Jameica-Plugins
+(also neben Hibiscus und SynTAX auch Jollina, emediaservices und all
+die anderen, die ich gar nicht kenne, weil sie irgendwo in-house
+verwendet werden) wuerden dann nicht mehr funktionieren.
+
+Was ich machen koennte, waere ein Warnhinweis im Log, wenn zu einer
+View keine Hilfe existiert. Da die aber auch gar nicht Pflicht ist -
+der Plugin-Autor sollte ja nicht gezwungen werden, Hilfetexte
+fuer jede View zu schreiben, wuerde das aber unter Umstaenden stoerende
+Warn-Meldungen im Log verursachen. Eigentlich auch keine wirklich
+schoen Loesung.
+
+Mhh, mir faellt da nicht wirklich eine brauchbare technische
+Loesung ein. Unter Umstaenden koenne ich eine Message schicken,
+wenn keine Hilfe gefunden wurde. Die koenntest du dann abonnieren
+und bei dir eine Warnmeldung um Log ausgeben.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000197.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000199.html">[Hibiscus-devel] Hilfetexte links unten
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#198">[ Datum ]</a>
+              <a href="thread.html#198">[ Thema ]</a>
+              <a href="subject.html#198">[ Betreff (Subject)]</a>
+              <a href="author.html#198">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

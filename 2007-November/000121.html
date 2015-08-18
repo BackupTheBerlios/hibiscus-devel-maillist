@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Umbauten an Jameica-Classloader
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-November/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Umbauten%20an%20Jameica-Classloader&In-Reply-To=%3C200711091042.28609.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000120.html">
+   <LINK REL="Next"  HREF="000122.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Umbauten an Jameica-Classloader</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Umbauten%20an%20Jameica-Classloader&In-Reply-To=%3C200711091042.28609.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Umbauten an Jameica-Classloader">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Fr Nov  9 10:42:28 CET 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000120.html">[Hibiscus-devel] Umbauten an Jameica-Classloader
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000122.html">[Hibiscus-devel] Umbauten an Jameica-Classloader
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#121">[ Datum ]</a>
+              <a href="thread.html#121">[ Thema ]</a>
+              <a href="subject.html#121">[ Betreff (Subject) ]</a>
+              <a href="author.html#121">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> In JVerein wird mittels HBCIUtils.checkAccountCRC(blz, kontonummer); die
+</I>&gt;<i> Bankverbindung überprüft. Dabei erscheint dann jetzt folgende
+</I>&gt;<i> Logging-Ausgabe:
+</I>&gt;<i>
+</I>&gt;<i> [Thu Nov 08 20:00:18 GMT
+</I>&gt;<i> 2007][WARN][de.jost_net.JVerein.Einstellungen.checkAccountCRC] HBCI4Java
+</I>&gt;<i> subsystem seems to be not initialized for this thread group, adding
+</I>&gt;<i> thread group
+</I>&gt;<i> [Thu Nov 08 20:00:18 GMT 2007][ERROR][de.willuhn.jameica.gui.GUI.loop]
+</I>&gt;<i> main loop crashed, retry
+</I>&gt;<i> java.lang.NullPointerException
+</I>
+Kannst du mal den Code von de.jost_net.JVerein.Einstellungen.checkAccountCRC
+posten?
+
+Der Fehler passiert, weil die Hashtable in HBCI4Java, welche die
+lokalisierten Strings enthaelt, null ist. Falls das mit dem Classloader
+zu tun hat, haetten wir noch so einige Stellen, die da die Ursache
+sein koennten.
+
+Meine erste Vermutung: In Hibiscus (Klasse HBCI.java, Zeile 197)
+wird HBCI4Java initialisiert:
+
+HBCIUtils.init(null,null,this.callback);
+
+Der erste Parameter - der derzeit &lt;null&gt; ist, ist ein optionaler
+Classloader, den HBCI4Java verwenden soll. Wenn keiner angegeben ist,
+wird der aktuelle genommen, mit dem die Klassen selbst geladen wurde.
+Das muesste der Classloader vom Plugin Hibiscus sein. Du koenntest
+daher testhalber mal den System-Classloader von Jameica eintragen,
+da der sowohl ganz Jameica als auch alle Plugins (und damit auch
+JVerein) kennt. Also etwa so:
+
+HBCIUtils.init(Application.getClassLoader(),null,this.callback);
+
+Das gleiche muesste dann auch noch mal in HBCIProperties.java (Zeile 172)
+von Hibiscus gemacht werden:
+
+HBCIUtils.initThread(Application.getClassLoader(),null,...);
+
+Wenn du die Funktion HBCIProperties.checkAccountCRC(String,String)
+aus Hibiscus in JVerein uebernommen hast, muesstest du das bei
+dir auch so eintragen.
+
+&gt;<i> Daraufhin habe ich die Methode initHBCI aus der Klasse HBCI in meine
+</I>&gt;<i> Klasse JVereinPlugin kopiert. Dann erscheint die Meldung
+</I>
+Ne, lass den Code lieber so wie er jetzt ist. Wenn du den HBCICallback
+in JVerein nochmal neu initialisierst, wuerdest du vermutlich
+den von Hibiscus ueberschreiben.
+
+Ich komm im Moment grad nicht dazu, das selbst zu testen. Wenn ich
+am Wochenende aber Zeit hab, check ich mir mal JVerein aus und
+probiere da mal ein bisschen rum. Ich bin mir sicher, wir kriegen
+das geloest, ohne die Classloader-Umbauten von Jameica wieder
+rueckgaengig machen zu muessen.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000120.html">[Hibiscus-devel] Umbauten an Jameica-Classloader
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000122.html">[Hibiscus-devel] Umbauten an Jameica-Classloader
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#121">[ Datum ]</a>
+              <a href="thread.html#121">[ Thema ]</a>
+              <a href="subject.html#121">[ Betreff (Subject)]</a>
+              <a href="author.html#121">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Fwd: XML-Export von Sammelüberweisungen enthält keine Überweisungen
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2009-February/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%3D%3Fiso-8859-1%3Fq%3FFwd%3D3A_XML-Export_von_Sammel%3DFCbe%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Frweisungen_enth%3DE4lt_keine_%3DDCberweisungen%3F%3D&In-Reply-To=%3C316f4a3b0902110759l2b6dc380x12f80f3c1c107dd1%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   <LINK REL="Next"  HREF="000164.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Fwd: XML-Export von Sammelüberweisungen enthält keine Überweisungen</H1>
+    <B>Marcel Gleis</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20%3D%3Fiso-8859-1%3Fq%3FFwd%3D3A_XML-Export_von_Sammel%3DFCbe%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Frweisungen_enth%3DE4lt_keine_%3DDCberweisungen%3F%3D&In-Reply-To=%3C316f4a3b0902110759l2b6dc380x12f80f3c1c107dd1%40mail.gmail.com%3E"
+           TITLE="[Hibiscus-devel] Fwd: XML-Export von Sammelüberweisungen enthält keine Überweisungen">gleis at netzprofis.de
+                  </A><BR>
+    <I>Mi Feb 11 16:59:31 CET 2009</I>
+    <P><UL>
+        
+        <LI>Nächste Nachricht: <A HREF="000164.html">[Hibiscus-devel] Fwd: XML-Export von Sammelüberweisungen enthält keine Überweisungen
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#161">[ Datum ]</a>
+              <a href="thread.html#161">[ Thema ]</a>
+              <a href="subject.html#161">[ Betreff (Subject) ]</a>
+              <a href="author.html#161">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hallo Hibiscus-Mailingliste,
+
+unten stehende Mail hatte ich bereits an direkt an Herrn Willuhn geschickt.
+Wahrscheinlich hat er aber zu viel zu tun. Deswegen möchte ich folgenden
+Fehler hier berichten:
+
+
+Hallo Herr Willuhn,
+
+erstmal vielen Dank für die sehr gute Kombi Jameica/Hibiscus!
+
+Leider haben wir ein kleines Problem: die XML-Exportdatei von
+Sammelüberweisungen enthält keine Überweisungen.
+
+Rekonstruktion
+- Jameica 1.7
+- Hibiscus 1.9
+1. Sammelüberweisung anlegen
+2. Überweisung hinzufügen
+3. Rechtsklick auf Sammelüberweisung -&gt; Exportieren -&gt; XML-Format -&gt; Export
+starten
+
+Ausgabe:
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;objects&gt;
+  &lt;object type=&quot;de.willuhn.jameica.hbci.server.SammelUeberweisungImpl&quot;
+id=&quot;18&quot;&gt;
+    &lt;termin type=&quot;java.sql.Date&quot;&gt;09.02.2009 00:00:00&lt;/termin&gt;
+    &lt;bezeichnung type=&quot;java.lang.String&quot;&gt;divers KKKKW6&lt;/bezeichnung&gt;
+    &lt;konto_id type=&quot;java.lang.Integer&quot;&gt;2&lt;/konto_id&gt;
+    &lt;ausgefuehrt type=&quot;java.lang.Integer&quot;&gt;0&lt;/ausgefuehrt&gt;
+  &lt;/object&gt;
+&lt;/objects&gt;
+
+HTML/DTAU-Exporte funktionieren einwandfrei. Das &quot;korrekte&quot; HTML ist
+angehängt.
+
+Wir benötigen die XML-Exportversion, um von einem Hibiscus ins andere zu
+kopieren. Ein Mitarbeiter macht die Zahlungsvorbereitung, ausgeführt wird
+sie von einem anderen.
+
+
+Vielen Dank für die Hilfe,
+
+
+
+Viele Grüße,
+Marcel Gleis
+
+
+
+-- 
+Marcel Gleis
+
+netzprofis GmbH &amp; Co. KG
+Joseph-von-Fraunhofer-Str. 29
+44227 Dortmund
+
+Fon: +49-231-399802-70
+Fax: +49-231-399802-69
+Cell: +49-15771572880 (E-Plus)
+Skype: plutus78
+
+USt-IdNr. DE225365236 Amtsgericht Dortmund HRA 16304, Komplementärin:
+Gleis &amp; Louis Verwaltungsges. mbH Amtsgericht Dortmund HRB 20179,
+Geschäftsführer: Marcel Gleis &amp; Thomas Louis
+-------------- nächster Teil --------------
+Ein Dateianhang mit HTML-Daten wurde abgetrennt...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/hibiscus-devel/attachments/20090211/6797091f/attachment.html">https://lists.berlios.de/pipermail/hibiscus-devel/attachments/20090211/6797091f/attachment.html</A>&gt;
+-------------- nächster Teil --------------
+Ein Dateianhang mit HTML-Daten wurde abgetrennt...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/hibiscus-devel/attachments/20090211/6797091f/attachment-0001.html">https://lists.berlios.de/pipermail/hibiscus-devel/attachments/20090211/6797091f/attachment-0001.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Nächste Nachricht: <A HREF="000164.html">[Hibiscus-devel] Fwd: XML-Export von Sammelüberweisungen enthält keine Überweisungen
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#161">[ Datum ]</a>
+              <a href="thread.html#161">[ Thema ]</a>
+              <a href="subject.html#161">[ Betreff (Subject)]</a>
+              <a href="author.html#161">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

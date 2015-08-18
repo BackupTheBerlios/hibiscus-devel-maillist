@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Plugin-Mechanismus in Job-Erzeugung
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2011-March/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Plugin-Mechanismus%20in%20Job-Erzeugung&In-Reply-To=%3C4D77E621.6000404%40vullriede.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000214.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Plugin-Mechanismus in Job-Erzeugung</H1>
+    <B>Raphael Vullriede</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Plugin-Mechanismus%20in%20Job-Erzeugung&In-Reply-To=%3C4D77E621.6000404%40vullriede.de%3E"
+           TITLE="[Hibiscus-devel] Plugin-Mechanismus in Job-Erzeugung">lists.raphael at vullriede.de
+                  </A><BR>
+    <I>Mi Mär  9 21:42:09 CET 2011</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000214.html">[Hibiscus-devel] Plugin-Mechanismus in Job-Erzeugung
+</A></li>
+        
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#215">[ Datum ]</a>
+              <a href="thread.html#215">[ Thema ]</a>
+              <a href="subject.html#215">[ Betreff (Subject) ]</a>
+              <a href="author.html#215">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi,
+
+On 03/07/2011 05:27 PM, Olaf Willuhn wrote:
+&gt;<i> Hi,
+</I>&gt;<i> 
+</I>&gt;<i> sorry, bin leider noch nicht dazu gekommen, das einzubauen. Aber ich
+</I>&gt;<i> kuemmer mich noch drum ;)
+</I>
+Kein Problem. Ich bin momentan mit meinem eigenen Build sehr zufrieden
+;-) Da ansonsten keiner schreit scheint es ja anscheinend anderen auch
+nicht so wichtig zu sein.
+
+&gt;&gt;<i> Das klappt leider so nicht. Aus einem mir unbekannten Grund liefert
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> loader.findByClass(org.org.vullriede.hibiscus.hbci.server.hbci.HBCIDepotSaldoJob.class)
+</I>&gt;&gt;<i> auch HBCI.class als Plugin, auch wenn es in einem seperaten Plugin
+</I>&gt;&gt;<i> enthalten ist.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Liegt das evt. daran, dass der ClassFinder über HBCI.class gezogen wird?
+</I>&gt;<i> 
+</I>&gt;<i> Mhh, kann eigentlich nicht sein, denn das Plugin wird via
+</I>&gt;<i> 
+</I>&gt;<i> CodeSource source = class.getProtectionDomain().getCodeSource();
+</I>&gt;<i> URL url = source.getLocation();
+</I>&gt;<i> 
+</I>&gt;<i> ermittelt. Genommen wird dann jenes Plugin, welches sich im gleichen
+</I>&gt;<i> Verzeichnis befindet, wie die Klasse. Unbabhaengig vom Classloader.
+</I>&gt;<i> Du koenntest mal mit dem Debugger in &quot;findByClass()&quot; reinsteppen.
+</I>&gt;<i> Vielleicht findest du da die Ursache.
+</I>
+Ich schau am Wochenende in Ruhe nochmal rein.
+
+
+Grüße
+Raphael
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000214.html">[Hibiscus-devel] Plugin-Mechanismus in Job-Erzeugung
+</A></li>
+	
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#215">[ Datum ]</a>
+              <a href="thread.html#215">[ Thema ]</a>
+              <a href="subject.html#215">[ Betreff (Subject)]</a>
+              <a href="author.html#215">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

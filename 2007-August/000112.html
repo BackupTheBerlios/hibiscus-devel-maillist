@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Hibiscus-devel Digest, Vol 12, Issue 2
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-August/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Hibiscus-devel%20Digest%2C%20Vol%2012%2C%20Issue%202&In-Reply-To=%3C46CEBA04.80909%40gmx.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000111.html">
+   <LINK REL="Next"  HREF="000113.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Hibiscus-devel Digest, Vol 12, Issue 2</H1>
+    <B>Marco Hügel</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Hibiscus-devel%20Digest%2C%20Vol%2012%2C%20Issue%202&In-Reply-To=%3C46CEBA04.80909%40gmx.de%3E"
+           TITLE="[Hibiscus-devel] Hibiscus-devel Digest, Vol 12, Issue 2">hyllismuell at gmx.de
+                  </A><BR>
+    <I>Fr Aug 24 12:59:16 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000111.html">[Hibiscus-devel] [hibiscus-nightly] Umstellung auf H2-Datenbank
+</A></li>
+        <LI>Nächste Nachricht: <A HREF="000113.html">[Hibiscus-devel] Hibiscus-devel Digest, Vol 12, Issue 2
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#112">[ Datum ]</a>
+              <a href="thread.html#112">[ Thema ]</a>
+              <a href="subject.html#112">[ Betreff (Subject) ]</a>
+              <a href="author.html#112">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Eine Migrationsmöglichkeit von McKoi auf H2 ist nicht vorgesehen?!?
+
+Marco
+
+<A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">hibiscus-devel-request at lists.berlios.de</A> schrieb:
+&gt;<i> Send Hibiscus-devel mailing list submissions to
+</I>&gt;<i> 	<A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">hibiscus-devel at lists.berlios.de</A>
+</I>&gt;<i> 
+</I>&gt;<i> To subscribe or unsubscribe via the World Wide Web, visit
+</I>&gt;<i> 	<A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">https://lists.berlios.de/mailman/listinfo/hibiscus-devel</A>
+</I>&gt;<i> or, via email, send a message with subject or body 'help' to
+</I>&gt;<i> 	<A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">hibiscus-devel-request at lists.berlios.de</A>
+</I>&gt;<i> 
+</I>&gt;<i> You can reach the person managing the list at
+</I>&gt;<i> 	<A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">hibiscus-devel-owner at lists.berlios.de</A>
+</I>&gt;<i> 
+</I>&gt;<i> When replying, please edit your Subject line so it is more specific
+</I>&gt;<i> than &quot;Re: Contents of Hibiscus-devel digest...&quot;
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Today's Topics:
+</I>&gt;<i> 
+</I>&gt;<i>    1. [hibiscus-nightly] Umstellung auf H2-Datenbank (Olaf Willuhn)
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> ----------------------------------------------------------------------
+</I>&gt;<i> 
+</I>&gt;<i> Message: 1
+</I>&gt;<i> Date: Thu, 23 Aug 2007 17:12:36 +0200
+</I>&gt;<i> From: Olaf Willuhn &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">hibiscus at willuhn.de</A>&gt;
+</I>&gt;<i> Subject: [Hibiscus-devel] [hibiscus-nightly] Umstellung auf
+</I>&gt;<i> 	H2-Datenbank
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">hibiscus-devel at lists.berlios.de</A>
+</I>&gt;<i> Message-ID: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">200708231712.36757.hibiscus at willuhn.de</A>&gt;
+</I>&gt;<i> Content-Type: text/plain;  charset=&quot;iso-8859-1&quot;
+</I>&gt;<i> 
+</I>&gt;<i> [mit dem falschen Absender geschickt, daher hier nochmal...
+</I>&gt;<i> auf die Gefahr hin, dass das Posting doppelt erscheint]
+</I>&gt;<i> 
+</I>&gt;<i> Hi,
+</I>&gt;<i> 
+</I>&gt;<i> irgendwann muessen wir ja mal umstellen ;)
+</I>&gt;<i> Ich habe daher gerade die Hibiscus-Default-Datenbank im CVS
+</I>&gt;<i> (und damit im Nightly-Build ab morgen) von McKoi auf H2 geaendert.
+</I>&gt;<i> Das heisst, existierende Installationen verwenden weiterhin McKoi
+</I>&gt;<i> (bzw. ggf. MySQL)[1]. Bei neue Installationen wird nun jedoch H2
+</I>&gt;<i> mit aktivierter XTEA-Verschluesselung angelegt. Das dafuer noetige
+</I>&gt;<i> Passwort wird zufaellig erzeugt und mit dem Masterpasswort verschluesselt
+</I>&gt;<i> in de.willuhn.jameica.hbci.rmi.HBCIDBService.properties gespeichert.
+</I>&gt;<i> Das Masterpasswort selbst kann ich nicht fuer die Datenbank verwenden,
+</I>&gt;<i> da der User dieses aendern kann und ich bisher noch keine praktikable 
+</I>&gt;<i> Moeglichkeit gefunden habe, dieses dann auch fuer die Datenbank aendern
+</I>&gt;<i> zu koennen.
+</I>&gt;<i> 
+</I>&gt;<i> Nutzer der Nightly-Builds sind somit also jetz automatisch auch
+</I>&gt;<i> Beta-Tester fuer die neue H2-Datenbank.
+</I>&gt;<i> 
+</I>&gt;<i> [1] da dort in de.willuhn.jameica.hbci.rmi.HBCIDBService.properties
+</I>&gt;<i> mit dem Parameter &quot;database.driver&quot; ja bereits konfiguriert ist, welcher
+</I>&gt;<i> Treiber verwendet werden soll.
+</I>&gt;<i> 
+</I>&gt;<i> Gruss
+</I>&gt;<i> Olaf
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> ------------------------------
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Hibiscus-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Hibiscus-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">https://lists.berlios.de/mailman/listinfo/hibiscus-devel</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> End of Hibiscus-devel Digest, Vol 12, Issue 2
+</I>&gt;<i> *********************************************
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000111.html">[Hibiscus-devel] [hibiscus-nightly] Umstellung auf H2-Datenbank
+</A></li>
+	<LI>Nächste Nachricht: <A HREF="000113.html">[Hibiscus-devel] Hibiscus-devel Digest, Vol 12, Issue 2
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#112">[ Datum ]</a>
+              <a href="thread.html#112">[ Thema ]</a>
+              <a href="subject.html#112">[ Betreff (Subject)]</a>
+              <a href="author.html#112">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

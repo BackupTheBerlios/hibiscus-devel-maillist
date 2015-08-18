@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] PDF-Ausgabe der Umsatz-Kategorien
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-May/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20PDF-Ausgabe%20der%20Umsatz-Kategorien&In-Reply-To=%3C200705021323.31617.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   <LINK REL="Next"  HREF="000071.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] PDF-Ausgabe der Umsatz-Kategorien</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20PDF-Ausgabe%20der%20Umsatz-Kategorien&In-Reply-To=%3C200705021323.31617.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] PDF-Ausgabe der Umsatz-Kategorien">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Mi Mai  2 13:23:31 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Nächste Nachricht: <A HREF="000071.html">[Hibiscus-devel] PDF-Ausgabe der Umsatz-Kategorien
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#70">[ Datum ]</a>
+              <a href="thread.html#70">[ Thema ]</a>
+              <a href="subject.html#70">[ Betreff (Subject) ]</a>
+              <a href="author.html#70">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi Heiner,
+
+&gt;<i> ich habe gerade die PDF-Ausgabe der Umsatz-Kategorien eingecheckt. Die
+</I>&gt;<i> im Kategorie-Tree angezeigten Daten können entweder in Form einer
+</I>&gt;<i> Komplettliste (Kategorien, einzelne Umsätze, Kategorie-Summen) oder in
+</I>&gt;<i> Form der &quot;Nur-Kategorien&quot;-Liste (Kategorie, Summe) ausgegeben werden.
+</I>&gt;<i>
+</I>&gt;<i> In diesem Zusammenhang habe ich eine neue Reporter-Klasse erstellt. Die
+</I>&gt;<i> Klasse gibt nicht das her, was der Name evtl. verspricht. Sie kapselt
+</I>&gt;<i> lediglich die für die PDF-Ausgabe der Kontoauszüge und der
+</I>&gt;<i> Kategorielisten erforderliche Funktionalität.
+</I>&gt;<i>
+</I>&gt;<i> Die neuen Listen werden im morgigen Nightly-Build zur Verfügung stehen.
+</I>
+Ich konnt's mir natuerlich wieder nicht verkneifen, nochmal an dem
+Code zuzustricken - sorry ;)
+Aus den beiden Formaten (Nur Kategorie-Summen, Kategorien mit Umsaetzen)
+hab ich eigenstaendige Implementierungen des Interfaces &quot;Exporter&quot; gemacht.
+Das erspart deinen zusaetzlichen UmsatzKategorieListeDialog mit der
+Format-Auswahl. Hierzu hab ich noch eine Klasse &quot;io.UmsatzTree&quot; hinzugefuegt,
+die als Container fuer den Tree samt den zugehoerigen Meta-Daten (Konto, von,
+bis) dient.
+Damit fuegen sich beide Formate besser in die IO-API von Hibiscus ein.
+Ausserdem koennen spaeter leicht weitere Formate hinzugefuegt werden, wenn
+sie den Objekt-Typ &quot;io.UmsatzTree&quot; unterstuetzen.
+
+Gruss
+Olaf
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Nächste Nachricht: <A HREF="000071.html">[Hibiscus-devel] PDF-Ausgabe der Umsatz-Kategorien
+</A></li>
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#70">[ Datum ]</a>
+              <a href="thread.html#70">[ Thema ]</a>
+              <a href="subject.html#70">[ Betreff (Subject)]</a>
+              <a href="author.html#70">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>

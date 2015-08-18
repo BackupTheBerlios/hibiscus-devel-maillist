@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Hibiscus-devel] Umbauten an Jameica-Classloader
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/hibiscus-devel/2007-October/index.html" >
+   <LINK REL="made"  HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Umbauten%20an%20Jameica-Classloader&In-Reply-To=%3C200710260156.08989.hibiscus%40willuhn.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000118.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Hibiscus-devel] Umbauten an Jameica-Classloader</H1>
+    <B>Olaf Willuhn</B> 
+    <A
+    HREF="mailto:hibiscus-devel%40lists.berlios.de?Subject=Re%3A%20%5BHibiscus-devel%5D%20Umbauten%20an%20Jameica-Classloader&In-Reply-To=%3C200710260156.08989.hibiscus%40willuhn.de%3E"
+           TITLE="[Hibiscus-devel] Umbauten an Jameica-Classloader">hibiscus at willuhn.de
+                  </A><BR>
+    <I>Fr Okt 26 01:56:08 CEST 2007</I>
+    <P><UL>
+        <LI>Vorherige Nachricht: <A HREF="000118.html">[Hibiscus-devel] [Hibiscus] Umstellung auf H2-Datenbank incl.	Migration fertig
+</A></li>
+        
+         <LI> <B>Nachrichten sortiert nach:</B> 
+              <a href="date.html#119">[ Datum ]</a>
+              <a href="thread.html#119">[ Thema ]</a>
+              <a href="subject.html#119">[ Betreff (Subject) ]</a>
+              <a href="author.html#119">[ Autor ]</a>
+         </LI>
+       </UL>
+    <HR>
+<!--beginarticle-->
+<PRE>Hi zusammen,
+
+I)
+
+ich hab mich mal wieder an den innersten Eingeweiden
+von Jameica vergriffen - naemlich am Classloader ;)
+
+Grund fuer die ganze Sache:
+
+1) Bisher teilen sich Jameica selbst sowie alle Plugins
+   einen gemeinsamen Classloader. Das ist auf der einen
+   Seite prima, weil die Plugins auf die Weise prima
+   miteinander kommunizieren koennen. Auf der anderen
+   Seite koennte es aber zu Konflikten kommen, wenn
+   z.Bsp. Plugin A eine Bibliothek in Version 1.0
+   enthaelt, Plugin B die gleiche - jedoch in Version 2.0.
+   Dann befinden sich beide Bibliotheken im Classpath
+   und koennten zu Konflikten fuehren.
+2) Mit dem Classfinder ist es ja moeglich, zu einem
+   vorgegebenen Interface nach existierenden Implementierungen
+   zu suchen. Hierbei werden die Klassen in allen Plugins
+   und in Jameica selbst durchsucht. Es ist also nicht
+   ohne weiteres moeglich, nur nach Implementierungen
+   innerhalb des eigenen Plugins zu suchen. Normalerweise
+   umgeht man das Problem einfach, indem man in seinem
+   Plugin ein Interface definiert, welches alle anderen
+   Plugins nicht kennen und ergo auch keine Impls dazu
+   haben koennen.
+3) Vor langer Zeit befand sich die &quot;plugin.xml&quot; mal direkt
+   in der Jar-Datei von einem Plugin. Damit war es zwar
+   moeglich, Plugins auszuliefern, die nur aus einer
+   einzigen Datei bestanden, es hatte jedoch den Nachteil,
+   das Jameica beim Start alle Jars nach diesen Dateien
+   durchsuchen musste. Das ist schon lange nicht mehr
+   so. Allerdings hat das nun den Nebeneffekt, dass Jameica
+   nicht mehr weiss, in welchem Jar sich das Plugin
+   tatsaechlich befindet (also das Jar, in dem die
+   von AbstractPlugin abgeleitete Klasse liegt). Das
+   ist aber dumm, weil in diesem Jar auch die Ressource-Bundles,
+   Hilfetexte, Icons, etc liegen. Diese Dateien werden
+   via &quot;getRessourceAsStream&quot; ueber den Classloader geladen.
+   Bemerkt? Jupp. Wenn sich Jameica und alle Plugins ein
+   und den selben Classloader teilen und in zwei Plugins
+   z.Bsp. ein exakt gleichnamiges Icon (z.Bsp. img/logo.png)
+   existiert, koennte es passieren, dass Plugin A versehentlich
+   das Icon von Plugin B laedt.
+   Das ist uebrigens auch der Grund, warum Jameica -
+   (wenn es nicht in Eclipse gestartet wurde) bei jedem
+   Plugin eine Warnung im Log ausgab, dass dieses angeblich
+   nicht das System-Locale unterstuetzt. Es wusste schlicht
+   nicht, in welcher Jar-Datei es nach den properties-Dateien
+   mit den Uebersetzungen suchen sollte. Hat bisher vermutlich
+   nur deshalb niemanden gestoert, weil noch keiner
+   mehrsprachige Plugins entwickelt hat ;)
+   
+
+Um bei oben genannten Punkten kuenftig flexibler zu sein,
+hab ich den Classloader nun aufgeteilt. Es gibt einen System-Classloader,
+der alles kennt (sowohl Jameica als auch die Plugins). Ausserdem
+wird fuer jedes Plugin ein eigener Classloader erzeugt, der
+nur dieses Plugin kennt.
+(zu erreichen ueber plugin.getRessources().getClassloader())
+Hierbei werden die Klassen jedoch nicht redundant geladen.
+Stattdessen existiert Tree von Classloadern. Der System-Classloader
+kennt selbst nur die Jameica-Klassen. Allerdings enthaelt er
+als &quot;Child-Classloader&quot; auch die von den Plugins. Findet er
+eine Klasse nicht selbst, delegiert er die Anfrage an die
+Kinder.
+Heisst: Im Code der Plugins muss nichts geaendert werden,
+da ueberall standardmaessig noch der System-Classloader
+verwendet wird. In Zukunft besteht jedoch die Moeglichkeit,
+auch die Plugin-Classloader zu nutzen, wenn man sicherstellen
+will, dass man nur Daten aus dem eigenen Plugin laden moechte.
+
+Der Startvorgang von Jameica sollte hierbei auch etwas schneller
+geworden sein, da vorher an einer Stelle (gezwungenermassen)
+Klassen doppelt geladen werden mussten.
+
+II) In diesem Zusammenhang konnte auch der Konstruktor
+von AbstractPlugin vereinfacht werden. Er enthielt bisher
+einen Parameter vom Typ &quot;File&quot;. Er existiert zwar noch,
+ich hab ihn aber als &quot;deprecated&quot; markiert. Stattdessen
+kann man nun den neuen parameterlosen Konstruktor nutzen.
+Wenn irgendwann alle Plugins umgestellt sind, fliegen
+die expliziten Konstruktoren aus AbstractPlugin komplett
+raus. Dann kann man ihn in der eigenen Plugin-Klasse
+auch weglassen, da er dann nicht mehr ueberschrieben werden
+muss. Jameica versucht standardmaessig, das Plugin ueber
+den neuen parameterlosen Konstruktor zu instanziieren.
+Schlaegt das fehl (weil er im Plugin noch nicht implementiert
+ist), macht der Pluginloader ein Fallback und instanziiert
+das Plugin mit dem alten Konstruktor. In dem Fall wird
+im Log ein Warnhinweis ausgegeben, dass das Plugin einen
+veralteten Konstruktor nutzt.
+Ausserdem sind nun die Methoden install(), update(),
+shutDown() und init() nicht mehr abstract. Stattdessen
+sind sie in AbstractPlugin leer implementiert. Man
+_muss_ sie also nicht mehr ueberschreiben sondern _kann_
+dies tun, wenn man sie braucht.
+Heisst: Akut muesst ihr an euren Plugins nichts aendern.
+Sie kompilieren unveraendert auch gegen die geaenderte
+AbstractPlugin. Ihr muesst auch keine neuen Releases
+machen. Es kommt auch zu keinen NoSuchMethodErrors, wenn
+das Plugin noch gegen die alte AbstractPlugin gelinkt ist
+(zumindest bei meinen Tests ging das).
+
+
+Alle Aenderungen sind natuerlich nicht in der Release
+sondern nur im Nightly-Build. Und wie gesagt - ihr muesst
+an eurem Code erstmal nichts aendern. Alles sollte wie
+gehabt funktionieren. Falls doch irgendwelche Fehler
+kommen, die auf Classloader-Probleme zurueckzufuehren
+sind, dann meldet mir sie bitte.
+
+Gruss
+Olaf
+
+
+
+
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Vorherige Nachricht: <A HREF="000118.html">[Hibiscus-devel] [Hibiscus] Umstellung auf H2-Datenbank incl.	Migration fertig
+</A></li>
+	
+         <LI> <B>Nachrichten sortiert nach:</B>
+              <a href="date.html#119">[ Datum ]</a>
+              <a href="thread.html#119">[ Thema ]</a>
+              <a href="subject.html#119">[ Betreff (Subject)]</a>
+              <a href="author.html#119">[ Autor ]</a>
+         </LI>
+       </UL>
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/hibiscus-devel">Mehr Informationen &uuml;ber die Mailingliste Hibiscus-devel</a><br>
+</body></html>
